@@ -23,10 +23,12 @@ foreign key (address_id) references address (id)
 insert into customer (name, password, email, address_id)
 values ('Dzmitry Furmanau', '288', 'amator@gmail.com', 1);
 
--- create table if not exists customers_addresses (
--- id bigint primary key auto_increment,
--- foreign key (address_id) references address (id),
--- foreign key (customer_id) references customer (id)
--- );
---
--- insert into customers_addresses (address_id, customer_id) values (1, 1);
+create table if not exists customers_addresses (
+id bigint primary key auto_increment,
+address_id bigint,
+customer_id bigint,
+foreign key (address_id) references address (id),
+foreign key (customer_id) references customer (id)
+);
+
+insert into customers_addresses (address_id, customer_id) values (1, 1);

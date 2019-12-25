@@ -50,7 +50,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerResponseDto> save(@RequestBody CustomerRequestDto customerRequestDto) {
         customerRequestDto.setId(null);
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.save(getBook(customerRequestDto)), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService.save(getCustomer(customerRequestDto)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -59,7 +59,7 @@ public class CustomerController {
         if (!Objects.equals(id, customerRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.customer.unexpectedId", new Object[]{}));
         }
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.update(getBook(customerRequestDto)), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService.update(getCustomer(customerRequestDto)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class CustomerController {
         customerService.deleteById(id);
     }
 
-    private Customer getBook(CustomerRequestDto customerRequestDto) {
+    private Customer getCustomer(CustomerRequestDto customerRequestDto) {
         final Customer customer = mapper.map(customerRequestDto, Customer.class);
         final Address address = new Address();
         address.setId(customerRequestDto.getAddressId());
