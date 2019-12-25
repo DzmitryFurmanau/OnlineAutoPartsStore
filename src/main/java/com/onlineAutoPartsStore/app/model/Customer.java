@@ -27,21 +27,15 @@ public class Customer {
     @NotEmpty(message = "{customer.email.notEmpty}")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
-    @NotNull(message = "{customer.address.notNull}")
-    private Address address;
-
     public Customer() {
 
     }
 
-    public Customer(Long id, String name, String password, String email, Address address) {
+    public Customer(Long id, String name, String password, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
-        this.address = address;
     }
 
     public Long getId() {
@@ -74,13 +68,5 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

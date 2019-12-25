@@ -2,6 +2,8 @@ package com.onlineAutoPartsStore.app.controller;
 
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.dto.AddressDto;
+import com.onlineAutoPartsStore.app.dto.request.AddressRequestDto;
+import com.onlineAutoPartsStore.app.dto.response.AddressResponseDto;
 import com.onlineAutoPartsStore.app.model.Address;
 import com.onlineAutoPartsStore.app.service.AddressService;
 import org.dozer.Mapper;
@@ -31,34 +33,34 @@ public class AddressController {
 
 
     @GetMapping
-    public ResponseEntity<List<AddressDto>> getAll() {
+    public ResponseEntity<List<AddressResponseDto>> getAll() {
         final List<Address> addresses = addressService.findAll();
-        final List<AddressDto> addressDtoList = addresses.stream()
-                .map((role) -> mapper.map(role, AddressDto.class))
+        final List<AddressResponseDto> addressResponseDtoList = addresses.stream()
+                .map((role) -> mapper.map(role, AddressResponseDto.class))
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(addressDtoList, HttpStatus.OK);
+        return new ResponseEntity<>(addressResponseDtoList, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<AddressDto> getOne(@PathVariable Long id) {
-        final AddressDto addressDto = mapper.map(addressService.findById(id), AddressDto.class);
-        return new ResponseEntity<>(addressDto, HttpStatus.OK);
+    public ResponseEntity<AddressResponseDto> getOne(@PathVariable Long id) {
+        final AddressResponseDto addressResponseDto = mapper.map(addressService.findById(id), AddressResponseDto.class);
+        return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<AddressDto> save(@RequestBody AddressDto addressDto) {
-        addressDto.setId(null);
-        final AddressDto responseAddressDto = mapper.map(addressService.save(mapper.map(addressDto, Address.class)), AddressDto.class);
-        return new ResponseEntity<>(responseAddressDto, HttpStatus.OK);
+    public ResponseEntity<AddressResponseDto> save(@RequestBody AddressRequestDto addressRequestDto) {
+        addressRequestDto.setId(null);
+        final AddressResponseDto addressResponseDto = mapper.map(addressService.save(mapper.map(addressRequestDto, Address.class)), AddressResponseDto.class);
+        return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AddressDto> update(@RequestBody AddressDto addressDto, @PathVariable Long id) {
-        if (!Objects.equals(id, addressDto.getId())) {
+    public ResponseEntity<AddressResponseDto> update(@RequestBody AddressRequestDto addressRequestDto, @PathVariable Long id) {
+        if (!Objects.equals(id, addressRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.address.unexpectedId", new Object[]{}));
         }
-        final AddressDto responseAddressDto = mapper.map(addressService.update(mapper.map(addressDto, Address.class)), AddressDto.class);
-        return new ResponseEntity<>(responseAddressDto, HttpStatus.OK);
+        final AddressResponseDto addressResponseDto = mapper.map(addressService.update(mapper.map(addressRequestDto, Address.class)), AddressResponseDto.class);
+        return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

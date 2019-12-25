@@ -1,16 +1,13 @@
 package com.onlineAutoPartsStore.app.controller;
 
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
-import com.onlineAutoPartsStore.app.dto.AddressDto;
 import com.onlineAutoPartsStore.app.dto.CustomersAddressesDto;
-import com.onlineAutoPartsStore.app.dto.request.CustomerRequestDto;
 import com.onlineAutoPartsStore.app.dto.request.CustomersAddressesRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.CustomerResponseDto;
 import com.onlineAutoPartsStore.app.dto.response.CustomersAddressesResponseDto;
 import com.onlineAutoPartsStore.app.model.Address;
 import com.onlineAutoPartsStore.app.model.Customer;
 import com.onlineAutoPartsStore.app.model.CustomersAddresses;
-import com.onlineAutoPartsStore.app.service.CustomerService;
 import com.onlineAutoPartsStore.app.service.CustomersAddressesService;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
@@ -54,24 +51,35 @@ public class CustomersAddressesController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomersAddressesDto> save(@RequestBody CustomersAddressesDto customersAddressesDto) {
-        customersAddressesDto.setId(null);
-        final CustomersAddressesDto responseCustomersAddressesDto = mapper.map(customersAddressesService.save(mapper.map(customersAddressesDto, CustomersAddresses.class)), CustomersAddressesDto.class);
-        return new ResponseEntity<>(responseCustomersAddressesDto, HttpStatus.OK);
+    public ResponseEntity<CustomersAddressesResponseDto> save(@RequestBody CustomersAddressesRequestDto customersAddressesRequestDto) {
+        customersAddressesRequestDto.setId(null);
+        final CustomersAddressesResponseDto CustomersAddressesResponseDto = mapper.map(customersAddressesService.save(getCustomersAddresses(customersAddressesRequestDto)), CustomersAddressesResponseDto.class);
+        return new ResponseEntity<>(CustomersAddressesResponseDto, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CustomersAddressesDto> update(@RequestBody CustomersAddressesDto customersAddressesDto, @PathVariable Long id) {
-        if (!Objects.equals(id, customersAddressesDto.getId())) {
+    public ResponseEntity<CustomersAddressesResponseDto> update(@RequestBody CustomersAddressesRequestDto customersAddressesRequestDto, @PathVariable Long id) {
+        if (!Objects.equals(id, customersAddressesRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.customers_addresses.unexpectedId", new Object[]{}));
         }
-        final CustomersAddressesDto responseCustomersAddressesDto = mapper.map(customersAddressesService.update(mapper.map(customersAddressesDto, CustomersAddresses.class)), CustomersAddressesDto.class);
-        return new ResponseEntity<>(responseCustomersAddressesDto, HttpStatus.OK);
+        final CustomersAddressesResponseDto customersAddressesResponseDto= mapper.map(customersAddressesService.update(getCustomersAddresses(customersAddressesRequestDto)), CustomersAddressesResponseDto.class);
+        return new ResponseEntity<>(customersAddressesResponseDto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         customersAddressesService.deleteById(id);
+    }
+
+    private CustomersAddresses getCustomersAddresses(CustomersAddressesRequestDto customersAddressesRequestDto) {
+        final CustomersAddresses customersAddresses = mapper.map(customersAddressesRequestDto, CustomersAddresses.class);
+        final Address address = new Address();
+        final Customer customer = new Customer();
+        address.setId(customersAddressesRequestDto.getAddressId());
+        customer.setId(customersAddressesRequestDto.getCustomerId());
+        customersAddresses.setAddress(address);
+        customersAddresses.setCustomer(customer);
+        return customersAddresses;
     }
 }

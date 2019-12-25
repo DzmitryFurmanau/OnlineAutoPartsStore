@@ -15,13 +15,11 @@ create table if not exists customer (
 id bigint primary key auto_increment,
 name varchar,
 password varchar,
-email varchar,
-address_id bigint,
-foreign key (address_id) references address (id)
+email varchar
 );
 
-insert into customer (name, password, email, address_id)
-values ('Dzmitry Furmanau', '288', 'amator@gmail.com', 1);
+insert into customer (name, password, email)
+values ('Dzmitry Furmanau', '288', 'amator@gmail.com');
 
 create table if not exists customers_addresses (
 id bigint primary key auto_increment,

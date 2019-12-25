@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer save(Customer customer) {
         validate(customer.getId() != null, localizedMessageSource.getMessage("error.customer.notHaveId", new Object[]{}));
         validate(customerRepository.existsByName(customer.getName()), localizedMessageSource.getMessage("error.customer.name.notUnique", new Object[]{}));
-        return saveAndFlush(customer);
+        return customerRepository.saveAndFlush(customer);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
         final boolean isDuplicateExists = duplicateCustomer != null && !Objects.equals(duplicateCustomer.getId(), id);
         validate(isDuplicateExists, localizedMessageSource.getMessage("error.customer.name.notUnique", new Object[]{}));
         findById(id);
-        return saveAndFlush(customer);
+        return customerRepository.saveAndFlush(customer);
     }
 
 
@@ -68,12 +68,6 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteById(Long id) {
         findById(id);
         customerRepository.deleteById(id);
-    }
-
-    private Customer saveAndFlush(Customer customer) {
-        validate(customer.getAddress() == null || customer.getAddress().getId() == null, localizedMessageSource.getMessage("error.customer.address.isNull", new Object[]{}));
-        customer.setAddress(addressService.findById(customer.getAddress().getId()));
-        return customerRepository.saveAndFlush(customer);
     }
 
     private void validate(boolean expression, String errorMessage) {

@@ -1,6 +1,7 @@
 package com.onlineAutoPartsStore.app.controller;
 
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
+import com.onlineAutoPartsStore.app.dto.CustomerDto;
 import com.onlineAutoPartsStore.app.dto.request.CustomerRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.CustomerResponseDto;
 import com.onlineAutoPartsStore.app.model.Address;
@@ -50,7 +51,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerResponseDto> save(@RequestBody CustomerRequestDto customerRequestDto) {
         customerRequestDto.setId(null);
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.save(getCustomer(customerRequestDto)), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService.save(mapper.map(customerRequestDto, Customer.class)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -59,7 +60,7 @@ public class CustomerController {
         if (!Objects.equals(id, customerRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.customer.unexpectedId", new Object[]{}));
         }
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.update(getCustomer(customerRequestDto)), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService.update(mapper.map(customerRequestDto, Customer.class)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -67,13 +68,5 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         customerService.deleteById(id);
-    }
-
-    private Customer getCustomer(CustomerRequestDto customerRequestDto) {
-        final Customer customer = mapper.map(customerRequestDto, Customer.class);
-        final Address address = new Address();
-        address.setId(customerRequestDto.getAddressId());
-        customer.setAddress(address);
-        return customer;
     }
 }

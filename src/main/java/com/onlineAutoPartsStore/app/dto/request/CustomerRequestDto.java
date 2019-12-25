@@ -23,9 +23,6 @@ public class CustomerRequestDto {
     @NotEmpty(message = "{customer.email.notEmpty}")
     private String email;
 
-    @NotNull(message = "{customer.address.notNull}")
-    private Long addressId;
-
     public Long getId() {
         return id;
     }
@@ -56,13 +53,5 @@ public class CustomerRequestDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Long getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
     }
 }

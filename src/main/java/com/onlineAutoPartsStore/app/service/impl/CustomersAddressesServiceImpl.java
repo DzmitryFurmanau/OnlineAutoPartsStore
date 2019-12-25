@@ -53,9 +53,6 @@ public class CustomersAddressesServiceImpl implements CustomersAddressesService 
     public CustomersAddresses update(CustomersAddresses customersAddresses) {
         final Long id = customersAddresses.getId();
         validate(id == null, localizedMessageSource.getMessage("error.customers_addresses.haveId", new Object[]{}));
-        //final Optional<CustomersAddresses> duplicateCustomersAddresses = customersAddressesRepository.findById(customersAddresses.getId());
-        //final boolean isDuplicateExists = duplicateCustomersAddresses != null && !Objects.equals(duplicateCustomersAddresses.getId(), id);
-        //validate(isDuplicateExists, localizedMessageSource.getMessage("error.customers_addresses.id.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(customersAddresses);
     }
