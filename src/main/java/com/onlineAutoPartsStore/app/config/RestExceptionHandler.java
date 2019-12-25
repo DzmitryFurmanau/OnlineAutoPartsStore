@@ -23,8 +23,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String EMPTY = "";
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
-                                                          HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
         String errorMessage = exception.getBindingResult().getAllErrors().stream()
                 .map(objectError -> Objects.requireNonNull(objectError.getDefaultMessage()).concat(SEMICOLON))
                 .reduce(EMPTY, String::concat);

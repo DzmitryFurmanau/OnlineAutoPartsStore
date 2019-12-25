@@ -35,3 +35,13 @@ name varchar
 );
 
 insert into provider (name) values ('Yuriy Yarovoy');
+
+create table if not exists heaver (
+id bigint primary key auto_increment,
+name varchar,
+age smallint,
+salary integer,
+bonus integer
+);
+
+insert into heaver (name, age, salary, bonus) values ('Anton Miranouski', 25, 500, 100);
