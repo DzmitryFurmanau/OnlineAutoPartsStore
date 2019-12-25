@@ -1,10 +1,8 @@
 package com.onlineAutoPartsStore.app.controller;
 
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
-import com.onlineAutoPartsStore.app.dto.CustomerDto;
 import com.onlineAutoPartsStore.app.dto.request.CustomerRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.CustomerResponseDto;
-import com.onlineAutoPartsStore.app.model.Address;
 import com.onlineAutoPartsStore.app.model.Customer;
 import com.onlineAutoPartsStore.app.service.CustomerService;
 import org.dozer.Mapper;

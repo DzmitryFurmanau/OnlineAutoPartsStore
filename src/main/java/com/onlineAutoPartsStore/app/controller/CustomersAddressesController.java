@@ -1,9 +1,7 @@
 package com.onlineAutoPartsStore.app.controller;
 
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
-import com.onlineAutoPartsStore.app.dto.CustomersAddressesDto;
 import com.onlineAutoPartsStore.app.dto.request.CustomersAddressesRequestDto;
-import com.onlineAutoPartsStore.app.dto.response.CustomerResponseDto;
 import com.onlineAutoPartsStore.app.dto.response.CustomersAddressesResponseDto;
 import com.onlineAutoPartsStore.app.model.Address;
 import com.onlineAutoPartsStore.app.model.Customer;
@@ -62,7 +60,7 @@ public class CustomersAddressesController {
         if (!Objects.equals(id, customersAddressesRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.customers_addresses.unexpectedId", new Object[]{}));
         }
-        final CustomersAddressesResponseDto customersAddressesResponseDto= mapper.map(customersAddressesService.update(getCustomersAddresses(customersAddressesRequestDto)), CustomersAddressesResponseDto.class);
+        final CustomersAddressesResponseDto customersAddressesResponseDto = mapper.map(customersAddressesService.update(getCustomersAddresses(customersAddressesRequestDto)), CustomersAddressesResponseDto.class);
         return new ResponseEntity<>(customersAddressesResponseDto, HttpStatus.OK);
     }
 

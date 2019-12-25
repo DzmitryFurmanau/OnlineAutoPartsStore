@@ -8,8 +8,7 @@ country varchar,
 pinCode integer
 );
 
-insert into address (phoneNumber, street, city, state, country, pinCode)
-values (298687764, 'Folush', 'Hrodna', 'Hrodna Region', 'Belarus', 230006);
+insert into address (phoneNumber, street, city, state, country, pinCode) values (298687764, 'Folush', 'Hrodna', 'Hrodna Region', 'Belarus', 230006);
 
 create table if not exists customer (
 id bigint primary key auto_increment,
@@ -18,8 +17,7 @@ password varchar,
 email varchar
 );
 
-insert into customer (name, password, email)
-values ('Dzmitry Furmanau', '288', 'amator@gmail.com');
+insert into customer (name, password, email) values ('Dzmitry Furmanau', '288', 'amator@gmail.com');
 
 create table if not exists customers_addresses (
 id bigint primary key auto_increment,
@@ -30,3 +28,10 @@ foreign key (customer_id) references customer (id)
 );
 
 insert into customers_addresses (address_id, customer_id) values (1, 1);
+
+create table if not exists provider (
+id bigint primary key auto_increment,
+name varchar
+);
+
+insert into provider (name) values ('Yuriy Yarovoy');

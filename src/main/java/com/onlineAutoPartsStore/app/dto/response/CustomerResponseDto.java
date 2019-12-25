@@ -1,7 +1,5 @@
 package com.onlineAutoPartsStore.app.dto.response;
 
-import com.onlineAutoPartsStore.app.dto.AddressDto;
-
 public class CustomerResponseDto {
 
     private Long id;
@@ -11,8 +9,6 @@ public class CustomerResponseDto {
     private String password;
 
     private String email;
-
-    private AddressDto address;
 
     public Long getId() {
         return id;
@@ -44,13 +40,5 @@ public class CustomerResponseDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public AddressDto getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressDto address) {
-        this.address = address;
     }
 }

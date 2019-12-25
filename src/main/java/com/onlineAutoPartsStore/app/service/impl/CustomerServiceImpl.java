@@ -3,7 +3,6 @@ package com.onlineAutoPartsStore.app.service.impl;
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.model.Customer;
 import com.onlineAutoPartsStore.app.repository.CustomerRepository;
-import com.onlineAutoPartsStore.app.service.AddressService;
 import com.onlineAutoPartsStore.app.service.CustomerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +16,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
-    private final AddressService addressService;
-
     private final CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, AddressService addressService, LocalizedMessageSource localizedMessageSource) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, LocalizedMessageSource localizedMessageSource) {
         this.customerRepository = customerRepository;
-        this.addressService = addressService;
         this.localizedMessageSource = localizedMessageSource;
     }
 

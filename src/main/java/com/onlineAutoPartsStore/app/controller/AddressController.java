@@ -1,7 +1,6 @@
 package com.onlineAutoPartsStore.app.controller;
 
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
-import com.onlineAutoPartsStore.app.dto.AddressDto;
 import com.onlineAutoPartsStore.app.dto.request.AddressRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.AddressResponseDto;
 import com.onlineAutoPartsStore.app.model.Address;
