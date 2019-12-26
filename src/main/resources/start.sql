@@ -17,7 +17,7 @@ password varchar,
 email varchar
 );
 
-insert into customer (name, password, email) values ('Dzmitry Furmanau', '288', 'amator@gmail.com');
+insert into customer (name, password, email) values ('Dzmitry', '288', 'amator@gmail.com');
 
 create table if not exists customers_addresses (
 id bigint primary key auto_increment,
@@ -34,7 +34,7 @@ id bigint primary key auto_increment,
 name varchar
 );
 
-insert into provider (name) values ('Yuriy Yarovoy');
+insert into provider (name) values ('Yuriy');
 
 create table if not exists heaver (
 id bigint primary key auto_increment,
@@ -44,4 +44,15 @@ salary integer,
 bonus integer
 );
 
-insert into heaver (name, age, salary, bonus) values ('Anton Miranouski', 25, 500, 100);
+insert into heaver (name, age, salary, bonus) values ('Anton', 25, 500, 100);
+
+create table if not exists stock (
+id bigint primary key auto_increment,
+quantity integer,
+provider_id bigint,
+heaver_id bigint,
+foreign key (provider_id) references provider (id),
+foreign key (heaver_id) references heaver (id)
+);
+
+insert into stock (quantity, provider_id, heaver_id) values (1, 1, 1);

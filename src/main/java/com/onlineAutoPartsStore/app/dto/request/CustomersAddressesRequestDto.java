@@ -1,7 +1,5 @@
 package com.onlineAutoPartsStore.app.dto.request;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class CustomersAddressesRequestDto {
