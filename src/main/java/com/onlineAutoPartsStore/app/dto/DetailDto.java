@@ -1,26 +1,13 @@
 package com.onlineAutoPartsStore.app.dto;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 public class DetailDto {
 
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{detail.name.notNull}")
-    @NotEmpty(message = "{detail.name.notEmpty}")
     private String name;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{detail.type.notNull}")
-    @NotEmpty(message = "{detail.type.notEmpty}")
     private String type;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{detail.price.notNull}")
-    @NotEmpty(message = "{detail.price.notEmpty}")
     private Double price;
 
     public Long getId() {

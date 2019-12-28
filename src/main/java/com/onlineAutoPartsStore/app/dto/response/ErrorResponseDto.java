@@ -8,9 +8,6 @@ public class ErrorResponseDto {
 
     private String message;
 
-    public ErrorResponseDto() {
-    }
-
     public ErrorResponseDto(HttpStatus httpStatus, String message) {
         this.httpStatus = httpStatus;
         this.message = message;

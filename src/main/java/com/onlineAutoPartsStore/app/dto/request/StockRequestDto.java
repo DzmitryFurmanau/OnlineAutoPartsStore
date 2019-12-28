@@ -1,22 +1,13 @@
 package com.onlineAutoPartsStore.app.dto.request;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 public class StockRequestDto {
 
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{stock.quantity.notNull}")
-    @NotEmpty(message = "{stock.quantity.notEmpty}")
     private Integer quantity;
 
-    @NotNull(message = "{stock.provider.notNull}")
     private Long providerId;
 
-    @NotNull(message = "{stock.heaver.notNull}")
     private Long heaverId;
 
     public Long getId() {

@@ -1,26 +1,13 @@
 package com.onlineAutoPartsStore.app.dto.request;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 public class CarRequestDto {
 
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{car.model.notNull}")
-    @NotEmpty(message = "{car.model.notEmpty}")
     private String model;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{car.year.notNull}")
-    @NotEmpty(message = "{car.year.notEmpty}")
     private Short year;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{car.pinCode.notNull}")
-    @NotEmpty(message = "{car.pinCode.notEmpty}")
     private String pinCode;
 
     public Long getId() {

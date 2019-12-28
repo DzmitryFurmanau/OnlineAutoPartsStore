@@ -1,6 +1,6 @@
 create table if not exists public.address (
 id bigint primary key auto_increment,
-phoneNumber integer,
+phonenumber integer,
 street varchar,
 city varchar,
 state varchar,
@@ -8,8 +8,8 @@ country varchar,
 pincode integer
 );
 
-insert into public.address (phoneNumber, street, city, state, country, pincode) values (298687764, 'Folush', 'Hrodna', 'Hrodna Region', 'Belarus', 230006);
-insert into public.address (phoneNumber, street, city, state, country, pincode) values (336549871, 'Strelkovaya', 'Hrodna', 'Hrodna Region', 'Belarus', 230009);
+insert into public.address (phonenumber, street, city, state, country, pincode) values (298687764, 'Folush', 'Hrodna', 'Hrodna Region', 'Belarus', 230006);
+insert into public.address (phonenumber, street, city, state, country, pincode) values (336549871, 'Strelkovaya', 'Hrodna', 'Hrodna Region', 'Belarus', 230009);
 
 create table if not exists public.customer (
 id bigint primary key auto_increment,
@@ -23,14 +23,15 @@ insert into public.customer (name, password, email) values ('Olga', 'Dance', 'lo
 
 create table if not exists public.customers_addresses (
 id bigint primary key auto_increment,
-address_id bigint,
 customer_id bigint,
-foreign key (address_id) references public.address (id),
-foreign key (customer_id) references public.customer (id)
+address_id bigint,
+foreign key (customer_id) references public.customer (id),
+foreign key (address_id) references public.address (id)
+
 );
 
-insert into public.customers_addresses (address_id, customer_id) values (1, 1);
-insert into public.customers_addresses (address_id, customer_id) values (2, 1);
+insert into public.customers_addresses (customer_id, address_id) values (1, 1);
+insert into public.customers_addresses (customer_id, address_id) values (1, 2);
 
 create table if not exists public.provider (
 id bigint primary key auto_increment,
@@ -106,3 +107,20 @@ category smallint
 
 insert into public.seller (name, age, salary, category) values ('Danuta', 20, 700, 2);
 insert into public.seller (name, age, salary, category) values ('Anna', 30, 800, 1);
+
+
+
+CREATE TABLE IF NOT EXISTS public.order (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    date VARCHAR,
+    sum INTEGER,
+    seller_id BIGINT,
+    details_stocks_id BIGINT,
+    customers_addresses_id BIGINT,
+        FOREIGN KEY (seller_id) REFERENCES public.seller (id),
+        FOREIGN KEY (details_stocks_id) REFERENCES public.details_stocks (id),
+        FOREIGN KEY (customers_addresses_id) REFERENCES public.customers_addresses (id)
+);
+
+INSERT INTO public.order (date, sum, seller_id, details_stocks_id, customers_addresses_id) VALUES ('2019-12-12', 1524, 2, 2, 2);
+INSERT INTO public.order (date, sum, seller_id, details_stocks_id, customers_addresses_id) VALUES ('2019-11-11', 123, 1, 1, 1);

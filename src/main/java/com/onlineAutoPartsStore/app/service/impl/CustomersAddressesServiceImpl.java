@@ -18,16 +18,16 @@ public class CustomersAddressesServiceImpl implements CustomersAddressesService 
 
     private final CustomersAddressesRepository customersAddressesRepository;
 
-    private final AddressService addressService;
-
     private final CustomerService customerService;
+
+    private final AddressService addressService;
 
     private final LocalizedMessageSource localizedMessageSource;
 
-    public CustomersAddressesServiceImpl(CustomersAddressesRepository customersAddressesRepository, AddressService addressService, CustomerService customerService, LocalizedMessageSource localizedMessageSource) {
+    public CustomersAddressesServiceImpl(CustomersAddressesRepository customersAddressesRepository, CustomerService customerService, AddressService addressService, LocalizedMessageSource localizedMessageSource) {
         this.customersAddressesRepository = customersAddressesRepository;
-        this.addressService = addressService;
         this.customerService = customerService;
+        this.addressService = addressService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
@@ -75,10 +75,10 @@ public class CustomersAddressesServiceImpl implements CustomersAddressesService 
     }
 
     private CustomersAddresses saveAndFlush(CustomersAddresses customersAddresses) {
-        validate(customersAddresses.getAddress() == null || customersAddresses.getAddress().getId() == null, localizedMessageSource.getMessage("error.customers_addresses.address.isNull", new Object[]{}));
         validate(customersAddresses.getCustomer() == null || customersAddresses.getCustomer().getId() == null, localizedMessageSource.getMessage("error.customers_addresses.customer.isNull", new Object[]{}));
-        customersAddresses.setAddress(addressService.findById(customersAddresses.getAddress().getId()));
+        validate(customersAddresses.getAddress() == null || customersAddresses.getAddress().getId() == null, localizedMessageSource.getMessage("error.customers_addresses.address.isNull", new Object[]{}));
         customersAddresses.setCustomer(customerService.findById(customersAddresses.getCustomer().getId()));
+        customersAddresses.setAddress(addressService.findById(customersAddresses.getAddress().getId()));
         return customersAddressesRepository.saveAndFlush(customersAddresses);
     }
 

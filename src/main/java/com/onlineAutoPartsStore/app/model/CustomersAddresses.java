@@ -12,14 +12,14 @@ public class CustomersAddresses {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id", nullable = false)
-    @NotNull(message = "{customers_addresses.address.notNull}")
-    private Address address;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     @NotNull(message = "{customers_addresses.customer.notNull}")
     private Customer customer;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", nullable = false)
+    @NotNull(message = "{customers_addresses.address.notNull}")
+    private Address address;
 
     public CustomersAddresses() {
     }
@@ -32,19 +32,19 @@ public class CustomersAddresses {
         this.id = id;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

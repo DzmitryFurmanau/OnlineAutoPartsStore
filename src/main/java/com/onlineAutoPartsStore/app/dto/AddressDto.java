@@ -1,44 +1,19 @@
 package com.onlineAutoPartsStore.app.dto;
 
-import org.hibernate.validator.constraints.Range;
-
-import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 public class AddressDto {
 
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{address.phoneNumber.notNull}")
-    @NotEmpty(message = "{address.phoneNumber.notEmpty}")
     private Integer phoneNumber;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{address.street.notNull}")
-    @NotEmpty(message = "{address.street.notEmpty}")
     private String street;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{address.city.notNull}")
-    @NotEmpty(message = "{address.city.notEmpty}")
     private String city;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{address.state.notNull}")
-    @NotEmpty(message = "{address.state.notEmpty}")
     private String state;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{address.country.notNull}")
-    @NotEmpty(message = "{address.country.notEmpty}")
     private String country;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{address.pinCode.notNull}")
-    @NotEmpty(message = "{address.pinCode.notEmpty}")
     private Integer pinCode;
 
     public Long getId() {

@@ -71,12 +71,12 @@ public class CustomersAddressesController {
 
     private CustomersAddresses getCustomersAddresses(CustomersAddressesRequestDto customersAddressesRequestDto) {
         final CustomersAddresses customersAddresses = mapper.map(customersAddressesRequestDto, CustomersAddresses.class);
-        final Address address = new Address();
         final Customer customer = new Customer();
-        address.setId(customersAddressesRequestDto.getAddressId());
+        final Address address = new Address();
         customer.setId(customersAddressesRequestDto.getCustomerId());
-        customersAddresses.setAddress(address);
+        address.setId(customersAddressesRequestDto.getAddressId());
         customersAddresses.setCustomer(customer);
+        customersAddresses.setAddress(address);
         return customersAddresses;
     }
 }
