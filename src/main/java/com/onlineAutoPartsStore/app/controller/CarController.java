@@ -24,7 +24,6 @@ public class CarController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
-
     public CarController(Mapper mapper, CarService carService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.carService = carService;

@@ -26,7 +26,6 @@ public class CustomersAddressesController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
-
     public CustomersAddressesController(Mapper mapper, CustomersAddressesService customersAddressesService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.customersAddressesService = customersAddressesService;

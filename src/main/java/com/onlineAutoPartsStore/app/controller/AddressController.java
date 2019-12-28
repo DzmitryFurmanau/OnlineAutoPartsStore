@@ -30,7 +30,6 @@ public class AddressController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
-
     @GetMapping
     public ResponseEntity<List<AddressResponseDto>> getAll() {
         final List<Address> addresses = addressService.findAll();

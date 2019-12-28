@@ -26,7 +26,6 @@ public class StockController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
-
     public StockController(Mapper mapper, StockService stockService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.stockService = stockService;

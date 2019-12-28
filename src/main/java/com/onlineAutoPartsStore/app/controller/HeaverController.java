@@ -30,7 +30,6 @@ public class HeaverController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
-
     @GetMapping
     public ResponseEntity<List<HeaverResponseDto>> getAll() {
         final List<Heaver> heavers = heaverService.findAll();

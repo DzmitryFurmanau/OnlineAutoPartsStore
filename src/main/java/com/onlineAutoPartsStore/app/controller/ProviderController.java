@@ -24,7 +24,6 @@ public class ProviderController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
-
     public ProviderController(Mapper mapper, ProviderService providerService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.providerService = providerService;
