@@ -10,18 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
 public class StockServiceImpl implements StockService {
 
-    private final LocalizedMessageSource localizedMessageSource;
+    private final StockRepository stockRepository;
 
     private final ProviderService providerService;
 
     private final HeaverService heaverService;
 
-    private final StockRepository stockRepository;
+    private final LocalizedMessageSource localizedMessageSource;
 
     public StockServiceImpl(StockRepository stockRepository, ProviderService providerService, HeaverService heaverService, LocalizedMessageSource localizedMessageSource) {
         this.stockRepository = stockRepository;
@@ -43,7 +44,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Stock save(Stock stock) {
         validate(stock.getId() != null, localizedMessageSource.getMessage("error.stock.notHaveId", new Object[]{}));
-        validate(stockRepository.existsById(stock.getId()), localizedMessageSource.getMessage("error.stock.id.notUnique", new Object[]{}));
+        validate(stockRepository.existsByQuantity(stock.getQuantity()), localizedMessageSource.getMessage("error.stock.quantity.notUnique", new Object[]{}));
         return saveAndFlush(stock);
     }
 
@@ -51,6 +52,9 @@ public class StockServiceImpl implements StockService {
     public Stock update(Stock stock) {
         final Long id = stock.getId();
         validate(id == null, localizedMessageSource.getMessage("error.stock.haveId", new Object[]{}));
+        final Stock duplicateStock = stockRepository.findByQuantity(stock.getQuantity());
+        final boolean isDuplicateExists = duplicateStock != null && !Objects.equals(duplicateStock.getId(), id);
+        validate(isDuplicateExists, localizedMessageSource.getMessage("error.provider.quantity.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(stock);
     }

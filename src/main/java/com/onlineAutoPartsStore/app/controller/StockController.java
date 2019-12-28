@@ -35,9 +35,9 @@ public class StockController {
 
     @GetMapping
     public ResponseEntity<List<StockResponseDto>> getAll() {
-        final List<Stock> stock = stockService.findAll();
-        final List<StockResponseDto> stockResponseDtoList = stock.stream()
-                .map((customerAddresses) -> mapper.map(customerAddresses, StockResponseDto.class))
+        final List<Stock> stocks = stockService.findAll();
+        final List<StockResponseDto> stockResponseDtoList = stocks.stream()
+                .map((stock) -> mapper.map(stock, StockResponseDto.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(stockResponseDtoList, HttpStatus.OK);
     }

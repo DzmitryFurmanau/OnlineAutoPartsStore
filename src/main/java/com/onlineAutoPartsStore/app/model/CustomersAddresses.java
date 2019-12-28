@@ -1,7 +1,6 @@
 package com.onlineAutoPartsStore.app.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -12,24 +11,17 @@ public class CustomersAddresses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id", nullable = false)
     @NotNull(message = "{customers_addresses.address.notNull}")
     private Address address;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     @NotNull(message = "{customers_addresses.customer.notNull}")
     private Customer customer;
 
     public CustomersAddresses() {
-
-    }
-
-    public CustomersAddresses(Long id, Address address, Customer customer) {
-        this.id = id;
-        this.address = address;
-        this.customer = customer;
     }
 
     public Long getId() {

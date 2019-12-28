@@ -28,14 +28,6 @@ public class Customer {
     private String email;
 
     public Customer() {
-
-    }
-
-    public Customer(Long id, String name, String password, String email) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
     }
 
     public Long getId() {

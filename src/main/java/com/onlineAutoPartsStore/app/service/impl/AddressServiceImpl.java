@@ -14,9 +14,9 @@ import java.util.Objects;
 @Transactional
 public class AddressServiceImpl implements AddressService {
 
-    private final LocalizedMessageSource localizedMessageSource;
-
     private final AddressRepository addressRepository;
+
+    private final LocalizedMessageSource localizedMessageSource;
 
     public AddressServiceImpl(AddressRepository addressRepository, LocalizedMessageSource localizedMessageSource) {
         this.addressRepository = addressRepository;

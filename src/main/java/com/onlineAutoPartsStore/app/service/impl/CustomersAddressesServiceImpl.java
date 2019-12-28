@@ -10,18 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class CustomersAddressesServiceImpl implements CustomersAddressesService {
 
-    private final LocalizedMessageSource localizedMessageSource;
+    private final CustomersAddressesRepository customersAddressesRepository;
 
     private final AddressService addressService;
 
     private final CustomerService customerService;
 
-    private final CustomersAddressesRepository customersAddressesRepository;
+    private final LocalizedMessageSource localizedMessageSource;
 
     public CustomersAddressesServiceImpl(CustomersAddressesRepository customersAddressesRepository, AddressService addressService, CustomerService customerService, LocalizedMessageSource localizedMessageSource) {
         this.customersAddressesRepository = customersAddressesRepository;
@@ -51,6 +52,9 @@ public class CustomersAddressesServiceImpl implements CustomersAddressesService 
     public CustomersAddresses update(CustomersAddresses customersAddresses) {
         final Long id = customersAddresses.getId();
         validate(id == null, localizedMessageSource.getMessage("error.customers_addresses.haveId", new Object[]{}));
+        final Optional<CustomersAddresses> duplicateCustomersAddresses = customersAddressesRepository.findById(customersAddresses.getId());
+        final boolean isDuplicateExists = duplicateCustomersAddresses.isPresent();
+        validate(isDuplicateExists, localizedMessageSource.getMessage("error.customers_addresses.id.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(customersAddresses);
     }

@@ -35,7 +35,7 @@ public class AddressController {
     public ResponseEntity<List<AddressResponseDto>> getAll() {
         final List<Address> addresses = addressService.findAll();
         final List<AddressResponseDto> addressResponseDtoList = addresses.stream()
-                .map((role) -> mapper.map(role, AddressResponseDto.class))
+                .map((address) -> mapper.map(address, AddressResponseDto.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(addressResponseDtoList, HttpStatus.OK);
     }

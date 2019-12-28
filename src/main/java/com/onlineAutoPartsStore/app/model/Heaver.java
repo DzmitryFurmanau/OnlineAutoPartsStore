@@ -33,15 +33,6 @@ public class Heaver {
     private Integer bonus;
 
     public Heaver() {
-
-    }
-
-    public Heaver(Long id, String name, Short age, Integer salary, Integer bonus) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-        this.bonus = bonus;
     }
 
     public Long getId() {

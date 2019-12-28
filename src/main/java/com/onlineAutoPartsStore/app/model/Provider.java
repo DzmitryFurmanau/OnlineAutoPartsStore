@@ -18,12 +18,6 @@ public class Provider {
     private String name;
 
     public Provider() {
-
-    }
-
-    public Provider(Long id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Long getId() {

@@ -43,17 +43,6 @@ public class Address {
     private Integer pinCode;
 
     public Address() {
-
-    }
-
-    public Address(Long id, Integer phoneNumber, String street, String city, String state, String country, Integer pinCode) {
-        this.id = id;
-        this.phoneNumber = phoneNumber;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.pinCode = pinCode;
     }
 
     public Long getId() {

@@ -14,9 +14,9 @@ import java.util.Objects;
 @Transactional
 public class ProviderServiceImpl implements ProviderService {
 
-    private final LocalizedMessageSource localizedMessageSource;
-
     private final ProviderRepository providerRepository;
+
+    private final LocalizedMessageSource localizedMessageSource;
 
     public ProviderServiceImpl(ProviderRepository providerRepository, LocalizedMessageSource localizedMessageSource) {
         this.providerRepository = providerRepository;

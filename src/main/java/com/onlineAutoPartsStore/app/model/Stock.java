@@ -17,24 +17,17 @@ public class Stock {
     @NotEmpty(message = "{stock.quantity.notEmpty}")
     private Integer quantity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "provider_id", nullable = false)
     @NotNull(message = "{stock.provider.notNull}")
     private Provider provider;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "heaver_id", nullable = false)
     @NotNull(message = "{stock.heaver.notNull}")
     private Heaver heaver;
 
     public Stock() {
-
-    }
-
-    public Stock(Long id, Integer quantity, Provider provider, Heaver heaver) {
-        this.id = id;
-        this.quantity = quantity;
-        this.provider = provider;
     }
 
     public Long getId() {

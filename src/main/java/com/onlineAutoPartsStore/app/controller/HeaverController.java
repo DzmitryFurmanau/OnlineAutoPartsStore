@@ -35,7 +35,7 @@ public class HeaverController {
     public ResponseEntity<List<HeaverResponseDto>> getAll() {
         final List<Heaver> heavers = heaverService.findAll();
         final List<HeaverResponseDto> heaverResponseDtoList = heavers.stream()
-                .map((role) -> mapper.map(role, HeaverResponseDto.class))
+                .map((heaver) -> mapper.map(heaver, HeaverResponseDto.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(heaverResponseDtoList, HttpStatus.OK);
     }

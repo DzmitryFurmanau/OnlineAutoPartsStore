@@ -14,9 +14,9 @@ import java.util.Objects;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    private final LocalizedMessageSource localizedMessageSource;
-
     private final CustomerRepository customerRepository;
+
+    private final LocalizedMessageSource localizedMessageSource;
 
     public CustomerServiceImpl(CustomerRepository customerRepository, LocalizedMessageSource localizedMessageSource) {
         this.customerRepository = customerRepository;

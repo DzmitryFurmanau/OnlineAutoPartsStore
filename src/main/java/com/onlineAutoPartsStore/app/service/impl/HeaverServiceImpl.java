@@ -14,9 +14,9 @@ import java.util.Objects;
 @Transactional
 public class HeaverServiceImpl implements HeaverService {
 
-    private final LocalizedMessageSource localizedMessageSource;
-
     private final HeaverRepository heaverRepository;
+
+    private final LocalizedMessageSource localizedMessageSource;
 
     public HeaverServiceImpl(HeaverRepository heaverRepository, LocalizedMessageSource localizedMessageSource) {
         this.heaverRepository = heaverRepository;
@@ -36,7 +36,7 @@ public class HeaverServiceImpl implements HeaverService {
     @Override
     public Heaver save(Heaver heaver) {
         validate(heaver.getId() != null, localizedMessageSource.getMessage("error.heaver.notHaveId", new Object[]{}));
-        validate(heaverRepository.existsByName(heaver.getName()), localizedMessageSource.getMessage("error.heaver.Name.notUnique", new Object[]{}));
+        validate(heaverRepository.existsByName(heaver.getName()), localizedMessageSource.getMessage("error.heaver.name.notUnique", new Object[]{}));
         return heaverRepository.saveAndFlush(heaver);
     }
 
