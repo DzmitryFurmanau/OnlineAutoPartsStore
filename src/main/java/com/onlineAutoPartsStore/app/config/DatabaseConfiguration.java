@@ -32,7 +32,7 @@ public class DatabaseConfiguration {
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder.setType(EmbeddedDatabaseType.H2)
-                .addScript("/start.sql")
+                .addScript("/schema.sql")
                 .build();
     }
 
