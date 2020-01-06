@@ -18,8 +18,8 @@ public class Order {
     private String date;
 
     @Column(unique = true, nullable = false)
-    @NotNull(message = "{order.date.notNull}")
-    @NotEmpty(message = "{order.date.notEmpty}")
+    @NotNull(message = "{order.sum.notNull}")
+    @NotEmpty(message = "{order.sum.notEmpty}")
     private Integer sum;
 
     @ManyToOne(fetch = FetchType.EAGER)

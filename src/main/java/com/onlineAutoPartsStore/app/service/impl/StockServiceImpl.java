@@ -54,7 +54,7 @@ public class StockServiceImpl implements StockService {
         validate(id == null, localizedMessageSource.getMessage("error.stock.haveId", new Object[]{}));
         final Stock duplicateStock = stockRepository.findByQuantity(stock.getQuantity());
         final boolean isDuplicateExists = duplicateStock != null && !Objects.equals(duplicateStock.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.provider.quantity.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource.getMessage("error.stock.quantity.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(stock);
     }
