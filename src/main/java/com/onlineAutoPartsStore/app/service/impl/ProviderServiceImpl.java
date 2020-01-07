@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Provider service.
+ */
 @Service
 @Transactional
 public class ProviderServiceImpl implements ProviderService {
@@ -18,6 +21,12 @@ public class ProviderServiceImpl implements ProviderService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Provider service.
+     *
+     * @param providerRepository     the provider repository
+     * @param localizedMessageSource the localized message source
+     */
     public ProviderServiceImpl(ProviderRepository providerRepository, LocalizedMessageSource localizedMessageSource) {
         this.providerRepository = providerRepository;
         this.localizedMessageSource = localizedMessageSource;

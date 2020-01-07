@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Order service.
+ */
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
@@ -27,6 +30,15 @@ public class OrderServiceImpl implements OrderService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Order service.
+     *
+     * @param orderRepository           the order repository
+     * @param sellerService             the seller service
+     * @param detailsStocksService      the details stocks service
+     * @param customersAddressesService the customers addresses service
+     * @param localizedMessageSource    the localized message source
+     */
     public OrderServiceImpl(OrderRepository orderRepository, SellerService sellerService, DetailsStocksService detailsStocksService, CustomersAddressesService customersAddressesService, LocalizedMessageSource localizedMessageSource) {
         this.orderRepository = orderRepository;
         this.sellerService = sellerService;

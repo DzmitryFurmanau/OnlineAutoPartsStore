@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The type Heaver controller.
+ */
 @RestController
 @RequestMapping("/heaver")
 public class HeaverController {
@@ -24,12 +27,24 @@ public class HeaverController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Heaver controller.
+     *
+     * @param mapper                 the mapper
+     * @param heaverService          the heaver service
+     * @param localizedMessageSource the localized message source
+     */
     public HeaverController(Mapper mapper, HeaverService heaverService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.heaverService = heaverService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @GetMapping
     public ResponseEntity<List<HeaverResponseDto>> getAll() {
         final List<Heaver> heavers = heaverService.findAll();
@@ -39,12 +54,24 @@ public class HeaverController {
         return new ResponseEntity<>(heaverResponseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one.
+     *
+     * @param id the id
+     * @return the one
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<HeaverResponseDto> getOne(@PathVariable Long id) {
         final HeaverResponseDto heaverResponseDto = mapper.map(heaverService.findById(id), HeaverResponseDto.class);
         return new ResponseEntity<>(heaverResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Save response entity.
+     *
+     * @param heaverRequestDto the heaver request dto
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<HeaverResponseDto> save(@RequestBody HeaverRequestDto heaverRequestDto) {
         heaverRequestDto.setId(null);
@@ -52,6 +79,13 @@ public class HeaverController {
         return new ResponseEntity<>(heaverResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param heaverRequestDto the heaver request dto
+     * @param id               the id
+     * @return the response entity
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<HeaverResponseDto> update(@RequestBody HeaverRequestDto heaverRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, heaverRequestDto.getId())) {
@@ -61,6 +95,11 @@ public class HeaverController {
         return new ResponseEntity<>(heaverResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

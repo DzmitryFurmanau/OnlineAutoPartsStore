@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The type Stock controller.
+ */
 @RestController
 @RequestMapping("/stock")
 public class StockController {
@@ -26,12 +29,24 @@ public class StockController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Stock controller.
+     *
+     * @param mapper                 the mapper
+     * @param stockService           the stock service
+     * @param localizedMessageSource the localized message source
+     */
     public StockController(Mapper mapper, StockService stockService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.stockService = stockService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @GetMapping
     public ResponseEntity<List<StockResponseDto>> getAll() {
         final List<Stock> stocks = stockService.findAll();
@@ -41,12 +56,24 @@ public class StockController {
         return new ResponseEntity<>(stockResponseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one.
+     *
+     * @param id the id
+     * @return the one
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<StockResponseDto> getOne(@PathVariable Long id) {
         final StockResponseDto stockResponseDto = mapper.map(stockService.findById(id), StockResponseDto.class);
         return new ResponseEntity<>(stockResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Save response entity.
+     *
+     * @param stockRequestDto the stock request dto
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<StockResponseDto> save(@RequestBody StockRequestDto stockRequestDto) {
         stockRequestDto.setId(null);
@@ -54,6 +81,13 @@ public class StockController {
         return new ResponseEntity<>(stockResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param stockRequestDto the stock request dto
+     * @param id              the id
+     * @return the response entity
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<StockResponseDto> update(@RequestBody StockRequestDto stockRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, stockRequestDto.getId())) {
@@ -63,6 +97,11 @@ public class StockController {
         return new ResponseEntity<>(stockResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

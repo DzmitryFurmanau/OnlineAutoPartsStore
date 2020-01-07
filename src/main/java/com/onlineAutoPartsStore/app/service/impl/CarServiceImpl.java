@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Car service.
+ */
 @Service
 @Transactional
 public class CarServiceImpl implements CarService {
@@ -18,6 +21,12 @@ public class CarServiceImpl implements CarService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Car service.
+     *
+     * @param carRepository          the car repository
+     * @param localizedMessageSource the localized message source
+     */
     public CarServiceImpl(CarRepository carRepository, LocalizedMessageSource localizedMessageSource) {
         this.carRepository = carRepository;
         this.localizedMessageSource = localizedMessageSource;

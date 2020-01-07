@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The type Provider controller.
+ */
 @RestController
 @RequestMapping("/provider")
 public class ProviderController {
@@ -24,12 +27,24 @@ public class ProviderController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Provider controller.
+     *
+     * @param mapper                 the mapper
+     * @param providerService        the provider service
+     * @param localizedMessageSource the localized message source
+     */
     public ProviderController(Mapper mapper, ProviderService providerService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.providerService = providerService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @GetMapping
     public ResponseEntity<List<ProviderResponseDto>> getAll() {
         final List<Provider> providers = providerService.findAll();
@@ -39,12 +54,24 @@ public class ProviderController {
         return new ResponseEntity<>(providerResponseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one.
+     *
+     * @param id the id
+     * @return the one
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProviderResponseDto> getOne(@PathVariable Long id) {
         final ProviderResponseDto providerResponseDto = mapper.map(providerService.findById(id), ProviderResponseDto.class);
         return new ResponseEntity<>(providerResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Save response entity.
+     *
+     * @param providerRequestDto the provider request dto
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<ProviderResponseDto> save(@RequestBody ProviderRequestDto providerRequestDto) {
         providerRequestDto.setId(null);
@@ -52,6 +79,13 @@ public class ProviderController {
         return new ResponseEntity<>(providerResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param providerRequestDto the provider request dto
+     * @param id                 the id
+     * @return the response entity
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProviderResponseDto> update(@RequestBody ProviderRequestDto providerRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, providerRequestDto.getId())) {
@@ -61,6 +95,11 @@ public class ProviderController {
         return new ResponseEntity<>(providerResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

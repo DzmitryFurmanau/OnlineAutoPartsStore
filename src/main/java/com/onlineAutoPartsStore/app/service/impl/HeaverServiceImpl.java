@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Heaver service.
+ */
 @Service
 @Transactional
 public class HeaverServiceImpl implements HeaverService {
@@ -18,6 +21,12 @@ public class HeaverServiceImpl implements HeaverService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Heaver service.
+     *
+     * @param heaverRepository       the heaver repository
+     * @param localizedMessageSource the localized message source
+     */
     public HeaverServiceImpl(HeaverRepository heaverRepository, LocalizedMessageSource localizedMessageSource) {
         this.heaverRepository = heaverRepository;
         this.localizedMessageSource = localizedMessageSource;

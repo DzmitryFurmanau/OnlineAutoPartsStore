@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Customers addresses service.
+ */
 @Service
 @Transactional
 public class CustomersAddressesServiceImpl implements CustomersAddressesService {
@@ -24,6 +27,14 @@ public class CustomersAddressesServiceImpl implements CustomersAddressesService 
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Customers addresses service.
+     *
+     * @param customersAddressesRepository the customers addresses repository
+     * @param customerService              the customer service
+     * @param addressService               the address service
+     * @param localizedMessageSource       the localized message source
+     */
     public CustomersAddressesServiceImpl(CustomersAddressesRepository customersAddressesRepository, CustomerService customerService, AddressService addressService, LocalizedMessageSource localizedMessageSource) {
         this.customersAddressesRepository = customersAddressesRepository;
         this.customerService = customerService;

@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The type Details stocks controller.
+ */
 @RestController
 @RequestMapping("/details_stocks")
 public class DetailsStocksController {
@@ -26,12 +29,24 @@ public class DetailsStocksController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Details stocks controller.
+     *
+     * @param mapper                 the mapper
+     * @param detailsStocksService   the details stocks service
+     * @param localizedMessageSource the localized message source
+     */
     public DetailsStocksController(Mapper mapper, DetailsStocksService detailsStocksService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.detailsStocksService = detailsStocksService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @GetMapping
     public ResponseEntity<List<DetailsStocksResponseDto>> getAll() {
         final List<DetailsStocks> detailsStocks = detailsStocksService.findAll();
@@ -41,12 +56,24 @@ public class DetailsStocksController {
         return new ResponseEntity<>(detailsStocksResponseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one.
+     *
+     * @param id the id
+     * @return the one
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<DetailsStocksResponseDto> getOne(@PathVariable Long id) {
         final DetailsStocksResponseDto detailsStocksResponseDto = mapper.map(detailsStocksService.findById(id), DetailsStocksResponseDto.class);
         return new ResponseEntity<>(detailsStocksResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Save response entity.
+     *
+     * @param detailsStocksRequestDto the details stocks request dto
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<DetailsStocksResponseDto> save(@RequestBody DetailsStocksRequestDto detailsStocksRequestDto) {
         detailsStocksRequestDto.setId(null);
@@ -54,6 +81,13 @@ public class DetailsStocksController {
         return new ResponseEntity<>(detailsStocksResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param detailsStocksRequestDto the details stocks request dto
+     * @param id                      the id
+     * @return the response entity
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<DetailsStocksResponseDto> update(@RequestBody DetailsStocksRequestDto detailsStocksRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, detailsStocksRequestDto.getId())) {
@@ -63,6 +97,11 @@ public class DetailsStocksController {
         return new ResponseEntity<>(detailsStocksResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

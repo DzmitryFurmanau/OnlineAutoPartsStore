@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The type Customers addresses controller.
+ */
 @RestController
 @RequestMapping("/customers_addresses")
 public class CustomersAddressesController {
@@ -26,12 +29,24 @@ public class CustomersAddressesController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Customers addresses controller.
+     *
+     * @param mapper                    the mapper
+     * @param customersAddressesService the customers addresses service
+     * @param localizedMessageSource    the localized message source
+     */
     public CustomersAddressesController(Mapper mapper, CustomersAddressesService customersAddressesService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.customersAddressesService = customersAddressesService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @GetMapping
     public ResponseEntity<List<CustomersAddressesResponseDto>> getAll() {
         final List<CustomersAddresses> customersAddresses = customersAddressesService.findAll();
@@ -41,12 +56,24 @@ public class CustomersAddressesController {
         return new ResponseEntity<>(customersAddressesResponseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one.
+     *
+     * @param id the id
+     * @return the one
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<CustomersAddressesResponseDto> getOne(@PathVariable Long id) {
         final CustomersAddressesResponseDto customersAddressesResponseDto = mapper.map(customersAddressesService.findById(id), CustomersAddressesResponseDto.class);
         return new ResponseEntity<>(customersAddressesResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Save response entity.
+     *
+     * @param customersAddressesRequestDto the customers addresses request dto
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<CustomersAddressesResponseDto> save(@RequestBody CustomersAddressesRequestDto customersAddressesRequestDto) {
         customersAddressesRequestDto.setId(null);
@@ -54,6 +81,13 @@ public class CustomersAddressesController {
         return new ResponseEntity<>(CustomersAddressesResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param customersAddressesRequestDto the customers addresses request dto
+     * @param id                           the id
+     * @return the response entity
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<CustomersAddressesResponseDto> update(@RequestBody CustomersAddressesRequestDto customersAddressesRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, customersAddressesRequestDto.getId())) {
@@ -63,6 +97,11 @@ public class CustomersAddressesController {
         return new ResponseEntity<>(customersAddressesResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

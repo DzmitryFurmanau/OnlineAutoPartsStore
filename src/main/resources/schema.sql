@@ -22,7 +22,7 @@ CREATE TABLE public.customer (
 );
 
 INSERT INTO public.customer (id, name, password, email) VALUES (1, 'Dzmitry', '1488', 'amator@gmail.com');
-INSERT INTO public.customer (id, name, password, email) VALUES (2, 'Olga', 'Dance', 'love@gmail.com');
+INSERT INTO public.customer (id, name, password, email) VALUES (2, 'Volha', 'Dance', 'love@gmail.com');
 
 
 DROP TABLE IF EXISTS public.customers_addresses;

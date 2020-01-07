@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Seller service.
+ */
 @Service
 @Transactional
 public class SellerServiceImpl implements SellerService {
@@ -18,6 +21,12 @@ public class SellerServiceImpl implements SellerService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Seller service.
+     *
+     * @param sellerRepository       the seller repository
+     * @param localizedMessageSource the localized message source
+     */
     public SellerServiceImpl(SellerRepository sellerRepository, LocalizedMessageSource localizedMessageSource) {
         this.sellerRepository = sellerRepository;
         this.localizedMessageSource = localizedMessageSource;

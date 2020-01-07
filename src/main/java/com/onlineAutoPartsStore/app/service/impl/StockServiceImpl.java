@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Stock service.
+ */
 @Service
 @Transactional
 public class StockServiceImpl implements StockService {
@@ -24,6 +27,14 @@ public class StockServiceImpl implements StockService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Stock service.
+     *
+     * @param stockRepository        the stock repository
+     * @param providerService        the provider service
+     * @param heaverService          the heaver service
+     * @param localizedMessageSource the localized message source
+     */
     public StockServiceImpl(StockRepository stockRepository, ProviderService providerService, HeaverService heaverService, LocalizedMessageSource localizedMessageSource) {
         this.stockRepository = stockRepository;
         this.providerService = providerService;

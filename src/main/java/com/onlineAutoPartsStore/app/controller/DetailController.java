@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The type Detail controller.
+ */
 @RestController
 @RequestMapping("/detail")
 public class DetailController {
@@ -25,12 +28,24 @@ public class DetailController {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Detail controller.
+     *
+     * @param mapper                 the mapper
+     * @param detailService          the detail service
+     * @param localizedMessageSource the localized message source
+     */
     public DetailController(Mapper mapper, DetailService detailService, LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.detailService = detailService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @GetMapping
     public ResponseEntity<List<DetailResponseDto>> getAll() {
         final List<Detail> details = detailService.findAll();
@@ -40,12 +55,24 @@ public class DetailController {
         return new ResponseEntity<>(detailResponseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one.
+     *
+     * @param id the id
+     * @return the one
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<DetailResponseDto> getOne(@PathVariable Long id) {
         final DetailResponseDto detailResponseDto = mapper.map(detailService.findById(id), DetailResponseDto.class);
         return new ResponseEntity<>(detailResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Save response entity.
+     *
+     * @param detailRequestDto the detail request dto
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<DetailResponseDto> save(@RequestBody DetailRequestDto detailRequestDto) {
         detailRequestDto.setId(null);
@@ -53,6 +80,13 @@ public class DetailController {
         return new ResponseEntity<>(detailResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param detailRequestDto the detail request dto
+     * @param id               the id
+     * @return the response entity
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<DetailResponseDto> update(@RequestBody DetailRequestDto detailRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, detailRequestDto.getId())) {
@@ -62,6 +96,11 @@ public class DetailController {
         return new ResponseEntity<>(detailResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

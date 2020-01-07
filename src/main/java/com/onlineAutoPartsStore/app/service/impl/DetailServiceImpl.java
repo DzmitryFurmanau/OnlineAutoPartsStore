@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Detail service.
+ */
 @Service
 @Transactional
 public class DetailServiceImpl implements DetailService {
@@ -21,6 +24,13 @@ public class DetailServiceImpl implements DetailService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Detail service.
+     *
+     * @param detailRepository       the detail repository
+     * @param carService             the car service
+     * @param localizedMessageSource the localized message source
+     */
     public DetailServiceImpl(DetailRepository detailRepository, CarService carService, LocalizedMessageSource localizedMessageSource) {
         this.detailRepository = detailRepository;
         this.carService = carService;

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The type Stock.
+ */
 @Entity
 @Table(name = "stock", schema = "public")
 public class Stock {
@@ -27,37 +30,80 @@ public class Stock {
     @NotNull(message = "{stock.heaver.notNull}")
     private Heaver heaver;
 
+    /**
+     * Instantiates a new Stock.
+     */
     public Stock() {
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Gets quantity.
+     *
+     * @return the quantity
+     */
     public Integer getQuantity() {
         return quantity;
     }
 
+    /**
+     * Sets quantity.
+     *
+     * @param quantity the quantity
+     */
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     * Gets provider.
+     *
+     * @return the provider
+     */
     public Provider getProvider() {
         return provider;
     }
 
+    /**
+     * Sets provider.
+     *
+     * @param provider the provider
+     */
     public void setProvider(Provider provider) {
         this.provider = provider;
     }
 
+    /**
+     * Gets heaver.
+     *
+     * @return the heaver
+     */
     public Heaver getHeaver() {
         return heaver;
     }
 
+    /**
+     * Sets heaver.
+     *
+     * @param heaver the heaver
+     */
     public void setHeaver(Heaver heaver) {
         this.heaver = heaver;
     }

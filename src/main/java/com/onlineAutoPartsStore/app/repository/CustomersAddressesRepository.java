@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
+/**
+ * The interface Customers addresses repository.
+ */
 public interface CustomersAddressesRepository extends JpaRepository<CustomersAddresses, Long> {
 
     boolean existsById(Long id);

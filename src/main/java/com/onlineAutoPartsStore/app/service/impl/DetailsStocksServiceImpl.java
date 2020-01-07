@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Details stocks service.
+ */
 @Service
 @Transactional
 public class DetailsStocksServiceImpl implements DetailsStocksService {
@@ -24,6 +27,14 @@ public class DetailsStocksServiceImpl implements DetailsStocksService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Details stocks service.
+     *
+     * @param detailsStocksRepository the details stocks repository
+     * @param stockService            the stock service
+     * @param detailService           the detail service
+     * @param localizedMessageSource  the localized message source
+     */
     public DetailsStocksServiceImpl(DetailsStocksRepository detailsStocksRepository, StockService stockService, DetailService detailService, LocalizedMessageSource localizedMessageSource) {
         this.detailsStocksRepository = detailsStocksRepository;
         this.stockService = stockService;

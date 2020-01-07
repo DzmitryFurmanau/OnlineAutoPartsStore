@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Customer service.
+ */
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -18,6 +21,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final LocalizedMessageSource localizedMessageSource;
 
+    /**
+     * Instantiates a new Customer service.
+     *
+     * @param customerRepository     the customer repository
+     * @param localizedMessageSource the localized message source
+     */
     public CustomerServiceImpl(CustomerRepository customerRepository, LocalizedMessageSource localizedMessageSource) {
         this.customerRepository = customerRepository;
         this.localizedMessageSource = localizedMessageSource;
