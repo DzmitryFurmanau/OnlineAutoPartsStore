@@ -3,27 +3,31 @@ package com.onlineAutoPartsStore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
- * The type Provider.
+ * The type Role.
  */
 @Entity
-@Table(name = "providers", schema = "public")
-public class Provider {
-
+@Table(name = "roles", schema = "public")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)
-    @NotNull(message = "{provider.name.notNull}")
-    @NotEmpty(message = "{provider.name.notEmpty}")
+    @NotNull(message = "{role.name.notNull}")
+    @NotEmpty(message = "{role.name.notEmpty}")
     private String name;
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
     /**
-     * Instantiates a new Provider.
+     * Instantiates a new Role.
      */
-    public Provider() {
+    public Role() {
     }
 
     /**
@@ -60,5 +64,23 @@ public class Provider {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Gets users.
+     *
+     * @return the users
+     */
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    /**
+     * Sets users.
+     *
+     * @param users the users
+     */
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

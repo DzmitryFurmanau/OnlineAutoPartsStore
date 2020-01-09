@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * The type Provider controller.
  */
 @RestController
-@RequestMapping("/provider")
+@RequestMapping("/providers")
 public class ProviderController {
 
     private final Mapper mapper;

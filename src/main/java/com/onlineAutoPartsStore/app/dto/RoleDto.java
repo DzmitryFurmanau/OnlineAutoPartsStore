@@ -1,30 +1,17 @@
-package com.onlineAutoPartsStore.app.model;
+package com.onlineAutoPartsStore.app.dto;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
- * The type Provider.
+ * The type Role dto.
  */
-@Entity
-@Table(name = "providers", schema = "public")
-public class Provider {
+public class RoleDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{provider.name.notNull}")
-    @NotEmpty(message = "{provider.name.notEmpty}")
     private String name;
-
-    /**
-     * Instantiates a new Provider.
-     */
-    public Provider() {
-    }
 
     /**
      * Gets id.

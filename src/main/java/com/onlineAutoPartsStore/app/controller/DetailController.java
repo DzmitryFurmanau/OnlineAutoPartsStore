@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * The type Detail controller.
  */
 @RestController
-@RequestMapping("/detail")
+@RequestMapping("/details")
 public class DetailController {
 
     private final Mapper mapper;

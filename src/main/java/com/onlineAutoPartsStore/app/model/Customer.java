@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
  * The type Customer.
  */
 @Entity
-@Table(name = "customer", schema = "public")
+@Table(name = "customers", schema = "public")
 public class Customer {
 
     @Id

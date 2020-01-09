@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * The type Address controller.
  */
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/addresses")
 public class AddressController {
 
     private final Mapper mapper;

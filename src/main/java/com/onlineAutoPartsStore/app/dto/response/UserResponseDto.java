@@ -1,30 +1,17 @@
-package com.onlineAutoPartsStore.app.model;
+package com.onlineAutoPartsStore.app.dto.response;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import com.onlineAutoPartsStore.app.dto.RoleDto;
 
 /**
- * The type Provider.
+ * The type User response dto.
  */
-@Entity
-@Table(name = "providers", schema = "public")
-public class Provider {
+public class UserResponseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    @NotNull(message = "{provider.name.notNull}")
-    @NotEmpty(message = "{provider.name.notEmpty}")
     private String name;
 
-    /**
-     * Instantiates a new Provider.
-     */
-    public Provider() {
-    }
+    private RoleDto role;
 
     /**
      * Gets id.
@@ -60,5 +47,23 @@ public class Provider {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Gets role.
+     *
+     * @return the role
+     */
+    public RoleDto getRole() {
+        return role;
+    }
+
+    /**
+     * Sets role.
+     *
+     * @param role the role
+     */
+    public void setRole(RoleDto role) {
+        this.role = role;
     }
 }

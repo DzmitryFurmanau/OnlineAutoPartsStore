@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * The type Heaver controller.
  */
 @RestController
-@RequestMapping("/heaver")
+@RequestMapping("/heavers")
 public class HeaverController {
 
     private final Mapper mapper;

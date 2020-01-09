@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * The type Car controller.
  */
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/cars")
 public class CarController {
 
     private final Mapper mapper;

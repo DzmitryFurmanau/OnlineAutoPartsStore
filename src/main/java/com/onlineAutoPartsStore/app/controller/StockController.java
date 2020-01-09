@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * The type Stock controller.
  */
 @RestController
-@RequestMapping("/stock")
+@RequestMapping("/stocks")
 public class StockController {
 
     private final Mapper mapper;

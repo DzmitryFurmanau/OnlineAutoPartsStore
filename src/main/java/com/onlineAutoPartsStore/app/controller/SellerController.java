@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * The type Seller controller.
  */
 @RestController
-@RequestMapping("/seller")
+@RequestMapping("/sellers")
 public class SellerController {
 
     private final Mapper mapper;
