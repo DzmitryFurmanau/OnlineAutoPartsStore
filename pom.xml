@@ -16,7 +16,7 @@
         <spring.webmvc>5.2.2.RELEASE</spring.webmvc>
         <spring.data>2.2.2.RELEASE</spring.data>
         <hibernate.core>5.4.9.Final</hibernate.core>
-        <hibernate.validator>6.0.16.Final</hibernate.validator>
+        <hibernate.validator>6.1.0.Final</hibernate.validator>
         <com.h2.driver>1.4.197</com.h2.driver>
         <javax.servlet>4.0.1</javax.servlet>
         <jackson.core>2.10.1</jackson.core>
