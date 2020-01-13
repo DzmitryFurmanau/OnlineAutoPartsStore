@@ -5,4 +5,3 @@
 5. DTO
 6. Validation
 7. Security
-8. Test
