@@ -5,6 +5,7 @@ import com.onlineAutoPartsStore.app.dto.request.DetailRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.DetailResponseDto;
 import com.onlineAutoPartsStore.app.model.Car;
 import com.onlineAutoPartsStore.app.model.Detail;
+import com.onlineAutoPartsStore.app.model.Stock;
 import com.onlineAutoPartsStore.app.service.DetailService;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -35,7 +37,9 @@ public class DetailController {
      * @param detailService          the detail service
      * @param localizedMessageSource the localized message source
      */
-    public DetailController(Mapper mapper, DetailService detailService, LocalizedMessageSource localizedMessageSource) {
+    public DetailController(Mapper mapper,
+                            DetailService detailService,
+                            LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.detailService = detailService;
         this.localizedMessageSource = localizedMessageSource;
@@ -112,6 +116,12 @@ public class DetailController {
         final Car car = new Car();
         car.setId(detailRequestDto.getCarId());
         detail.setCar(car);
+        final Set<Stock> stockSet = detailRequestDto.getStockId().stream().map(stockId -> {
+            Stock stock = new Stock();
+            stock.setId(stockId);
+            return stock;
+        }).collect(Collectors.toSet());
+        detail.setStocks(stockSet);
         return detail;
     }
 }

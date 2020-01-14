@@ -3,10 +3,7 @@ package com.onlineAutoPartsStore.app.controller;
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.dto.request.OrderRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.OrderResponseDto;
-import com.onlineAutoPartsStore.app.model.CustomersAddresses;
-import com.onlineAutoPartsStore.app.model.DetailsStocks;
-import com.onlineAutoPartsStore.app.model.Order;
-import com.onlineAutoPartsStore.app.model.Seller;
+import com.onlineAutoPartsStore.app.model.*;
 import com.onlineAutoPartsStore.app.service.OrderService;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
@@ -37,7 +34,9 @@ public class OrderController {
      * @param orderService           the order service
      * @param localizedMessageSource the localized message source
      */
-    public OrderController(Mapper mapper, OrderService orderService, LocalizedMessageSource localizedMessageSource) {
+    public OrderController(Mapper mapper,
+                           OrderService orderService,
+                           LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.orderService = orderService;
         this.localizedMessageSource = localizedMessageSource;
@@ -112,14 +111,20 @@ public class OrderController {
     private Order getOrder(OrderRequestDto orderRequestDto) {
         final Order order = mapper.map(orderRequestDto, Order.class);
         final Seller seller = new Seller();
-        final DetailsStocks detailsStocks = new DetailsStocks();
-        final CustomersAddresses customersAddresses = new CustomersAddresses();
+        final Detail detail = new Detail();
+        final Stock stock = new Stock();
+        final Customer customer = new Customer();
+        final Address address = new Address();
         seller.setId(orderRequestDto.getSellerId());
-        detailsStocks.setId(orderRequestDto.getDetailsStocksId());
-        customersAddresses.setId(orderRequestDto.getCustomersAddressesId());
+        detail.setId(orderRequestDto.getDetailId());
+        stock.setId(orderRequestDto.getStockId());
+        customer.setId(orderRequestDto.getCustomerId());
+        address.setId(orderRequestDto.getAddressId());
         order.setSeller(seller);
-        order.setDetailsStocks(detailsStocks);
-        order.setCustomersAddresses(customersAddresses);
+        order.setDetail(detail);
+        order.setStock(stock);
+        order.setCustomer(customer);
+        order.setAddress(address);
         return order;
     }
 }

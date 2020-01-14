@@ -31,14 +31,24 @@ public class Order {
     private Seller seller;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "details_stocks_id", nullable = false)
-    @NotNull(message = "{order.details_stocks.notNull}")
-    private DetailsStocks detailsStocks;
+    @JoinColumn(name = "detail_id", nullable = false)
+    @NotNull(message = "{order.detail.notNull}")
+    private Detail detail;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customers_addresses_id", nullable = false)
-    @NotNull(message = "{order.customers_addresses.notNull}")
-    private CustomersAddresses customersAddresses;
+    @JoinColumn(name = "stock_id", nullable = false)
+    @NotNull(message = "{order.stock.notNull}")
+    private Stock stock;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
+    @NotNull(message = "{order.customer.notNull}")
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", nullable = false)
+    @NotNull(message = "{order.address.notNull}")
+    private Address address;
 
     /**
      * Instantiates a new Order.
@@ -123,34 +133,70 @@ public class Order {
      *
      * @return the details stocks
      */
-    public DetailsStocks getDetailsStocks() {
-        return detailsStocks;
+    public Detail getDetail() {
+        return detail;
     }
 
     /**
-     * Sets details stocks.
+     * Sets detail.
      *
-     * @param detailsStocks the details stocks
+     * @param detail the detail
      */
-    public void setDetailsStocks(DetailsStocks detailsStocks) {
-        this.detailsStocks = detailsStocks;
+    public void setDetail(Detail detail) {
+        this.detail = detail;
     }
 
     /**
-     * Gets customers addresses.
+     * Gets stock.
      *
-     * @return the customers addresses
+     * @return the stock
      */
-    public CustomersAddresses getCustomersAddresses() {
-        return customersAddresses;
+    public Stock getStock() {
+        return stock;
     }
 
     /**
-     * Sets customers addresses.
+     * Sets stock.
      *
-     * @param customersAddresses the customers addresses
+     * @param stock the stock
      */
-    public void setCustomersAddresses(CustomersAddresses customersAddresses) {
-        this.customersAddresses = customersAddresses;
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
+    /**
+     * Gets customer.
+     *
+     * @return the customer
+     */
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    /**
+     * Sets customer.
+     *
+     * @param customer the customer
+     */
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

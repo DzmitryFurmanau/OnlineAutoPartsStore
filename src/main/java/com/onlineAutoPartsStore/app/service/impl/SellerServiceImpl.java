@@ -27,7 +27,8 @@ public class SellerServiceImpl implements SellerService {
      * @param sellerRepository       the seller repository
      * @param localizedMessageSource the localized message source
      */
-    public SellerServiceImpl(SellerRepository sellerRepository, LocalizedMessageSource localizedMessageSource) {
+    public SellerServiceImpl(SellerRepository sellerRepository,
+                             LocalizedMessageSource localizedMessageSource) {
         this.sellerRepository = sellerRepository;
         this.localizedMessageSource = localizedMessageSource;
     }

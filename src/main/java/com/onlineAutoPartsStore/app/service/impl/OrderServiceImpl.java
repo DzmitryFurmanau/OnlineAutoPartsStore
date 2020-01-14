@@ -3,10 +3,7 @@ package com.onlineAutoPartsStore.app.service.impl;
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.model.Order;
 import com.onlineAutoPartsStore.app.repository.OrderRepository;
-import com.onlineAutoPartsStore.app.service.CustomersAddressesService;
-import com.onlineAutoPartsStore.app.service.DetailsStocksService;
-import com.onlineAutoPartsStore.app.service.OrderService;
-import com.onlineAutoPartsStore.app.service.SellerService;
+import com.onlineAutoPartsStore.app.service.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,26 +21,40 @@ public class OrderServiceImpl implements OrderService {
 
     private final SellerService sellerService;
 
-    private final DetailsStocksService detailsStocksService;
+    private final DetailService detailService;
 
-    private final CustomersAddressesService customersAddressesService;
+    private final StockService stockService;
+
+    private final CustomerService customerService;
+
+    private final AddressService addressService;
 
     private final LocalizedMessageSource localizedMessageSource;
 
     /**
      * Instantiates a new Order service.
      *
-     * @param orderRepository           the order repository
-     * @param sellerService             the seller service
-     * @param detailsStocksService      the details stocks service
-     * @param customersAddressesService the customers addresses service
-     * @param localizedMessageSource    the localized message source
+     * @param orderRepository        the order repository
+     * @param sellerService          the seller service
+     * @param detailService          the detail service
+     * @param stockService           the stock service
+     * @param customerService        the customer service
+     * @param addressService         the address service
+     * @param localizedMessageSource the localized message source
      */
-    public OrderServiceImpl(OrderRepository orderRepository, SellerService sellerService, DetailsStocksService detailsStocksService, CustomersAddressesService customersAddressesService, LocalizedMessageSource localizedMessageSource) {
+    public OrderServiceImpl(OrderRepository orderRepository,
+                            SellerService sellerService,
+                            DetailService detailService,
+                            StockService stockService,
+                            CustomerService customerService,
+                            AddressService addressService,
+                            LocalizedMessageSource localizedMessageSource) {
         this.orderRepository = orderRepository;
         this.sellerService = sellerService;
-        this.detailsStocksService = detailsStocksService;
-        this.customersAddressesService = customersAddressesService;
+        this.detailService = detailService;
+        this.stockService = stockService;
+        this.customerService = customerService;
+        this.addressService = addressService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
@@ -92,11 +103,15 @@ public class OrderServiceImpl implements OrderService {
 
     private Order saveAndFlush(Order order) {
         validate(order.getSeller() == null || order.getSeller().getId() == null, localizedMessageSource.getMessage("error.order.seller.isNull", new Object[]{}));
-        validate(order.getDetailsStocks() == null || order.getDetailsStocks().getId() == null, localizedMessageSource.getMessage("error.order.details_stocks.isNull", new Object[]{}));
-        validate(order.getCustomersAddresses() == null || order.getCustomersAddresses().getId() == null, localizedMessageSource.getMessage("error.order.customers_addresses.isNull", new Object[]{}));
+        validate(order.getDetail() == null || order.getDetail().getId() == null, localizedMessageSource.getMessage("error.order.detail.isNull", new Object[]{}));
+        validate(order.getStock() == null || order.getStock().getId() == null, localizedMessageSource.getMessage("error.order.stock.isNull", new Object[]{}));
+        validate(order.getCustomer() == null || order.getCustomer().getId() == null, localizedMessageSource.getMessage("error.order.customer.isNull", new Object[]{}));
+        validate(order.getAddress() == null || order.getAddress().getId() == null, localizedMessageSource.getMessage("error.order.address.isNull", new Object[]{}));
         order.setSeller(sellerService.findById(order.getSeller().getId()));
-        order.setDetailsStocks(detailsStocksService.findById(order.getDetailsStocks().getId()));
-        order.setCustomersAddresses(customersAddressesService.findById(order.getCustomersAddresses().getId()));
+        order.setDetail(detailService.findById(order.getDetail().getId()));
+        order.setStock(stockService.findById(order.getStock().getId()));
+        order.setCustomer(customerService.findById(order.getCustomer().getId()));
+        order.setAddress(addressService.findById(order.getAddress().getId()));
         return orderRepository.saveAndFlush(order);
     }
 

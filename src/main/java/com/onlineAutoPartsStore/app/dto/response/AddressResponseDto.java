@@ -1,5 +1,7 @@
 package com.onlineAutoPartsStore.app.dto.response;
 
+import com.onlineAutoPartsStore.app.dto.CustomerDto;
+
 /**
  * The type Address response dto.
  */
@@ -18,6 +20,8 @@ public class AddressResponseDto {
     private String country;
 
     private Integer pinCode;
+
+    private CustomerDto customer;
 
     /**
      * Gets id.
@@ -143,5 +147,23 @@ public class AddressResponseDto {
      */
     public void setPinCode(Integer pinCode) {
         this.pinCode = pinCode;
+    }
+
+    /**
+     * Gets customer.
+     *
+     * @return the customer
+     */
+    public CustomerDto getCustomer() {
+        return customer;
+    }
+
+    /**
+     * Sets customer.
+     *
+     * @param customer the customer
+     */
+    public void setCustomer(CustomerDto customer) {
+        this.customer = customer;
     }
 }

@@ -1,5 +1,7 @@
 package com.onlineAutoPartsStore.app.dto.request;
 
+import java.util.Set;
+
 /**
  * The type Address request dto.
  */
@@ -18,6 +20,8 @@ public class AddressRequestDto {
     private String country;
 
     private Integer pinCode;
+
+    private Set<Long> customerId;
 
     /**
      * Gets id.
@@ -143,5 +147,23 @@ public class AddressRequestDto {
      */
     public void setPinCode(Integer pinCode) {
         this.pinCode = pinCode;
+    }
+
+    /**
+     * Gets customer id.
+     *
+     * @return the customer id
+     */
+    public Set<Long> getCustomerId() {
+        return customerId;
+    }
+
+    /**
+     * Sets customer id.
+     *
+     * @param customerId the customer id
+     */
+    public void setCustomerId(Set<Long> customerId) {
+        this.customerId = customerId;
     }
 }

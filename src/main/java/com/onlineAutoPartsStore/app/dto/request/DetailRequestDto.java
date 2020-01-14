@@ -1,5 +1,7 @@
 package com.onlineAutoPartsStore.app.dto.request;
 
+import java.util.Set;
+
 /**
  * The type Detail request dto.
  */
@@ -14,6 +16,8 @@ public class DetailRequestDto {
     private Double price;
 
     private Long carId;
+
+    private Set<Long> stockId;
 
     /**
      * Gets id.
@@ -103,5 +107,23 @@ public class DetailRequestDto {
      */
     public void setCarId(Long carId) {
         this.carId = carId;
+    }
+
+    /**
+     * Gets stock id.
+     *
+     * @return the stock id
+     */
+    public Set<Long> getStockId() {
+        return stockId;
+    }
+
+    /**
+     * Sets stock id.
+     *
+     * @param stockId the stock id
+     */
+    public void setStockId(Set<Long> stockId) {
+        this.stockId = stockId;
     }
 }

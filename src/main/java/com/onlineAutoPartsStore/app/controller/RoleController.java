@@ -34,7 +34,9 @@ public class RoleController {
      * @param roleService            the role service
      * @param localizedMessageSource the localized message source
      */
-    public RoleController(Mapper mapper, RoleService roleService, LocalizedMessageSource localizedMessageSource) {
+    public RoleController(Mapper mapper,
+                          RoleService roleService,
+                          LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.roleService = roleService;
         this.localizedMessageSource = localizedMessageSource;

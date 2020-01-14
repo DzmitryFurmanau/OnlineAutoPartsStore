@@ -1,6 +1,7 @@
 package com.onlineAutoPartsStore.app.dto.response;
 
 import com.onlineAutoPartsStore.app.dto.CarDto;
+import com.onlineAutoPartsStore.app.dto.StockDto;
 
 /**
  * The type Detail response dto.
@@ -16,6 +17,8 @@ public class DetailResponseDto {
     private Double price;
 
     private CarDto car;
+
+    private StockDto stock;
 
     /**
      * Gets id.
@@ -105,5 +108,23 @@ public class DetailResponseDto {
      */
     public void setCar(CarDto car) {
         this.car = car;
+    }
+
+    /**
+     * Gets stock.
+     *
+     * @return the stock
+     */
+    public StockDto getStock() {
+        return stock;
+    }
+
+    /**
+     * Sets stock.
+     *
+     * @param stock the stock
+     */
+    public void setStock(StockDto stock) {
+        this.stock = stock;
     }
 }

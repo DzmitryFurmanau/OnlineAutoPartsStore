@@ -3,6 +3,7 @@ package com.onlineAutoPartsStore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * The type Detail.
@@ -34,6 +35,13 @@ public class Detail {
     @JoinColumn(name = "car_id", nullable = false)
     @NotNull(message = "{detail.car.notNull}")
     private Car car;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "details_stocks",
+            joinColumns = @JoinColumn(name = "detail_id"),
+            inverseJoinColumns = @JoinColumn(name = "stock_id"))
+    @NotNull(message = "{detail.stocks.notNull}")
+    private Set<Stock> stocks;
 
     /**
      * Instantiates a new Detail.
@@ -129,5 +137,23 @@ public class Detail {
      */
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    /**
+     * Gets stocks.
+     *
+     * @return the stocks
+     */
+    public Set<Stock> getStocks() {
+        return stocks;
+    }
+
+    /**
+     * Sets stocks.
+     *
+     * @param stocks the stocks
+     */
+    public void setStocks(Set<Stock> stocks) {
+        this.stocks = stocks;
     }
 }

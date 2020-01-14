@@ -1,5 +1,6 @@
 package com.onlineAutoPartsStore.app.dto.response;
 
+import com.onlineAutoPartsStore.app.dto.DetailDto;
 import com.onlineAutoPartsStore.app.dto.HeaverDto;
 import com.onlineAutoPartsStore.app.dto.ProviderDto;
 
@@ -15,6 +16,8 @@ public class StockResponseDto {
     private ProviderDto provider;
 
     private HeaverDto heaver;
+
+    private DetailDto detail;
 
     /**
      * Gets id.
@@ -86,5 +89,23 @@ public class StockResponseDto {
      */
     public void setHeaver(HeaverDto heaver) {
         this.heaver = heaver;
+    }
+
+    /**
+     * Gets detail.
+     *
+     * @return the detail
+     */
+    public DetailDto getDetail() {
+        return detail;
+    }
+
+    /**
+     * Sets detail.
+     *
+     * @param detail the detail
+     */
+    public void setDetail(DetailDto detail) {
+        this.detail = detail;
     }
 }

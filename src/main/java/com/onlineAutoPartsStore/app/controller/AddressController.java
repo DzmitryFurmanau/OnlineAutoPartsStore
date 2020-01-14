@@ -4,6 +4,7 @@ import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.dto.request.AddressRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.AddressResponseDto;
 import com.onlineAutoPartsStore.app.model.Address;
+import com.onlineAutoPartsStore.app.model.Customer;
 import com.onlineAutoPartsStore.app.service.AddressService;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +36,9 @@ public class AddressController {
      * @param addressService         the address service
      * @param localizedMessageSource the localized message source
      */
-    public AddressController(Mapper mapper, AddressService addressService, LocalizedMessageSource localizedMessageSource) {
+    public AddressController(Mapper mapper,
+                             AddressService addressService,
+                             LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.addressService = addressService;
         this.localizedMessageSource = localizedMessageSource;
@@ -75,7 +79,7 @@ public class AddressController {
     @PostMapping
     public ResponseEntity<AddressResponseDto> save(@RequestBody AddressRequestDto addressRequestDto) {
         addressRequestDto.setId(null);
-        final AddressResponseDto addressResponseDto = mapper.map(addressService.save(mapper.map(addressRequestDto, Address.class)), AddressResponseDto.class);
+        final AddressResponseDto addressResponseDto = mapper.map(addressService.save(getAddress(addressRequestDto)), AddressResponseDto.class);
         return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 
@@ -91,7 +95,7 @@ public class AddressController {
         if (!Objects.equals(id, addressRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.address.unexpectedId", new Object[]{}));
         }
-        final AddressResponseDto addressResponseDto = mapper.map(addressService.update(mapper.map(addressRequestDto, Address.class)), AddressResponseDto.class);
+        final AddressResponseDto addressResponseDto = mapper.map(addressService.update(getAddress(addressRequestDto)), AddressResponseDto.class);
         return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 
@@ -104,5 +108,16 @@ public class AddressController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         addressService.deleteById(id);
+    }
+
+    private Address getAddress(AddressRequestDto addressRequestDto) {
+        final Address address = mapper.map(addressRequestDto, Address.class);
+        final Set<Customer> customerSet = addressRequestDto.getCustomerId().stream().map(customerId -> {
+            Customer customer = new Customer();
+            customer.setId(customerId);
+            return customer;
+        }).collect(Collectors.toSet());
+        address.setCustomers(customerSet);
+        return address;
     }
 }

@@ -35,7 +35,10 @@ public class StockServiceImpl implements StockService {
      * @param heaverService          the heaver service
      * @param localizedMessageSource the localized message source
      */
-    public StockServiceImpl(StockRepository stockRepository, ProviderService providerService, HeaverService heaverService, LocalizedMessageSource localizedMessageSource) {
+    public StockServiceImpl(StockRepository stockRepository,
+                            ProviderService providerService,
+                            HeaverService heaverService,
+                            LocalizedMessageSource localizedMessageSource) {
         this.stockRepository = stockRepository;
         this.providerService = providerService;
         this.heaverService = heaverService;
