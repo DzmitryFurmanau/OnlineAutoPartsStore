@@ -31,7 +31,11 @@ public class Customer {
     @NotEmpty(message = "{customer.email.notEmpty}")
     private String email;
 
-    @ManyToMany(mappedBy = "customers")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "customers_addresses",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    @NotNull(message = "{customer.addresses.notNull}")
     private Set<Address> addresses;
 
     /**

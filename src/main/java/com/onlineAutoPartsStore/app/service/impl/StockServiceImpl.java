@@ -3,7 +3,6 @@ package com.onlineAutoPartsStore.app.service.impl;
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.model.Stock;
 import com.onlineAutoPartsStore.app.repository.StockRepository;
-import com.onlineAutoPartsStore.app.service.DetailService;
 import com.onlineAutoPartsStore.app.service.HeaverService;
 import com.onlineAutoPartsStore.app.service.ProviderService;
 import com.onlineAutoPartsStore.app.service.StockService;
@@ -26,10 +25,7 @@ public class StockServiceImpl implements StockService {
 
     private final HeaverService heaverService;
 
-    private final DetailService detailService;
-
     private final LocalizedMessageSource localizedMessageSource;
-
 
     /**
      * Instantiates a new Stock service.
@@ -37,18 +33,15 @@ public class StockServiceImpl implements StockService {
      * @param stockRepository        the stock repository
      * @param providerService        the provider service
      * @param heaverService          the heaver service
-     * @param detailService          the detail service
      * @param localizedMessageSource the localized message source
      */
     public StockServiceImpl(StockRepository stockRepository,
                             ProviderService providerService,
                             HeaverService heaverService,
-                            DetailService detailService,
                             LocalizedMessageSource localizedMessageSource) {
         this.stockRepository = stockRepository;
         this.providerService = providerService;
         this.heaverService = heaverService;
-        this.detailService = detailService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
@@ -100,11 +93,6 @@ public class StockServiceImpl implements StockService {
         validate(stock.getHeaver() == null || stock.getHeaver().getId() == null, localizedMessageSource.getMessage("error.stock.heaver.isNull", new Object[]{}));
         stock.setProvider(providerService.findById(stock.getProvider().getId()));
         stock.setHeaver(heaverService.findById(stock.getHeaver().getId()));
-        stock.getDetails().forEach(detail -> {
-            validate(detail == null || detail.getId() == null,
-                    localizedMessageSource.getMessage("error.stock.details.isNull", new Object[]{}));
-            detail.setName(detailService.findById(detail.getId()).getName());
-        });
         return stockRepository.saveAndFlush(stock);
     }
 

@@ -46,11 +46,7 @@ public class Address {
     @NotEmpty(message = "{address.pinCode.notEmpty}")
     private Integer pinCode;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "customers_addresses",
-            joinColumns = @JoinColumn(name = "address_id"),
-            inverseJoinColumns = @JoinColumn(name = "customer_id"))
-    @NotNull(message = "{address.customers.notNull}")
+    @ManyToMany(mappedBy = "addresses")
     private Set<Customer> customers;
 
     /**

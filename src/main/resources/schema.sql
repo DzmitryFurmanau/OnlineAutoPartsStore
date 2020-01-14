@@ -133,15 +133,19 @@ CREATE TABLE public.orders (
     date VARCHAR,
     sum INTEGER,
         seller_id BIGINT,
-        details_stocks_id BIGINT,
-        customers_addresses_id BIGINT,
+        detail_id BIGINT,
+        stock_id BIGINT,
+        customer_id BIGINT,
+        address_id BIGINT,
             FOREIGN KEY (seller_id) REFERENCES public.sellers (id),
-            FOREIGN KEY (details_stocks_id) REFERENCES public.details_stocks (id),
-            FOREIGN KEY (customers_addresses_id) REFERENCES public.customers_addresses (id),
+            FOREIGN KEY (detail_id) REFERENCES public.details (id),
+            FOREIGN KEY (stock_id) REFERENCES public.stocks (id),
+            FOREIGN KEY (customer_id) REFERENCES public.customers (id),
+            FOREIGN KEY (address_id) REFERENCES public.addresses (id),
 );
 
-INSERT INTO public.orders (id, date, sum, seller_id, details_stocks_id, customers_addresses_id) VALUES (1, '2019-12-12', 1524, 1, 1, 1);
-INSERT INTO public.orders (id, date, sum, seller_id, details_stocks_id, customers_addresses_id) VALUES (2, '2019-11-11', 123, 1, 1, 1);
+INSERT INTO public.orders (id, date, sum, seller_id, detail_id, stock_id, customer_id, address_id) VALUES (1, '2019-12-12', 1524, 1, 1, 1, 1, 1);
+INSERT INTO public.orders (id, date, sum, seller_id, detail_id, stock_id, customer_id, address_id) VALUES (2, '2019-11-11', 123, 2, 2, 2, 2, 2);
 
 
 DROP TABLE IF EXISTS public.roles;
