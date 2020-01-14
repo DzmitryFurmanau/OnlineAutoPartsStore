@@ -3,6 +3,7 @@ package com.onlineAutoPartsStore.app.service.impl;
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.model.Customer;
 import com.onlineAutoPartsStore.app.repository.CustomerRepository;
+import com.onlineAutoPartsStore.app.service.AddressService;
 import com.onlineAutoPartsStore.app.service.CustomerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,16 +20,22 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
+    private final AddressService addressService;
+
     private final LocalizedMessageSource localizedMessageSource;
 
     /**
      * Instantiates a new Customer service.
      *
      * @param customerRepository     the customer repository
+     * @param addressService         the address service
      * @param localizedMessageSource the localized message source
      */
-    public CustomerServiceImpl(CustomerRepository customerRepository, LocalizedMessageSource localizedMessageSource) {
+    public CustomerServiceImpl(CustomerRepository customerRepository,
+                               AddressService addressService,
+                               LocalizedMessageSource localizedMessageSource) {
         this.customerRepository = customerRepository;
+        this.addressService = addressService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
@@ -46,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer save(Customer customer) {
         validate(customer.getId() != null, localizedMessageSource.getMessage("error.customer.notHaveId", new Object[]{}));
         validate(customerRepository.existsByName(customer.getName()), localizedMessageSource.getMessage("error.customer.name.notUnique", new Object[]{}));
-        return customerRepository.saveAndFlush(customer);
+        return saveAndFlush(customer);
     }
 
     @Override
@@ -57,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
         final boolean isDuplicateExists = duplicateCustomer != null && !Objects.equals(duplicateCustomer.getId(), id);
         validate(isDuplicateExists, localizedMessageSource.getMessage("error.customer.name.notUnique", new Object[]{}));
         findById(id);
-        return customerRepository.saveAndFlush(customer);
+        return saveAndFlush(customer);
     }
 
 
@@ -73,6 +80,15 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteById(Long id) {
         findById(id);
         customerRepository.deleteById(id);
+    }
+
+    private Customer saveAndFlush(Customer customer) {
+        customer.getAddresses().forEach(address -> {
+            validate(address == null || address.getId() == null,
+                    localizedMessageSource.getMessage("error.customer.addresses.isNull", new Object[]{}));
+            address.setPhoneNumber(addressService.findById(address.getId()).getPhoneNumber());
+        });
+        return customerRepository.saveAndFlush(customer);
     }
 
     private void validate(boolean expression, String errorMessage) {

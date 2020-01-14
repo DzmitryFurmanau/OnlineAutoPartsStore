@@ -34,7 +34,9 @@ public class SellerController {
      * @param sellerService          the seller service
      * @param localizedMessageSource the localized message source
      */
-    public SellerController(Mapper mapper, SellerService sellerService, LocalizedMessageSource localizedMessageSource) {
+    public SellerController(Mapper mapper,
+                            SellerService sellerService,
+                            LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.sellerService = sellerService;
         this.localizedMessageSource = localizedMessageSource;

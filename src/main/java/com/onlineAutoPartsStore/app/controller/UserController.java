@@ -37,7 +37,9 @@ public class UserController {
      * @param userService            the user service
      * @param localizedMessageSource the localized message source
      */
-    public UserController(Mapper mapper, UserService userService, LocalizedMessageSource localizedMessageSource) {
+    public UserController(Mapper mapper,
+                          UserService userService,
+                          LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.userService = userService;
         this.localizedMessageSource = localizedMessageSource;

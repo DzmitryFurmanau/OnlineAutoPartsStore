@@ -1,5 +1,7 @@
 package com.onlineAutoPartsStore.app.dto.request;
 
+import java.util.Set;
+
 /**
  * The type Customer request dto.
  */
@@ -12,6 +14,8 @@ public class CustomerRequestDto {
     private String password;
 
     private String email;
+
+    private Set<Long> addressId;
 
     /**
      * Gets id.
@@ -83,5 +87,23 @@ public class CustomerRequestDto {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Gets address id.
+     *
+     * @return the address id
+     */
+    public Set<Long> getAddressId() {
+        return addressId;
+    }
+
+    /**
+     * Sets address id.
+     *
+     * @param addressId the address id
+     */
+    public void setAddressId(Set<Long> addressId) {
+        this.addressId = addressId;
     }
 }

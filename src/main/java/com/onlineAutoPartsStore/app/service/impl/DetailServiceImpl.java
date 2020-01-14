@@ -5,6 +5,7 @@ import com.onlineAutoPartsStore.app.model.Detail;
 import com.onlineAutoPartsStore.app.repository.DetailRepository;
 import com.onlineAutoPartsStore.app.service.CarService;
 import com.onlineAutoPartsStore.app.service.DetailService;
+import com.onlineAutoPartsStore.app.service.StockService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,8 @@ public class DetailServiceImpl implements DetailService {
 
     private final CarService carService;
 
+    private final StockService stockService;
+
     private final LocalizedMessageSource localizedMessageSource;
 
     /**
@@ -29,11 +32,16 @@ public class DetailServiceImpl implements DetailService {
      *
      * @param detailRepository       the detail repository
      * @param carService             the car service
+     * @param stockService           the stock service
      * @param localizedMessageSource the localized message source
      */
-    public DetailServiceImpl(DetailRepository detailRepository, CarService carService, LocalizedMessageSource localizedMessageSource) {
+    public DetailServiceImpl(DetailRepository detailRepository,
+                             CarService carService,
+                             StockService stockService,
+                             LocalizedMessageSource localizedMessageSource) {
         this.detailRepository = detailRepository;
         this.carService = carService;
+        this.stockService = stockService;
         this.localizedMessageSource = localizedMessageSource;
     }
 
@@ -82,6 +90,11 @@ public class DetailServiceImpl implements DetailService {
     private Detail saveAndFlush(Detail detail) {
         validate(detail.getCar() == null || detail.getCar().getId() == null, localizedMessageSource.getMessage("error.detail.car.isNull", new Object[]{}));
         detail.setCar(carService.findById(detail.getCar().getId()));
+        detail.getStocks().forEach(stock -> {
+            validate(stock == null || stock.getId() == null,
+                    localizedMessageSource.getMessage("error.detail.stocks.isNull", new Object[]{}));
+            stock.setQuantity(stockService.findById(stock.getId()).getQuantity());
+        });
         return detailRepository.saveAndFlush(detail);
     }
 

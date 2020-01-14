@@ -1,5 +1,7 @@
 package com.onlineAutoPartsStore.app.dto.response;
 
+import com.onlineAutoPartsStore.app.dto.AddressDto;
+
 /**
  * The type Customer response dto.
  */
@@ -12,6 +14,8 @@ public class CustomerResponseDto {
     private String password;
 
     private String email;
+
+    private AddressDto address;
 
     /**
      * Gets id.
@@ -83,5 +87,23 @@ public class CustomerResponseDto {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
+    public AddressDto getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
+    public void setAddress(AddressDto address) {
+        this.address = address;
     }
 }

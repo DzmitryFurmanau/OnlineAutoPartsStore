@@ -1,8 +1,11 @@
 package com.onlineAutoPartsStore.app.controller;
 
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
+import com.onlineAutoPartsStore.app.dto.request.AddressRequestDto;
 import com.onlineAutoPartsStore.app.dto.request.CustomerRequestDto;
+import com.onlineAutoPartsStore.app.dto.response.AddressResponseDto;
 import com.onlineAutoPartsStore.app.dto.response.CustomerResponseDto;
+import com.onlineAutoPartsStore.app.model.Address;
 import com.onlineAutoPartsStore.app.model.Customer;
 import com.onlineAutoPartsStore.app.service.CustomerService;
 import org.dozer.Mapper;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +38,9 @@ public class CustomerController {
      * @param customerService        the customer service
      * @param localizedMessageSource the localized message source
      */
-    public CustomerController(Mapper mapper, CustomerService customerService, LocalizedMessageSource localizedMessageSource) {
+    public CustomerController(Mapper mapper,
+                              CustomerService customerService,
+                              LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.customerService = customerService;
         this.localizedMessageSource = localizedMessageSource;
@@ -75,7 +81,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerResponseDto> save(@RequestBody CustomerRequestDto customerRequestDto) {
         customerRequestDto.setId(null);
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.save(mapper.map(customerRequestDto, Customer.class)), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService.save(getCustomer(customerRequestDto)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -91,7 +97,7 @@ public class CustomerController {
         if (!Objects.equals(id, customerRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.customer.unexpectedId", new Object[]{}));
         }
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.update(mapper.map(customerRequestDto, Customer.class)), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService.update(getCustomer(customerRequestDto)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -104,5 +110,16 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         customerService.deleteById(id);
+    }
+
+    private Customer getCustomer(CustomerRequestDto customerRequestDto) {
+        final Customer customer = mapper.map(customerRequestDto, Customer.class);
+        final Set<Address> addressSet = customerRequestDto.getAddressId().stream().map(addressId -> {
+            Address address = new Address();
+            address.setId(addressId);
+            return address;
+        }).collect(Collectors.toSet());
+        customer.setAddresses(addressSet);
+        return customer;
     }
 }

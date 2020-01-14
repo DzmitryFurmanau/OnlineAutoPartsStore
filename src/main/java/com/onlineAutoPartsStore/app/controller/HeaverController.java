@@ -34,7 +34,9 @@ public class HeaverController {
      * @param heaverService          the heaver service
      * @param localizedMessageSource the localized message source
      */
-    public HeaverController(Mapper mapper, HeaverService heaverService, LocalizedMessageSource localizedMessageSource) {
+    public HeaverController(Mapper mapper,
+                            HeaverService heaverService,
+                            LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.heaverService = heaverService;
         this.localizedMessageSource = localizedMessageSource;

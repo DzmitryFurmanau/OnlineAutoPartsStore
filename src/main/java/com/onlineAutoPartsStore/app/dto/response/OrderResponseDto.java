@@ -1,8 +1,6 @@
 package com.onlineAutoPartsStore.app.dto.response;
 
-import com.onlineAutoPartsStore.app.dto.CustomersAddressesDto;
-import com.onlineAutoPartsStore.app.dto.DetailsStocksDto;
-import com.onlineAutoPartsStore.app.dto.SellerDto;
+import com.onlineAutoPartsStore.app.dto.*;
 
 /**
  * The type Order response dto.
@@ -17,9 +15,13 @@ public class OrderResponseDto {
 
     private SellerDto seller;
 
-    private DetailsStocksDto detailsStocks;
+    private DetailDto detail;
 
-    private CustomersAddressesDto customersAddresses;
+    private StockDto stock;
+
+    private CustomerDto customer;
+
+    private AddressDto address;
 
     /**
      * Gets id.
@@ -98,34 +100,70 @@ public class OrderResponseDto {
      *
      * @return the details stocks
      */
-    public DetailsStocksDto getDetailsStocks() {
-        return detailsStocks;
+    public DetailDto getDetail() {
+        return detail;
     }
 
     /**
-     * Sets details stocks.
+     * Sets detail.
      *
-     * @param detailsStocks the details stocks
+     * @param detail the detail
      */
-    public void setDetailsStocks(DetailsStocksDto detailsStocks) {
-        this.detailsStocks = detailsStocks;
+    public void setDetail(DetailDto detail) {
+        this.detail = detail;
     }
 
     /**
-     * Gets customers addresses.
+     * Gets stock.
      *
-     * @return the customers addresses
+     * @return the stock
      */
-    public CustomersAddressesDto getCustomersAddresses() {
-        return customersAddresses;
+    public StockDto getStock() {
+        return stock;
     }
 
     /**
-     * Sets customers addresses.
+     * Sets stock.
      *
-     * @param customersAddresses the customers addresses
+     * @param stock the stock
      */
-    public void setCustomersAddresses(CustomersAddressesDto customersAddresses) {
-        this.customersAddresses = customersAddresses;
+    public void setStock(StockDto stock) {
+        this.stock = stock;
+    }
+
+    /**
+     * Gets customer.
+     *
+     * @return the customer
+     */
+    public CustomerDto getCustomer() {
+        return customer;
+    }
+
+    /**
+     * Sets customer.
+     *
+     * @param customer the customer
+     */
+    public void setCustomer(CustomerDto customer) {
+        this.customer = customer;
+    }
+
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
+    public AddressDto getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
+    public void setAddress(AddressDto address) {
+        this.address = address;
     }
 }

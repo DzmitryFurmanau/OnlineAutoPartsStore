@@ -3,6 +3,7 @@ package com.onlineAutoPartsStore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * The type Address.
@@ -44,6 +45,13 @@ public class Address {
     @NotNull(message = "{address.pinCode.notNull}")
     @NotEmpty(message = "{address.pinCode.notEmpty}")
     private Integer pinCode;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "customers_addresses",
+            joinColumns = @JoinColumn(name = "address_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id"))
+    @NotNull(message = "{address.customers.notNull}")
+    private Set<Customer> customers;
 
     /**
      * Instantiates a new Address.
@@ -175,5 +183,23 @@ public class Address {
      */
     public void setPinCode(Integer pinCode) {
         this.pinCode = pinCode;
+    }
+
+    /**
+     * Gets customers.
+     *
+     * @return the customers
+     */
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    /**
+     * Sets customers.
+     *
+     * @param customers the customers
+     */
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 }

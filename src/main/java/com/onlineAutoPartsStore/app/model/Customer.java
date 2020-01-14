@@ -3,6 +3,7 @@ package com.onlineAutoPartsStore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * The type Customer.
@@ -29,6 +30,9 @@ public class Customer {
     @NotNull(message = "{customer.email.notNull}")
     @NotEmpty(message = "{customer.email.notEmpty}")
     private String email;
+
+    @ManyToMany(mappedBy = "customers")
+    private Set<Address> addresses;
 
     /**
      * Instantiates a new Customer.
@@ -106,5 +110,23 @@ public class Customer {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Gets addresses.
+     *
+     * @return the addresses
+     */
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    /**
+     * Sets addresses.
+     *
+     * @param addresses the addresses
+     */
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 }

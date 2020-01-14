@@ -3,6 +3,7 @@ package com.onlineAutoPartsStore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * The type Stock.
@@ -29,6 +30,9 @@ public class Stock {
     @JoinColumn(name = "heaver_id", nullable = false)
     @NotNull(message = "{stock.heaver.notNull}")
     private Heaver heaver;
+
+    @ManyToMany(mappedBy = "stocks")
+    private Set<Detail> details;
 
     /**
      * Instantiates a new Stock.
@@ -106,5 +110,23 @@ public class Stock {
      */
     public void setHeaver(Heaver heaver) {
         this.heaver = heaver;
+    }
+
+    /**
+     * Gets details.
+     *
+     * @return the details
+     */
+    public Set<Detail> getDetails() {
+        return details;
+    }
+
+    /**
+     * Sets details.
+     *
+     * @param details the details
+     */
+    public void setDetails(Set<Detail> details) {
+        this.details = details;
     }
 }

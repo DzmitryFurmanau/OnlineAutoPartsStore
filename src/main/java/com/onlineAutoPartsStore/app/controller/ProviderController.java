@@ -34,7 +34,9 @@ public class ProviderController {
      * @param providerService        the provider service
      * @param localizedMessageSource the localized message source
      */
-    public ProviderController(Mapper mapper, ProviderService providerService, LocalizedMessageSource localizedMessageSource) {
+    public ProviderController(Mapper mapper,
+                              ProviderService providerService,
+                              LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.providerService = providerService;
         this.localizedMessageSource = localizedMessageSource;

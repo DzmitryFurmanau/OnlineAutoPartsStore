@@ -3,6 +3,7 @@ package com.onlineAutoPartsStore.app.controller;
 import com.onlineAutoPartsStore.app.component.LocalizedMessageSource;
 import com.onlineAutoPartsStore.app.dto.request.StockRequestDto;
 import com.onlineAutoPartsStore.app.dto.response.StockResponseDto;
+import com.onlineAutoPartsStore.app.model.Detail;
 import com.onlineAutoPartsStore.app.model.Heaver;
 import com.onlineAutoPartsStore.app.model.Provider;
 import com.onlineAutoPartsStore.app.model.Stock;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -36,7 +38,9 @@ public class StockController {
      * @param stockService           the stock service
      * @param localizedMessageSource the localized message source
      */
-    public StockController(Mapper mapper, StockService stockService, LocalizedMessageSource localizedMessageSource) {
+    public StockController(Mapper mapper,
+                           StockService stockService,
+                           LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.stockService = stockService;
         this.localizedMessageSource = localizedMessageSource;
@@ -116,6 +120,12 @@ public class StockController {
         heaver.setId(stockRequestDto.getHeaverId());
         stock.setProvider(provider);
         stock.setHeaver(heaver);
+        final Set<Detail> detailSet = stockRequestDto.getDetailId().stream().map(detailId -> {
+            Detail detail = new Detail();
+            detail.setId(detailId);
+            return detail;
+        }).collect(Collectors.toSet());
+        stock.setDetails(detailSet);
         return stock;
     }
 }

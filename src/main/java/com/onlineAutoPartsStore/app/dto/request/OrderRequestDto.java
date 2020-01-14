@@ -13,9 +13,13 @@ public class OrderRequestDto {
 
     private Long sellerId;
 
-    private Long detailsStocksId;
+    private Long detailId;
 
-    private Long customersAddressesId;
+    private Long stockId;
+
+    private Long customerId;
+
+    private Long addressId;
 
     /**
      * Gets id.
@@ -94,34 +98,70 @@ public class OrderRequestDto {
      *
      * @return the details stocks id
      */
-    public Long getDetailsStocksId() {
-        return detailsStocksId;
+    public Long getDetailId() {
+        return detailId;
     }
 
     /**
-     * Sets details stocks id.
+     * Sets detail id.
      *
-     * @param detailsStocksId the details stocks id
+     * @param detailId the detail id
      */
-    public void setDetailsStocksId(Long detailsStocksId) {
-        this.detailsStocksId = detailsStocksId;
+    public void setDetailId(Long detailId) {
+        this.detailId = detailId;
     }
 
     /**
-     * Gets customers addresses id.
+     * Gets stock id.
      *
-     * @return the customers addresses id
+     * @return the stock id
      */
-    public Long getCustomersAddressesId() {
-        return customersAddressesId;
+    public Long getStockId() {
+        return stockId;
     }
 
     /**
-     * Sets customers addresses id.
+     * Sets stock id.
      *
-     * @param customersAddressesId the customers addresses id
+     * @param stockId the stock id
      */
-    public void setCustomersAddressesId(Long customersAddressesId) {
-        this.customersAddressesId = customersAddressesId;
+    public void setStockId(Long stockId) {
+        this.stockId = stockId;
+    }
+
+    /**
+     * Gets customer id.
+     *
+     * @return the customer id
+     */
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    /**
+     * Sets customer id.
+     *
+     * @param customerId the customer id
+     */
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    /**
+     * Gets address id.
+     *
+     * @return the address id
+     */
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    /**
+     * Sets address id.
+     *
+     * @param addressId the address id
+     */
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 }
