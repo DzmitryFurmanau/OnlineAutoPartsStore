@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
  * The type App configuration.
  */
 @Configuration
-@ComponentScan(basePackages = "com.onlinestore")
+@ComponentScan(basePackages = "com.onlineAutoPartsStore")
 @Import({WebConfiguration.class, DatabaseConfiguration.class, MessagesConfiguration.class, SecurityConfiguration.class})
 public class AppConfiguration {
 

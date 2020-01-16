@@ -22,7 +22,7 @@ import java.util.Properties;
  */
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"com.onlinestore.app.repository"})
+@EnableJpaRepositories(basePackages = {"com.onlineAutoPartsStore.app.repository"})
 public class DatabaseConfiguration {
 
     @Value("${connection.driver_class}")
@@ -40,7 +40,7 @@ public class DatabaseConfiguration {
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder.setType(EmbeddedDatabaseType.H2)
-                .addScript("/schema.sql")
+                .addScripts("/schema.sql", "/start.sql")
                 .build();
     }
 
@@ -53,7 +53,7 @@ public class DatabaseConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
-        localContainerEntityManagerFactoryBean.setPackagesToScan("com.onlinestore.app.model");
+        localContainerEntityManagerFactoryBean.setPackagesToScan("com.onlineAutoPartsStore.app.model");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         localContainerEntityManagerFactoryBean.setJpaProperties(additionalProperties());
@@ -63,13 +63,13 @@ public class DatabaseConfiguration {
     /**
      * Transaction manager platform transaction manager.
      *
-     * @param emf the emf
+     * @param entityManagerFactory the entity manager factory
      * @return the platform transaction manager
      */
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
     }
 

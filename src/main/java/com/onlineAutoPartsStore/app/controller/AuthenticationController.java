@@ -1,12 +1,12 @@
-package com.onlinestore.app.controller;
+package com.onlineAutoPartsStore.app.controller;
 
-import com.onlinestore.app.dto.request.UserRegistrationRequestDto;
-import com.onlinestore.app.dto.response.TokenResponseDto;
-import com.onlinestore.app.model.Role;
-import com.onlinestore.app.model.User;
-import com.onlinestore.app.service.RoleService;
-import com.onlinestore.app.service.UserService;
-import com.onlinestore.app.service.security.TokenService;
+import com.onlineAutoPartsStore.app.dto.request.UserRegistrationRequestDto;
+import com.onlineAutoPartsStore.app.dto.response.TokenResponseDto;
+import com.onlineAutoPartsStore.app.model.Role;
+import com.onlineAutoPartsStore.app.model.User;
+import com.onlineAutoPartsStore.app.service.RoleService;
+import com.onlineAutoPartsStore.app.service.UserService;
+import com.onlineAutoPartsStore.app.service.security.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -47,11 +47,11 @@ public class AuthenticationController {
      * @param passwordEncoder       the password encoder
      * @param authenticationManager the authentication manager
      */
-    public AuthenticationController(final UserService userService,
-                                    final RoleService roleService,
-                                    final TokenService tokenService,
-                                    final PasswordEncoder passwordEncoder,
-                                    final AuthenticationManager authenticationManager) {
+    public AuthenticationController(UserService userService,
+                                    RoleService roleService,
+                                    TokenService tokenService,
+                                    PasswordEncoder passwordEncoder,
+                                    AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.roleService = roleService;
         this.tokenService = tokenService;
@@ -67,8 +67,7 @@ public class AuthenticationController {
      */
     @PostMapping("/signIn")
     public TokenResponseDto authenticateUser(@RequestBody UserRegistrationRequestDto requestDto) {
-        UsernamePasswordAuthenticationToken token;
-        token = new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new TokenResponseDto(tokenService.generate(authentication));
