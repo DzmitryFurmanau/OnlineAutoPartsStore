@@ -1,12 +1,12 @@
-package com.onlineAutoPartsStore.app.controller;
+package com.onlinestore.app.controller;
 
-import com.onlineAutoPartsStore.app.dto.request.UserRegistrationRequestDto;
-import com.onlineAutoPartsStore.app.dto.response.TokenResponseDto;
-import com.onlineAutoPartsStore.app.model.Role;
-import com.onlineAutoPartsStore.app.model.User;
-import com.onlineAutoPartsStore.app.service.RoleService;
-import com.onlineAutoPartsStore.app.service.UserService;
-import com.onlineAutoPartsStore.app.service.security.TokenService;
+import com.onlinestore.app.dto.request.UserRegistrationRequestDto;
+import com.onlinestore.app.dto.response.TokenResponseDto;
+import com.onlinestore.app.model.Role;
+import com.onlinestore.app.model.User;
+import com.onlinestore.app.service.RoleService;
+import com.onlinestore.app.service.UserService;
+import com.onlinestore.app.service.security.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -34,7 +34,7 @@ public class AuthenticationController {
 
     private final TokenService tokenService;
 
-    private final PasswordEncoder encoder;
+    private final PasswordEncoder passwordEncoder;
 
     private final AuthenticationManager authenticationManager;
 
@@ -44,18 +44,18 @@ public class AuthenticationController {
      * @param userService           the user service
      * @param roleService           the role service
      * @param tokenService          the token service
-     * @param encoder               the encoder
+     * @param passwordEncoder       the password encoder
      * @param authenticationManager the authentication manager
      */
-    public AuthenticationController(UserService userService,
-                                    RoleService roleService,
-                                    TokenService tokenService,
-                                    PasswordEncoder encoder,
-                                    AuthenticationManager authenticationManager) {
+    public AuthenticationController(final UserService userService,
+                                    final RoleService roleService,
+                                    final TokenService tokenService,
+                                    final PasswordEncoder passwordEncoder,
+                                    final AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.roleService = roleService;
         this.tokenService = tokenService;
-        this.encoder = encoder;
+        this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
     }
 
@@ -67,7 +67,8 @@ public class AuthenticationController {
      */
     @PostMapping("/signIn")
     public TokenResponseDto authenticateUser(@RequestBody UserRegistrationRequestDto requestDto) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword());
+        UsernamePasswordAuthenticationToken token;
+        token = new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new TokenResponseDto(tokenService.generate(authentication));
@@ -83,7 +84,7 @@ public class AuthenticationController {
     public User registerUser(@RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
         final User user = new User();
         user.setName(userRegistrationRequestDto.getUsername());
-        user.setPassword(encoder.encode(userRegistrationRequestDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(userRegistrationRequestDto.getPassword()));
         final Set<Role> roles = userRegistrationRequestDto.getRoles().stream()
                 .map(roleService::findByName)
                 .filter(Objects::nonNull)

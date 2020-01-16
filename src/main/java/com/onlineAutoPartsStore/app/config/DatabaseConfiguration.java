@@ -22,7 +22,7 @@ import java.util.Properties;
  */
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"com.onlineAutoPartsStore.app.repository"})
+@EnableJpaRepositories(basePackages = {"com.onlinestore.app.repository"})
 public class DatabaseConfiguration {
 
     @Value("${connection.driver_class}")
@@ -53,7 +53,7 @@ public class DatabaseConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
-        localContainerEntityManagerFactoryBean.setPackagesToScan("com.onlineAutoPartsStore.app.model");
+        localContainerEntityManagerFactoryBean.setPackagesToScan("com.onlinestore.app.model");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         localContainerEntityManagerFactoryBean.setJpaProperties(additionalProperties());
