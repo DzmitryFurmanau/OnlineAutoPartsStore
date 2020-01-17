@@ -42,13 +42,13 @@ public class OrderServiceImpl implements OrderService {
      * @param addressService         the address service
      * @param localizedMessageSource the localized message source
      */
-    public OrderServiceImpl(OrderRepository orderRepository,
-                            SellerService sellerService,
-                            DetailService detailService,
-                            StockService stockService,
-                            CustomerService customerService,
-                            AddressService addressService,
-                            LocalizedMessageSource localizedMessageSource) {
+    public OrderServiceImpl(final OrderRepository orderRepository,
+                            final SellerService sellerService,
+                            final DetailService detailService,
+                            final StockService stockService,
+                            final CustomerService customerService,
+                            final AddressService addressService,
+                            final LocalizedMessageSource localizedMessageSource) {
         this.orderRepository = orderRepository;
         this.sellerService = sellerService;
         this.detailService = detailService;

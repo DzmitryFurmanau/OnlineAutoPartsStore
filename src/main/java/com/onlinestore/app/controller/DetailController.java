@@ -37,9 +37,9 @@ public class DetailController {
      * @param detailService          the detail service
      * @param localizedMessageSource the localized message source
      */
-    public DetailController(Mapper mapper,
-                            DetailService detailService,
-                            LocalizedMessageSource localizedMessageSource) {
+    public DetailController(final Mapper mapper,
+                            final DetailService detailService,
+                            final LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.detailService = detailService;
         this.localizedMessageSource = localizedMessageSource;

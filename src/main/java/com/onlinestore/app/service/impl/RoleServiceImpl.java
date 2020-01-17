@@ -27,8 +27,8 @@ public class RoleServiceImpl implements RoleService {
      * @param roleRepository         the role repository
      * @param localizedMessageSource the localized message source
      */
-    public RoleServiceImpl(RoleRepository roleRepository,
-                           LocalizedMessageSource localizedMessageSource) {
+    public RoleServiceImpl(final RoleRepository roleRepository,
+                           final LocalizedMessageSource localizedMessageSource) {
         this.roleRepository = roleRepository;
         this.localizedMessageSource = localizedMessageSource;
     }

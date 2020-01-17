@@ -47,11 +47,11 @@ public class AuthenticationController {
      * @param passwordEncoder       the password encoder
      * @param authenticationManager the authentication manager
      */
-    public AuthenticationController(UserService userService,
-                                    RoleService roleService,
-                                    TokenService tokenService,
-                                    PasswordEncoder passwordEncoder,
-                                    AuthenticationManager authenticationManager) {
+    public AuthenticationController(final UserService userService,
+                                    final RoleService roleService,
+                                    final TokenService tokenService,
+                                    final PasswordEncoder passwordEncoder,
+                                    final AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.roleService = roleService;
         this.tokenService = tokenService;

@@ -1,5 +1,15 @@
 package com.onlinestore.app.model.enums;
 
+/**
+ * The enum Type.
+ */
 public enum Type {
-    CHASSIS, WHEEL
+    /**
+     * Chassis type.
+     */
+    CHASSIS,
+    /**
+     * Wheel type.
+     */
+    WHEEL
 }

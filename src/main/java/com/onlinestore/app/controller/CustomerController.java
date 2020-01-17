@@ -36,9 +36,9 @@ public class CustomerController {
      * @param customerService        the customer service
      * @param localizedMessageSource the localized message source
      */
-    public CustomerController(Mapper mapper,
-                              CustomerService customerService,
-                              LocalizedMessageSource localizedMessageSource) {
+    public CustomerController(final Mapper mapper,
+                              final CustomerService customerService,
+                              final LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.customerService = customerService;
         this.localizedMessageSource = localizedMessageSource;

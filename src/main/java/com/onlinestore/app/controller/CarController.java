@@ -34,9 +34,9 @@ public class CarController {
      * @param carService             the car service
      * @param localizedMessageSource the localized message source
      */
-    public CarController(Mapper mapper,
-                         CarService carService,
-                         LocalizedMessageSource localizedMessageSource) {
+    public CarController(final Mapper mapper,
+                         final CarService carService,
+                         final LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.carService = carService;
         this.localizedMessageSource = localizedMessageSource;

@@ -27,8 +27,8 @@ public class HeaverServiceImpl implements HeaverService {
      * @param heaverRepository       the heaver repository
      * @param localizedMessageSource the localized message source
      */
-    public HeaverServiceImpl(HeaverRepository heaverRepository,
-                             LocalizedMessageSource localizedMessageSource) {
+    public HeaverServiceImpl(final HeaverRepository heaverRepository,
+                             final LocalizedMessageSource localizedMessageSource) {
         this.heaverRepository = heaverRepository;
         this.localizedMessageSource = localizedMessageSource;
     }

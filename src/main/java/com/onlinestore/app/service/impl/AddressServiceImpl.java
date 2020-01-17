@@ -27,8 +27,8 @@ public class AddressServiceImpl implements AddressService {
      * @param addressRepository      the address repository
      * @param localizedMessageSource the localized message source
      */
-    public AddressServiceImpl(AddressRepository addressRepository,
-                              LocalizedMessageSource localizedMessageSource) {
+    public AddressServiceImpl(final AddressRepository addressRepository,
+                              final LocalizedMessageSource localizedMessageSource) {
         this.addressRepository = addressRepository;
         this.localizedMessageSource = localizedMessageSource;
     }

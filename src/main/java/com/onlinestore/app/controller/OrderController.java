@@ -3,8 +3,8 @@ package com.onlinestore.app.controller;
 import com.onlinestore.app.component.LocalizedMessageSource;
 import com.onlinestore.app.dto.request.OrderRequestDto;
 import com.onlinestore.app.dto.response.OrderResponseDto;
-import com.onlinestore.app.service.OrderService;
 import com.onlinestore.app.model.*;
+import com.onlinestore.app.service.OrderService;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +34,9 @@ public class OrderController {
      * @param orderService           the order service
      * @param localizedMessageSource the localized message source
      */
-    public OrderController(Mapper mapper,
-                           OrderService orderService,
-                           LocalizedMessageSource localizedMessageSource) {
+    public OrderController(final Mapper mapper,
+                           final OrderService orderService,
+                           final LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.orderService = orderService;
         this.localizedMessageSource = localizedMessageSource;

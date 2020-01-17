@@ -27,8 +27,8 @@ public class ProviderServiceImpl implements ProviderService {
      * @param providerRepository     the provider repository
      * @param localizedMessageSource the localized message source
      */
-    public ProviderServiceImpl(ProviderRepository providerRepository,
-                               LocalizedMessageSource localizedMessageSource) {
+    public ProviderServiceImpl(final ProviderRepository providerRepository,
+                               final LocalizedMessageSource localizedMessageSource) {
         this.providerRepository = providerRepository;
         this.localizedMessageSource = localizedMessageSource;
     }

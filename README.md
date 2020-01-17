@@ -1,4 +1,4 @@
-Java 8
+Java 11
 
  0. Spring REST
  1. Spring Data JPA

@@ -27,8 +27,8 @@ public class CarServiceImpl implements CarService {
      * @param carRepository          the car repository
      * @param localizedMessageSource the localized message source
      */
-    public CarServiceImpl(CarRepository carRepository,
-                          LocalizedMessageSource localizedMessageSource) {
+    public CarServiceImpl(final CarRepository carRepository,
+                          final LocalizedMessageSource localizedMessageSource) {
         this.carRepository = carRepository;
         this.localizedMessageSource = localizedMessageSource;
     }

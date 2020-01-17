@@ -33,17 +33,12 @@ public class TokenServiceImpl implements TokenService {
     private static final Integer JWT_EXPIRATION_MILLIS = 600000;
 
     @Override
-    public String generate(Authentication authentication) {
+    public String generate(final Authentication authentication) {
         return generate(((AuthenticationUserDetails) authentication.getPrincipal()).getUsername());
     }
 
     @Override
-    public String refresh(String token) {
-        return generate(extractUsername(token));
-    }
-
-    @Override
-    public String extractUsername(String token) {
+    public String extractUsername(final String token) {
         return Jwts.parser()
                 .setSigningKey(JWT_SECRET)
                 .parseClaimsJws(token)
@@ -51,7 +46,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public boolean validate(String authToken) {
+    public boolean validate(final String authToken) {
         try {
             Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(authToken);
             return true;
@@ -73,7 +68,7 @@ public class TokenServiceImpl implements TokenService {
         }
     }
 
-    private String generate(String username) {
+    private String generate(final String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())

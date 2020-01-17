@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class LocalDateTimeConverter extends DozerConverter<LocalDateTime, String> {
 
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Instantiates a new Local date time converter.
@@ -21,12 +21,12 @@ public class LocalDateTimeConverter extends DozerConverter<LocalDateTime, String
     }
 
     @Override
-    public String convertTo(LocalDateTime localDateTime, String date) {
+    public String convertTo(final LocalDateTime localDateTime, final String date) {
         return localDateTime.format(formatter);
     }
 
     @Override
-    public LocalDateTime convertFrom(String date, LocalDateTime localDateTime) {
+    public LocalDateTime convertFrom(final String date, final LocalDateTime localDateTime) {
         return LocalDateTime.parse(date, formatter);
     }
 }

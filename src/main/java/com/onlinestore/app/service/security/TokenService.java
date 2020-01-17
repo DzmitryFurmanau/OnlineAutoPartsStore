@@ -15,14 +15,6 @@ public interface TokenService {
     String generate(Authentication authentication);
 
     /**
-     * Refresh string.
-     *
-     * @param token the token
-     * @return the string
-     */
-    String refresh(String token);
-
-    /**
      * Extract username string.
      *
      * @param token the token

@@ -31,9 +31,9 @@ public class CustomerServiceImpl implements CustomerService {
      * @param addressService         the address service
      * @param localizedMessageSource the localized message source
      */
-    public CustomerServiceImpl(CustomerRepository customerRepository,
-                               AddressService addressService,
-                               LocalizedMessageSource localizedMessageSource) {
+    public CustomerServiceImpl(final CustomerRepository customerRepository,
+                               final AddressService addressService,
+                               final LocalizedMessageSource localizedMessageSource) {
         this.customerRepository = customerRepository;
         this.addressService = addressService;
         this.localizedMessageSource = localizedMessageSource;

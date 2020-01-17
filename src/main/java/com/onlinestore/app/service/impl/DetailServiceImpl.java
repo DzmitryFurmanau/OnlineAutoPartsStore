@@ -35,10 +35,10 @@ public class DetailServiceImpl implements DetailService {
      * @param stockService           the stock service
      * @param localizedMessageSource the localized message source
      */
-    public DetailServiceImpl(DetailRepository detailRepository,
-                             CarService carService,
-                             StockService stockService,
-                             LocalizedMessageSource localizedMessageSource) {
+    public DetailServiceImpl(final DetailRepository detailRepository,
+                             final CarService carService,
+                             final StockService stockService,
+                             final LocalizedMessageSource localizedMessageSource) {
         this.detailRepository = detailRepository;
         this.carService = carService;
         this.stockService = stockService;

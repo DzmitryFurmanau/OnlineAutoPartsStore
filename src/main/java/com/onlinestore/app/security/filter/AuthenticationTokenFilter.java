@@ -26,9 +26,9 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
     private static final String BEARER = "Bearer ";
 
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     /**
      * Instantiates a new Authentication token filter.

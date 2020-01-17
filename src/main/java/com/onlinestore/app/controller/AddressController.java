@@ -36,9 +36,9 @@ public class AddressController {
      * @param addressService         the address service
      * @param localizedMessageSource the localized message source
      */
-    public AddressController(Mapper mapper,
-                             AddressService addressService,
-                             LocalizedMessageSource localizedMessageSource) {
+    public AddressController(final Mapper mapper,
+                             final AddressService addressService,
+                             final LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.addressService = addressService;
         this.localizedMessageSource = localizedMessageSource;

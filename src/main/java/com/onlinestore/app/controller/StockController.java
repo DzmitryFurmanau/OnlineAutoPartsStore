@@ -38,9 +38,9 @@ public class StockController {
      * @param stockService           the stock service
      * @param localizedMessageSource the localized message source
      */
-    public StockController(Mapper mapper,
-                           StockService stockService,
-                           LocalizedMessageSource localizedMessageSource) {
+    public StockController(final Mapper mapper,
+                           final StockService stockService,
+                           final LocalizedMessageSource localizedMessageSource) {
         this.mapper = mapper;
         this.stockService = stockService;
         this.localizedMessageSource = localizedMessageSource;

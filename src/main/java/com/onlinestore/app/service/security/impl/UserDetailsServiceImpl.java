@@ -25,12 +25,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      *
      * @param userService the user service
      */
-    public UserDetailsServiceImpl(UserService userService) {
+    public UserDetailsServiceImpl(final UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         final User user = userService.findByName(username);
         final Set<SimpleGrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))

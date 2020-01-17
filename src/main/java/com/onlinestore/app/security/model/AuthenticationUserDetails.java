@@ -12,13 +12,13 @@ import java.util.Objects;
  */
 public class AuthenticationUserDetails implements UserDetails {
 
-    private Long id;
+    private final Long id;
 
-    private String username;
+    private final String username;
 
-    private String password;
+    private final String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     /**
      * Instantiates a new Authentication user details.

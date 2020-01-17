@@ -14,7 +14,7 @@ public class TokenResponseDto {
      *
      * @param accessToken the access token
      */
-    public TokenResponseDto(String accessToken) {
+    public TokenResponseDto(final String accessToken) {
         this.token = accessToken;
     }
 
@@ -32,7 +32,7 @@ public class TokenResponseDto {
      *
      * @param accessToken the access token
      */
-    public void setAccessToken(String accessToken) {
+    public void setAccessToken(final String accessToken) {
         this.token = accessToken;
     }
 
@@ -50,7 +50,7 @@ public class TokenResponseDto {
      *
      * @param tokenType the token type
      */
-    public void setTokenType(String tokenType) {
+    public void setTokenType(final String tokenType) {
         this.type = tokenType;
     }
 }

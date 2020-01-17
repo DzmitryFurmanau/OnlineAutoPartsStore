@@ -17,7 +17,7 @@ public class ErrorResponseDto {
      * @param httpStatus the http status
      * @param message    the message
      */
-    public ErrorResponseDto(HttpStatus httpStatus, String message) {
+    public ErrorResponseDto(final HttpStatus httpStatus, final String message) {
         this.httpStatus = httpStatus;
         this.message = message;
     }
@@ -36,7 +36,7 @@ public class ErrorResponseDto {
      *
      * @param httpStatus the http status
      */
-    public void setHttpStatus(HttpStatus httpStatus) {
+    public void setHttpStatus(final HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
     }
 
@@ -54,7 +54,7 @@ public class ErrorResponseDto {
      *
      * @param message the message
      */
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         this.message = message;
     }
 }

@@ -31,9 +31,9 @@ public class UserServiceImpl implements UserService {
      * @param roleService            the role service
      * @param userRepository         the user repository
      */
-    public UserServiceImpl(LocalizedMessageSource localizedMessageSource,
-                           RoleService roleService,
-                           UserRepository userRepository) {
+    public UserServiceImpl(final LocalizedMessageSource localizedMessageSource,
+                           final RoleService roleService,
+                           final UserRepository userRepository) {
         this.localizedMessageSource = localizedMessageSource;
         this.roleService = roleService;
         this.userRepository = userRepository;
