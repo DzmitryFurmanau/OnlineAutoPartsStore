@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.util.Objects;
 
@@ -21,8 +22,11 @@ import java.util.Objects;
  */
 @ControllerAdvice(annotations = RestController.class)
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(RestExceptionHandler.class);
+
     private static final String SEMICOLON = ";";
+
     private static final String EMPTY = "";
 
     @Override
@@ -30,8 +34,21 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String errorMessage = exception.getBindingResult().getAllErrors().stream()
                 .map(objectError -> Objects.requireNonNull(objectError.getDefaultMessage()).concat(SEMICOLON))
                 .reduce(EMPTY, String::concat);
-        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.BAD_REQUEST, errorMessage);
-        return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.BAD_REQUEST, errorMessage);
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Handle entity not found exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception, WebRequest request) {
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.NOT_FOUND, exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 
     /**
@@ -47,8 +64,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String errorMessage = exception.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage().concat(SEMICOLON))
                 .reduce(EMPTY, String::concat);
-        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
-        return handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
+        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 
     /**
@@ -61,7 +78,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {RuntimeException.class})
     protected ResponseEntity<Object> handleRuntimeException(RuntimeException exception, WebRequest request) {
         LOGGER.error(exception.getMessage(), exception);
-        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-        return handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 }

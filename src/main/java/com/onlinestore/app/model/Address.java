@@ -3,6 +3,7 @@ package com.onlinestore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -46,13 +47,37 @@ public class Address {
     @NotEmpty(message = "{address.pinCode.notEmpty}")
     private Integer pinCode;
 
-    @ManyToMany(mappedBy = "addresses")
-    private Set<Customer> customers;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "addresses")
+    private Set<Customer> customers = new HashSet<>();
 
     /**
      * Instantiates a new Address.
      */
     public Address() {
+    }
+
+    /**
+     * Instantiates a new Address.
+     *
+     * @param phoneNumber the phone number
+     * @param street      the street
+     * @param city        the city
+     * @param state       the state
+     * @param country     the country
+     * @param pinCode     the pin code
+     */
+    public Address(final Integer phoneNumber,
+                   final String street,
+                   final String city,
+                   final String state,
+                   final String country,
+                   final Integer pinCode) {
+        this.phoneNumber = phoneNumber;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.pinCode = pinCode;
     }
 
     /**

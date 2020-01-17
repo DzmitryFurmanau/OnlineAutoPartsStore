@@ -3,6 +3,7 @@ package com.onlinestore.app.config;
 import com.onlinestore.app.security.filter.AuthenticationTokenFilter;
 import com.onlinestore.app.service.security.TokenService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      * @param tokenService       the token service
      * @param userDetailsService the user details service
      */
-    public SecurityConfiguration(TokenService tokenService, UserDetailsService userDetailsService) {
+    public SecurityConfiguration(final TokenService tokenService, final UserDetailsService userDetailsService) {
         this.tokenService = tokenService;
         this.userDetailsService = userDetailsService;
     }
@@ -41,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http
                 .csrf()
                 .disable()
@@ -51,7 +52,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .mvcMatchers("/authentication/**").permitAll();
+                .mvcMatchers("/authentication/**").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/cars/**", "/details/**").permitAll()
+                .mvcMatchers(HttpMethod.PUT, "/addresses/**", "/customers/**").hasRole("USER")
+                .mvcMatchers(HttpMethod.POST, "/addresses/**", "/customers/**").hasRole("USER")
+                .mvcMatchers("/cars/**", "/heavers/**", "/sellers/**", "/stocks/**", "/users/**").hasRole("ADMIN");
         final AuthenticationTokenFilter filter = new AuthenticationTokenFilter(tokenService, userDetailsService);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }

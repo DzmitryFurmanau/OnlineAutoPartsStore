@@ -3,6 +3,7 @@ package com.onlinestore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -31,13 +32,26 @@ public class Stock {
     @NotNull(message = "{stock.heaver.notNull}")
     private Heaver heaver;
 
-    @ManyToMany(mappedBy = "stocks")
-    private Set<Detail> details;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "stocks")
+    private Set<Detail> details = new HashSet<>();
 
     /**
      * Instantiates a new Stock.
      */
     public Stock() {
+    }
+
+    /**
+     * Instantiates a new Stock.
+     *
+     * @param quantity the quantity
+     * @param provider the provider
+     * @param heaver   the heaver
+     */
+    public Stock(final Integer quantity, final Provider provider, final Heaver heaver) {
+        this.quantity = quantity;
+        this.provider = provider;
+        this.heaver = heaver;
     }
 
     /**

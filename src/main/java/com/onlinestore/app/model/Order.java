@@ -3,6 +3,7 @@ package com.onlinestore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * The type Order.
@@ -18,7 +19,7 @@ public class Order {
     @Column(unique = true, nullable = false)
     @NotNull(message = "{order.date.notNull}")
     @NotEmpty(message = "{order.date.notEmpty}")
-    private String date;
+    private LocalDateTime date;
 
     @Column(unique = true, nullable = false)
     @NotNull(message = "{order.sum.notNull}")
@@ -57,6 +58,33 @@ public class Order {
     }
 
     /**
+     * Instantiates a new Order.
+     *
+     * @param date     the date
+     * @param sum      the sum
+     * @param seller   the seller
+     * @param detail   the detail
+     * @param stock    the stock
+     * @param customer the customer
+     * @param address  the address
+     */
+    public Order(final LocalDateTime date,
+                 final Integer sum,
+                 final Seller seller,
+                 final Detail detail,
+                 final Stock stock,
+                 final Customer customer,
+                 final Address address) {
+        this.date = date;
+        this.sum = sum;
+        this.seller = seller;
+        this.detail = detail;
+        this.stock = stock;
+        this.customer = customer;
+        this.address = address;
+    }
+
+    /**
      * Gets id.
      *
      * @return the id
@@ -79,7 +107,7 @@ public class Order {
      *
      * @return the date
      */
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -88,7 +116,7 @@ public class Order {
      *
      * @param date the date
      */
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

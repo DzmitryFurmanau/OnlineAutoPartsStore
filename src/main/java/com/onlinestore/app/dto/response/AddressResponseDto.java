@@ -2,6 +2,9 @@ package com.onlinestore.app.dto.response;
 
 import com.onlinestore.app.dto.CustomerDto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * The type Address response dto.
  */
@@ -21,7 +24,7 @@ public class AddressResponseDto {
 
     private Integer pinCode;
 
-    private CustomerDto customer;
+    private Set<CustomerDto> customers = new HashSet<>();
 
     /**
      * Gets id.
@@ -150,20 +153,20 @@ public class AddressResponseDto {
     }
 
     /**
-     * Gets customer.
+     * Gets customers.
      *
-     * @return the customer
+     * @return the customers
      */
-    public CustomerDto getCustomer() {
-        return customer;
+    public Set<CustomerDto> getCustomers() {
+        return customers;
     }
 
     /**
-     * Sets customer.
+     * Sets customers.
      *
-     * @param customer the customer
+     * @param customers the customers
      */
-    public void setCustomer(CustomerDto customer) {
-        this.customer = customer;
+    public void setCustomers(Set<CustomerDto> customers) {
+        this.customers = customers;
     }
 }

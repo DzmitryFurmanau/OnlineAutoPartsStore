@@ -42,6 +42,21 @@ public class Heaver {
     }
 
     /**
+     * Instantiates a new Heaver.
+     *
+     * @param name   the name
+     * @param age    the age
+     * @param salary the salary
+     * @param bonus  the bonus
+     */
+    public Heaver(final String name, final Short age, final Integer salary, final Integer bonus) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        this.bonus = bonus;
+    }
+
+    /**
      * Gets id.
      *
      * @return the id

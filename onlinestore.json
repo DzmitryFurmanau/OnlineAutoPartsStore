@@ -1,0 +1,460 @@
+{
+	"id": "96681673-a326-ecee-cfba-f32ecc26d204",
+	"name": "it-academy",
+	"description": "",
+	"order": [
+		"1a77341f-16dd-0905-0ea8-be5ecd46c494",
+		"ca06cde3-c7c5-cd62-2126-a37f878d3928",
+		"9b5fe547-276c-134e-1948-df94cc543911",
+		"807a2dae-ecb1-88ce-1276-843482242e1c",
+		"d5cd4309-0d97-f9b1-668f-2c61e1a1664a",
+		"d8ba44a4-0718-4748-8b41-cdba285e274b",
+		"0f9f257d-af49-46c7-42b3-0123297d267c",
+		"3a6f468f-4ef9-f1fa-0e60-f926fefe63e1",
+		"910344c4-4ca8-8058-f0fc-4bbdf74756f0",
+		"21edc2a4-c379-a54c-bfdc-d0e50f9cf7af",
+		"8b4ae3ad-c204-2411-c7da-b83722e16255",
+		"f870f9ea-90fb-793f-f9e3-6fb1b5aa076e",
+		"112f2767-e91c-8b9b-0505-0758d586138d",
+		"a41b2162-2aff-4f60-ad4a-08d64ac5ee46"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1579263452691,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "0f9f257d-af49-46c7-42b3-0123297d267c",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/details",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/details",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579265885291,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": ""
+		},
+		{
+			"id": "112f2767-e91c-8b9b-0505-0758d586138d",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/heavers",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/heavers",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579273010230,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 2,\n        \"model\": \"VA-2107\",\n        \"year\": 1990,\n        \"pinCode\": \"ABC14881990\"\n    }"
+		},
+		{
+			"id": "1a77341f-16dd-0905-0ea8-be5ecd46c494",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/orders",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/orders",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579263455110,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n    \"id\": 3,\n    \"date\": \"2019-12-11\",\n    \"sum\": 1524,\n    \"seller\": {\n        \"id\": 3,\n        \"name\": \"ee\",\n        \"age\": 20,\n        \"salary\": 700,\n        \"category\": 2\n    },\n    \"detail\": {\n        \"id\": 1,\n        \"name\": \"Engine\",\n        \"type\": \"Chassis\",\n        \"price\": 107.58\n    },\n    \"stock\": {\n        \"id\": 2,\n        \"quantity\": 2\n    },\n    \"customer\": {\n        \"id\": 1,\n        \"name\": \"Dzmitry\",\n        \"password\": \"1488\",\n        \"email\": \"amator@gmail.com\"\n    },\n    \"address\": {\n        \"id\": 1,\n        \"phoneNumber\": 298687764,\n        \"street\": \"Folush\",\n        \"city\": \"Hrodna\",\n        \"state\": \"Hrodna Region\",\n        \"country\": \"Belarus\",\n        \"pinCode\": 230006\n    }\n}"
+		},
+		{
+			"id": "21edc2a4-c379-a54c-bfdc-d0e50f9cf7af",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/sellers",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/sellers",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579273085961,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 2,\n        \"model\": \"VA-2107\",\n        \"year\": 1990,\n        \"pinCode\": \"ABC14881990\"\n    }"
+		},
+		{
+			"id": "3a6f468f-4ef9-f1fa-0e60-f926fefe63e1",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/roles",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/roles",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579273042058,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 2,\n        \"model\": \"VA-2107\",\n        \"year\": 1990,\n        \"pinCode\": \"ABC14881990\"\n    }"
+		},
+		{
+			"id": "807a2dae-ecb1-88ce-1276-843482242e1c",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/providers/1",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "PUT",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/providers/1",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579274601663,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 1,\n        \"name\": \"Inokentiy\"\n    }"
+		},
+		{
+			"id": "8b4ae3ad-c204-2411-c7da-b83722e16255",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/stocks",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/stocks",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579273066531,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 2,\n        \"model\": \"VA-2107\",\n        \"year\": 1990,\n        \"pinCode\": \"ABC14881990\"\n    }"
+		},
+		{
+			"id": "910344c4-4ca8-8058-f0fc-4bbdf74756f0",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/sellers",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/users",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579273094292,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 2,\n        \"model\": \"VA-2107\",\n        \"year\": 1990,\n        \"pinCode\": \"ABC14881990\"\n    }"
+		},
+		{
+			"id": "9b5fe547-276c-134e-1948-df94cc543911",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/providers",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/providers",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579274549626,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 1,\n        \"name\": \"Ivan\"\n    }"
+		},
+		{
+			"id": "a41b2162-2aff-4f60-ad4a-08d64ac5ee46",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/addresses",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/addresses",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579271558296,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 3,\n        \"date\": \"2019-11-11T16:15:14\",\n        \"sum\": 123,\n        \"seller\": {\n            \"id\": 2,\n            \"name\": \"Anna\",\n            \"age\": 30,\n            \"salary\": 800,\n            \"category\": 1\n        },\n        \"detail\": {\n            \"id\": 2,\n            \"name\": \"Wheel\",\n            \"type\": \"Chassis\",\n            \"price\": 25.14\n        },\n        \"stock\": {\n            \"id\": 2,\n            \"quantity\": 3\n        },\n        \"customer\": {\n            \"id\": 2,\n            \"name\": \"Volha\",\n            \"password\": \"Dance\",\n            \"email\": \"love@gmail.com\"\n        },\n        \"address\": {\n            \"id\": 2,\n            \"phoneNumber\": 336549871,\n            \"street\": \"Strelkovaya\",\n            \"city\": \"Hrodna\",\n            \"state\": \"Hrodna Region\",\n            \"country\": \"Belarus\",\n            \"pinCode\": 230009\n        }\n    }"
+		},
+		{
+			"id": "ca06cde3-c7c5-cd62-2126-a37f878d3928",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/orders/2",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "DELETE",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/orders/2",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579273471834,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": ""
+		},
+		{
+			"id": "d5cd4309-0d97-f9b1-668f-2c61e1a1664a",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/cars",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1579265831506,
+			"name": "http://localhost:8080/customers",
+			"description": "",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "d8ba44a4-0718-4748-8b41-cdba285e274b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/cars",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/cars",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1579265838905,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": ""
+		},
+		{
+			"id": "f870f9ea-90fb-793f-f9e3-6fb1b5aa076e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/roles",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1579265960752,
+			"name": "http://localhost:8080/providers",
+			"description": "",
+			"collectionId": "96681673-a326-ecee-cfba-f32ecc26d204",
+			"responses": [],
+			"rawModeData": ""
+		}
+	]
+}

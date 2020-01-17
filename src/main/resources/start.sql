@@ -28,8 +28,8 @@ INSERT INTO public.details_stocks (id, stock_id, detail_id) VALUES (2, 2, 1);
 INSERT INTO public.sellers (id, name, age, salary, category) VALUES (1, 'Danuta', 20, 700, 2);
 INSERT INTO public.sellers (id, name, age, salary, category) VALUES (2, 'Anna', 30, 800, 1);
 
-INSERT INTO public.orders (id, date, sum, seller_id, detail_id, stock_id, customer_id, address_id) VALUES (1, '2019-12-12', 1524, 1, 1, 1, 1, 1);
-INSERT INTO public.orders (id, date, sum, seller_id, detail_id, stock_id, customer_id, address_id) VALUES (2, '2019-11-11', 123, 2, 2, 2, 2, 2);
+INSERT INTO public.orders (id, date, sum, seller_id, detail_id, stock_id, customer_id, address_id) VALUES (1, '2019-12-12 12:44:55', 1524, 1, 1, 1, 1, 1);
+INSERT INTO public.orders (id, date, sum, seller_id, detail_id, stock_id, customer_id, address_id) VALUES (2, '2019-11-11 16:15:14', 123, 2, 2, 2, 2, 2);
 
 INSERT INTO public.roles (id, name) VALUES (1, 'ROLE_USER');
 INSERT INTO public.roles (id, name) VALUES (2, 'ROLE_ADMIN');

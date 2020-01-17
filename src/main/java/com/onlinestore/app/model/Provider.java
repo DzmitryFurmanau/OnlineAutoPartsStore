@@ -27,6 +27,15 @@ public class Provider {
     }
 
     /**
+     * Instantiates a new Provider.
+     *
+     * @param name the name
+     */
+    public Provider(final String name) {
+        this.name = name;
+    }
+
+    /**
      * Gets id.
      *
      * @return the id

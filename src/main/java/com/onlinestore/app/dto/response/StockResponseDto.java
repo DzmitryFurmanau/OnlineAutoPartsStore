@@ -4,6 +4,9 @@ import com.onlinestore.app.dto.DetailDto;
 import com.onlinestore.app.dto.HeaverDto;
 import com.onlinestore.app.dto.ProviderDto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * The type Stock response dto.
  */
@@ -17,7 +20,7 @@ public class StockResponseDto {
 
     private HeaverDto heaver;
 
-    private DetailDto detail;
+    private Set<DetailDto> details = new HashSet<>();
 
     /**
      * Gets id.
@@ -92,20 +95,20 @@ public class StockResponseDto {
     }
 
     /**
-     * Gets detail.
+     * Gets details.
      *
-     * @return the detail
+     * @return the details
      */
-    public DetailDto getDetail() {
-        return detail;
+    public Set<DetailDto> getDetails() {
+        return details;
     }
 
     /**
-     * Sets detail.
+     * Sets details.
      *
-     * @param detail the detail
+     * @param details the details
      */
-    public void setDetail(DetailDto detail) {
-        this.detail = detail;
+    public void setDetails(Set<DetailDto> details) {
+        this.details = details;
     }
 }

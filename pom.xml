@@ -23,6 +23,7 @@
         <dozer>5.5.1</dozer>
         <logback>1.2.3</logback>
         <jjwt>0.9.1</jjwt>
+        <swagger>2.9.2</swagger>
     </properties>
 
     <dependencies>
@@ -96,6 +97,21 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${jjwt}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-data-rest</artifactId>
+            <version>${swagger}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger}</version>
         </dependency>
     </dependencies>
 

@@ -90,7 +90,7 @@ CREATE TABLE public.sellers (
 DROP TABLE IF EXISTS public.orders;
 CREATE TABLE public.orders (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    date VARCHAR,
+    date TIMESTAMP,
     sum INTEGER,
         seller_id BIGINT,
         detail_id BIGINT,

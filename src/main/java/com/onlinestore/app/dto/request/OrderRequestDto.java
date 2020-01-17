@@ -1,5 +1,7 @@
 package com.onlinestore.app.dto.request;
 
+import java.time.LocalDateTime;
+
 /**
  * The type Order request dto.
  */
@@ -7,7 +9,7 @@ public class OrderRequestDto {
 
     private Long id;
 
-    private String date;
+    private LocalDateTime date;
 
     private Integer sum;
 
@@ -44,7 +46,7 @@ public class OrderRequestDto {
      *
      * @return the date
      */
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -53,7 +55,7 @@ public class OrderRequestDto {
      *
      * @param date the date
      */
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

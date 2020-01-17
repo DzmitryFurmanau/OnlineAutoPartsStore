@@ -3,6 +3,7 @@ package com.onlinestore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -41,12 +42,27 @@ public class Detail {
             joinColumns = @JoinColumn(name = "detail_id"),
             inverseJoinColumns = @JoinColumn(name = "stock_id"))
     @NotNull(message = "{detail.stocks.notNull}")
-    private Set<Stock> stocks;
+    private Set<Stock> stocks = new HashSet<>();
 
     /**
      * Instantiates a new Detail.
      */
     public Detail() {
+    }
+
+    /**
+     * Instantiates a new Detail.
+     *
+     * @param name  the name
+     * @param type  the type
+     * @param price the price
+     * @param car   the car
+     */
+    public Detail(final String name, final String type, final Double price, final Car car) {
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.car = car;
     }
 
     /**

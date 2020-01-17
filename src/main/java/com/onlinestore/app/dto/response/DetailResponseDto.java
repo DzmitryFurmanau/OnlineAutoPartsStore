@@ -3,6 +3,9 @@ package com.onlinestore.app.dto.response;
 import com.onlinestore.app.dto.CarDto;
 import com.onlinestore.app.dto.StockDto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * The type Detail response dto.
  */
@@ -18,7 +21,7 @@ public class DetailResponseDto {
 
     private CarDto car;
 
-    private StockDto stock;
+    private Set<StockDto> stocks = new HashSet<>();
 
     /**
      * Gets id.
@@ -111,20 +114,20 @@ public class DetailResponseDto {
     }
 
     /**
-     * Gets stock.
+     * Gets stocks.
      *
-     * @return the stock
+     * @return the stocks
      */
-    public StockDto getStock() {
-        return stock;
+    public Set<StockDto> getStocks() {
+        return stocks;
     }
 
     /**
-     * Sets stock.
+     * Sets stocks.
      *
-     * @param stock the stock
+     * @param stocks the stocks
      */
-    public void setStock(StockDto stock) {
-        this.stock = stock;
+    public void setStocks(Set<StockDto> stocks) {
+        this.stocks = stocks;
     }
 }

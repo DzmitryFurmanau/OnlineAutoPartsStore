@@ -42,6 +42,21 @@ public class Seller {
     }
 
     /**
+     * Instantiates a new Seller.
+     *
+     * @param name     the name
+     * @param age      the age
+     * @param salary   the salary
+     * @param category the category
+     */
+    public Seller(final String name, final Short age, final Integer salary, final Short category) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        this.category = category;
+    }
+
+    /**
      * Gets id.
      *
      * @return the id

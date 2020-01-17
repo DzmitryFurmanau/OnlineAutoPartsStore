@@ -37,6 +37,19 @@ public class Car {
     }
 
     /**
+     * Instantiates a new Car.
+     *
+     * @param model   the model
+     * @param year    the year
+     * @param pinCode the pin code
+     */
+    public Car(final String model, final Short year, final String pinCode) {
+        this.model = model;
+        this.year = year;
+        this.pinCode = pinCode;
+    }
+
+    /**
      * Gets id.
      *
      * @return the id

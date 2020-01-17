@@ -3,6 +3,7 @@ package com.onlinestore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,12 +37,25 @@ public class Customer {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id"))
     @NotNull(message = "{customer.addresses.notNull}")
-    private Set<Address> addresses;
+    private Set<Address> addresses = new HashSet<>();
 
     /**
      * Instantiates a new Customer.
      */
     public Customer() {
+    }
+
+    /**
+     * Instantiates a new Customer.
+     *
+     * @param name     the name
+     * @param password the password
+     * @param email    the email
+     */
+    public Customer(final String name, final String password, final String email) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
     }
 
     /**

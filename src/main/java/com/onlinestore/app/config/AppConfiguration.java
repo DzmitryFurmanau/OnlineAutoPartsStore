@@ -11,5 +11,4 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages = "com.onlinestore")
 @Import({WebConfiguration.class, DatabaseConfiguration.class, MessagesConfiguration.class, SecurityConfiguration.class})
 public class AppConfiguration {
-
 }

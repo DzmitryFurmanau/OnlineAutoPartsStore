@@ -2,6 +2,9 @@ package com.onlinestore.app.dto.response;
 
 import com.onlinestore.app.dto.RoleDto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * The type User response dto.
  */
@@ -11,7 +14,7 @@ public class UserResponseDto {
 
     private String name;
 
-    private RoleDto role;
+    private Set<RoleDto> roles = new HashSet<>();
 
     /**
      * Gets id.
@@ -50,20 +53,20 @@ public class UserResponseDto {
     }
 
     /**
-     * Gets role.
+     * Gets roles.
      *
-     * @return the role
+     * @return the roles
      */
-    public RoleDto getRole() {
-        return role;
+    public Set<RoleDto> getRoles() {
+        return roles;
     }
 
     /**
-     * Sets role.
+     * Sets roles.
      *
-     * @param role the role
+     * @param roles the roles
      */
-    public void setRole(RoleDto role) {
-        this.role = role;
+    public void setRoles(Set<RoleDto> roles) {
+        this.roles = roles;
     }
 }

@@ -3,6 +3,8 @@ package com.onlinestore.app.repository;
 import com.onlinestore.app.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
+
 /**
  * The interface Order repository.
  */
@@ -14,7 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
      * @param date the date
      * @return the boolean
      */
-    boolean existsByDate(String date);
+    boolean existsByDate(LocalDateTime date);
 
     /**
      * Find by date order.
@@ -22,5 +24,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
      * @param date the date
      * @return the order
      */
-    Order findByDate(String date);
+    Order findByDate(LocalDateTime date);
 }

@@ -3,6 +3,7 @@ package com.onlinestore.app.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -31,7 +32,24 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @NotNull(message = "{user.roles.notNull}")
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
+
+    /**
+     * Instantiates a new User.
+     */
+    public User() {
+    }
+
+    /**
+     * Instantiates a new User.
+     *
+     * @param name     the name
+     * @param password the password
+     */
+    public User(final String name, final String password) {
+        this.name = name;
+        this.password = password;
+    }
 
     /**
      * Gets id.

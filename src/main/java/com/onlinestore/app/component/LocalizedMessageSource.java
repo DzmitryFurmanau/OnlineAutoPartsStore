@@ -23,7 +23,7 @@ public class LocalizedMessageSource {
      *
      * @param messageSource the message source
      */
-    LocalizedMessageSource(MessageSource messageSource) {
+    LocalizedMessageSource(final MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
@@ -34,7 +34,7 @@ public class LocalizedMessageSource {
      * @param arguments   the arguments
      * @return the message
      */
-    public String getMessage(String messageCode, Object[] arguments) {
+    public String getMessage(final String messageCode, final Object[] arguments) {
         Locale locale = LocaleContextHolder.getLocale();
         locale = localeList.contains(locale) ? locale : Locale.getDefault();
         return messageSource.getMessage(messageCode, arguments, locale);
