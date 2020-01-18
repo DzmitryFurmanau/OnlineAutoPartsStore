@@ -1,4 +1,4 @@
-package com.onlinestore.app.config;
+package com.onlinestore.app.configuration;
 
 import com.onlinestore.app.security.filter.AuthenticationTokenFilter;
 import com.onlinestore.app.service.security.TokenService;
@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.GET, "/cars/**", "/details/**").permitAll()
                 .mvcMatchers(HttpMethod.PUT, "/addresses/**", "/customers/**").hasRole("USER")
                 .mvcMatchers(HttpMethod.POST, "/addresses/**", "/customers/**").hasRole("USER")
-                .mvcMatchers("/cars/**", "/heavers/**", "/sellers/**", "/stocks/**", "/users/**").hasRole("ADMIN");
+                .mvcMatchers("/cars/**", "/heavers/**", "/sellers/**", "/stocks/**").hasRole("ADMIN");
         final AuthenticationTokenFilter filter = new AuthenticationTokenFilter(tokenService, userDetailsService);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }

@@ -52,31 +52,37 @@ public class DetailServiceImpl implements DetailService {
 
     @Override
     public Detail findById(Long id) {
-        return detailRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.detail.notExist", new Object[]{})));
+        return detailRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.detail.notExist", new Object[]{})));
     }
 
     @Override
     public Detail save(Detail detail) {
-        validate(detail.getId() != null, localizedMessageSource.getMessage("error.detail.notHaveId", new Object[]{}));
-        validate(detailRepository.existsByName(detail.getName()), localizedMessageSource.getMessage("error.detail.name.notUnique", new Object[]{}));
+        validate(detail.getId() != null, localizedMessageSource
+                .getMessage("error.detail.notHaveId", new Object[]{}));
+        validate(detailRepository.existsByName(detail.getName()), localizedMessageSource
+                .getMessage("error.detail.name.notUnique", new Object[]{}));
         return saveAndFlush(detail);
     }
 
     @Override
     public Detail update(Detail detail) {
         final Long id = detail.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.detail.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.detail.haveId", new Object[]{}));
         final Detail duplicateDetail = detailRepository.findByName(detail.getName());
         findById(id);
         final boolean isDuplicateExists = duplicateDetail != null && !Objects.equals(duplicateDetail.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.detail.name.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.detail.name.notUnique", new Object[]{}));
         return saveAndFlush(detail);
     }
 
     @Override
     public void delete(Detail detail) {
         final Long id = detail.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.detail.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.detail.haveId", new Object[]{}));
         findById(id);
         detailRepository.delete(detail);
     }
@@ -88,11 +94,13 @@ public class DetailServiceImpl implements DetailService {
     }
 
     private Detail saveAndFlush(Detail detail) {
-        validate(detail.getCar() == null || detail.getCar().getId() == null, localizedMessageSource.getMessage("error.detail.car.isNull", new Object[]{}));
+        validate(detail.getCar() == null || detail.getCar().getId() == null, localizedMessageSource
+                .getMessage("error.detail.car.isNull", new Object[]{}));
         detail.setCar(carService.findById(detail.getCar().getId()));
         detail.getStocks().forEach(stock -> {
             validate(stock == null || stock.getId() == null,
-                    localizedMessageSource.getMessage("error.detail.stocks.isNull", new Object[]{}));
+                    localizedMessageSource
+                            .getMessage("error.detail.stocks.isNull", new Object[]{}));
             stock.setQuantity(stockService.findById(stock.getId()).getQuantity());
         });
         return detailRepository.saveAndFlush(detail);

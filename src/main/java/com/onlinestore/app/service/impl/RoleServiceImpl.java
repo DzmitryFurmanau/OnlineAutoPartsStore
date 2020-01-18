@@ -40,7 +40,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findById(Long id) {
-        return roleRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.role.notExist", new Object[]{})));
+        return roleRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.role.notExist", new Object[]{})));
     }
 
     @Override
@@ -50,26 +51,31 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role save(Role role) {
-        validate(role.getId() != null, localizedMessageSource.getMessage("error.role.notHaveId", new Object[]{}));
-        validate(roleRepository.existsByName(role.getName()), localizedMessageSource.getMessage("error.role.name.notUnique", new Object[]{}));
+        validate(role.getId() != null, localizedMessageSource
+                .getMessage("error.role.notHaveId", new Object[]{}));
+        validate(roleRepository.existsByName(role.getName()), localizedMessageSource
+                .getMessage("error.role.name.notUnique", new Object[]{}));
         return roleRepository.saveAndFlush(role);
     }
 
     @Override
     public Role update(Role role) {
         final Long id = role.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.role.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.role.haveId", new Object[]{}));
         final Role duplicateRole = roleRepository.findByName(role.getName());
         findById(id);
         final boolean isDuplicateExists = duplicateRole != null && !Objects.equals(duplicateRole.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.role.name.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.role.name.notUnique", new Object[]{}));
         return roleRepository.saveAndFlush(role);
     }
 
     @Override
     public void delete(Role role) {
         final Long id = role.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.role.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.role.haveId", new Object[]{}));
         findById(id);
         roleRepository.delete(role);
     }

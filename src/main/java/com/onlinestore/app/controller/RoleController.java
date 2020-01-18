@@ -77,7 +77,8 @@ public class RoleController {
     @PostMapping
     public ResponseEntity<RoleDto> save(@Valid @RequestBody RoleDto roleDto) {
         roleDto.setId(null);
-        final RoleDto responseRoleDto = mapper.map(roleService.save(mapper.map(roleDto, Role.class)), RoleDto.class);
+        final RoleDto responseRoleDto = mapper.map(roleService
+                .save(mapper.map(roleDto, Role.class)), RoleDto.class);
         return new ResponseEntity<>(responseRoleDto, HttpStatus.OK);
     }
 
@@ -90,10 +91,11 @@ public class RoleController {
      */
     @PutMapping(value = "/{id}")
     public ResponseEntity<RoleDto> update(@Valid @RequestBody RoleDto roleDto, @PathVariable Long id) {
-        if (!Objects.equals(id, roleDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.role.unexpectedId", new Object[]{}));
-        }
-        final RoleDto responseRoleDto = mapper.map(roleService.update(mapper.map(roleDto, Role.class)), RoleDto.class);
+        if (!Objects.equals(id, roleDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.role.unexpectedId", new Object[]{}));
+        final RoleDto responseRoleDto = mapper.map(roleService
+                .update(mapper.map(roleDto, Role.class)), RoleDto.class);
         return new ResponseEntity<>(responseRoleDto, HttpStatus.OK);
     }
 

@@ -1,4 +1,4 @@
-package com.onlinestore.app.config;
+package com.onlinestore.app.configuration;
 
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

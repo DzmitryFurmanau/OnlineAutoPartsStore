@@ -65,23 +65,28 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(Long id) {
-        return orderRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.order.notExist", new Object[]{})));
+        return orderRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.order.notExist", new Object[]{})));
     }
 
     @Override
     public Order save(Order order) {
-        validate(order.getId() != null, localizedMessageSource.getMessage("error.order.notHaveId", new Object[]{}));
-        validate(orderRepository.existsByDate(order.getDate()), localizedMessageSource.getMessage("error.order.date.notUnique", new Object[]{}));
+        validate(order.getId() != null, localizedMessageSource
+                .getMessage("error.order.notHaveId", new Object[]{}));
+        validate(orderRepository.existsByDate(order.getDate()), localizedMessageSource
+                .getMessage("error.order.date.notUnique", new Object[]{}));
         return saveAndFlush(order);
     }
 
     @Override
     public Order update(Order order) {
         final Long id = order.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.order.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.order.haveId", new Object[]{}));
         final Order duplicateOrder = orderRepository.findByDate(order.getDate());
         final boolean isDuplicateExists = duplicateOrder != null && !Objects.equals(duplicateOrder.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.order.date.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.order.date.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(order);
     }
@@ -90,7 +95,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void delete(Order order) {
         final Long id = order.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.order.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.order.haveId", new Object[]{}));
         findById(id);
         orderRepository.delete(order);
     }
@@ -102,11 +108,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private Order saveAndFlush(Order order) {
-        validate(order.getSeller() == null || order.getSeller().getId() == null, localizedMessageSource.getMessage("error.order.seller.isNull", new Object[]{}));
-        validate(order.getDetail() == null || order.getDetail().getId() == null, localizedMessageSource.getMessage("error.order.detail.isNull", new Object[]{}));
-        validate(order.getStock() == null || order.getStock().getId() == null, localizedMessageSource.getMessage("error.order.stock.isNull", new Object[]{}));
-        validate(order.getCustomer() == null || order.getCustomer().getId() == null, localizedMessageSource.getMessage("error.order.customer.isNull", new Object[]{}));
-        validate(order.getAddress() == null || order.getAddress().getId() == null, localizedMessageSource.getMessage("error.order.address.isNull", new Object[]{}));
+        validate(order.getSeller() == null || order.getSeller().getId() == null, localizedMessageSource
+                .getMessage("error.order.seller.isNull", new Object[]{}));
+        validate(order.getDetail() == null || order.getDetail().getId() == null, localizedMessageSource
+                .getMessage("error.order.detail.isNull", new Object[]{}));
+        validate(order.getStock() == null || order.getStock().getId() == null, localizedMessageSource
+                .getMessage("error.order.stock.isNull", new Object[]{}));
+        validate(order.getCustomer() == null || order.getCustomer().getId() == null, localizedMessageSource
+                .getMessage("error.order.customer.isNull", new Object[]{}));
+        validate(order.getAddress() == null || order.getAddress().getId() == null, localizedMessageSource
+                .getMessage("error.order.address.isNull", new Object[]{}));
         order.setSeller(sellerService.findById(order.getSeller().getId()));
         order.setDetail(detailService.findById(order.getDetail().getId()));
         order.setStock(stockService.findById(order.getStock().getId()));

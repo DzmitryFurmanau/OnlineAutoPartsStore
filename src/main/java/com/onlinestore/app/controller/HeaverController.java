@@ -64,7 +64,8 @@ public class HeaverController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<HeaverResponseDto> getOne(@PathVariable Long id) {
-        final HeaverResponseDto heaverResponseDto = mapper.map(heaverService.findById(id), HeaverResponseDto.class);
+        final HeaverResponseDto heaverResponseDto;
+        heaverResponseDto = mapper.map(heaverService.findById(id), HeaverResponseDto.class);
         return new ResponseEntity<>(heaverResponseDto, HttpStatus.OK);
     }
 
@@ -77,7 +78,8 @@ public class HeaverController {
     @PostMapping
     public ResponseEntity<HeaverResponseDto> save(@RequestBody HeaverRequestDto heaverRequestDto) {
         heaverRequestDto.setId(null);
-        final HeaverResponseDto heaverResponseDto = mapper.map(heaverService.save(mapper.map(heaverRequestDto, Heaver.class)), HeaverResponseDto.class);
+        final HeaverResponseDto heaverResponseDto = mapper.map(heaverService
+                .save(mapper.map(heaverRequestDto, Heaver.class)), HeaverResponseDto.class);
         return new ResponseEntity<>(heaverResponseDto, HttpStatus.OK);
     }
 
@@ -89,11 +91,13 @@ public class HeaverController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<HeaverResponseDto> update(@RequestBody HeaverRequestDto heaverRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, heaverRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.heaver.unexpectedId", new Object[]{}));
-        }
-        final HeaverResponseDto heaverResponseDto = mapper.map(heaverService.update(mapper.map(heaverRequestDto, Heaver.class)), HeaverResponseDto.class);
+    public ResponseEntity<HeaverResponseDto> update(@RequestBody HeaverRequestDto heaverRequestDto,
+                                                    @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, heaverRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.heaver.unexpectedId", new Object[]{}));
+        final HeaverResponseDto heaverResponseDto = mapper.map(heaverService
+                .update(mapper.map(heaverRequestDto, Heaver.class)), HeaverResponseDto.class);
         return new ResponseEntity<>(heaverResponseDto, HttpStatus.OK);
     }
 

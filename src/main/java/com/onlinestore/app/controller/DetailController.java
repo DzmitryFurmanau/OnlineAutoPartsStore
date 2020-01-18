@@ -67,7 +67,8 @@ public class DetailController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<DetailResponseDto> getOne(@PathVariable Long id) {
-        final DetailResponseDto detailResponseDto = mapper.map(detailService.findById(id), DetailResponseDto.class);
+        final DetailResponseDto detailResponseDto;
+        detailResponseDto = mapper.map(detailService.findById(id), DetailResponseDto.class);
         return new ResponseEntity<>(detailResponseDto, HttpStatus.OK);
     }
 
@@ -80,7 +81,8 @@ public class DetailController {
     @PostMapping
     public ResponseEntity<DetailResponseDto> save(@RequestBody DetailRequestDto detailRequestDto) {
         detailRequestDto.setId(null);
-        final DetailResponseDto detailResponseDto = mapper.map(detailService.save(getDetail(detailRequestDto)), DetailResponseDto.class);
+        final DetailResponseDto detailResponseDto = mapper.map(detailService
+                .save(getDetail(detailRequestDto)), DetailResponseDto.class);
         return new ResponseEntity<>(detailResponseDto, HttpStatus.OK);
     }
 
@@ -92,11 +94,13 @@ public class DetailController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<DetailResponseDto> update(@RequestBody DetailRequestDto detailRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, detailRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.detail.unexpectedId", new Object[]{}));
-        }
-        final DetailResponseDto detailResponseDto = mapper.map(detailService.update(getDetail(detailRequestDto)), DetailResponseDto.class);
+    public ResponseEntity<DetailResponseDto> update(@RequestBody DetailRequestDto detailRequestDto,
+                                                    @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, detailRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.detail.unexpectedId", new Object[]{}));
+        final DetailResponseDto detailResponseDto = mapper.map(detailService
+                .update(getDetail(detailRequestDto)), DetailResponseDto.class);
         return new ResponseEntity<>(detailResponseDto, HttpStatus.OK);
     }
 

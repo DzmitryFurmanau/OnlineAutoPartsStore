@@ -64,7 +64,8 @@ public class ProviderController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProviderResponseDto> getOne(@PathVariable Long id) {
-        final ProviderResponseDto providerResponseDto = mapper.map(providerService.findById(id), ProviderResponseDto.class);
+        final ProviderResponseDto providerResponseDto;
+        providerResponseDto = mapper.map(providerService.findById(id), ProviderResponseDto.class);
         return new ResponseEntity<>(providerResponseDto, HttpStatus.OK);
     }
 
@@ -77,7 +78,9 @@ public class ProviderController {
     @PostMapping
     public ResponseEntity<ProviderResponseDto> save(@RequestBody ProviderRequestDto providerRequestDto) {
         providerRequestDto.setId(null);
-        final ProviderResponseDto providerResponseDto = mapper.map(providerService.save(mapper.map(providerRequestDto, Provider.class)), ProviderResponseDto.class);
+        final ProviderResponseDto providerResponseDto;
+        providerResponseDto = mapper.map(providerService
+                .save(mapper.map(providerRequestDto, Provider.class)), ProviderResponseDto.class);
         return new ResponseEntity<>(providerResponseDto, HttpStatus.OK);
     }
 
@@ -89,11 +92,14 @@ public class ProviderController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProviderResponseDto> update(@RequestBody ProviderRequestDto providerRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, providerRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.provider.unexpectedId", new Object[]{}));
-        }
-        final ProviderResponseDto providerResponseDto = mapper.map(providerService.update(mapper.map(providerRequestDto, Provider.class)), ProviderResponseDto.class);
+    public ResponseEntity<ProviderResponseDto> update(@RequestBody ProviderRequestDto providerRequestDto,
+                                                      @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, providerRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.provider.unexpectedId", new Object[]{}));
+        final ProviderResponseDto providerResponseDto;
+        providerResponseDto = mapper.map(providerService
+                .update(mapper.map(providerRequestDto, Provider.class)), ProviderResponseDto.class);
         return new ResponseEntity<>(providerResponseDto, HttpStatus.OK);
     }
 

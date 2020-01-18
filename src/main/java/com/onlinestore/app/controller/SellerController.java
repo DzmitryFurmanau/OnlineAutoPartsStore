@@ -77,7 +77,8 @@ public class SellerController {
     @PostMapping
     public ResponseEntity<SellerResponseDto> save(@RequestBody SellerRequestDto sellerRequestDto) {
         sellerRequestDto.setId(null);
-        final SellerResponseDto sellerResponseDto = mapper.map(sellerService.save(mapper.map(sellerRequestDto, Seller.class)), SellerResponseDto.class);
+        final SellerResponseDto sellerResponseDto = mapper.map(sellerService
+                .save(mapper.map(sellerRequestDto, Seller.class)), SellerResponseDto.class);
         return new ResponseEntity<>(sellerResponseDto, HttpStatus.OK);
     }
 
@@ -89,11 +90,13 @@ public class SellerController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<SellerResponseDto> update(@RequestBody SellerRequestDto sellerRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, sellerRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.seller.unexpectedId", new Object[]{}));
-        }
-        final SellerResponseDto sellerResponseDto = mapper.map(sellerService.update(mapper.map(sellerRequestDto, Seller.class)), SellerResponseDto.class);
+    public ResponseEntity<SellerResponseDto> update(@RequestBody SellerRequestDto sellerRequestDto,
+                                                    @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, sellerRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.seller.unexpectedId", new Object[]{}));
+        final SellerResponseDto sellerResponseDto = mapper.map(sellerService
+                .update(mapper.map(sellerRequestDto, Seller.class)), SellerResponseDto.class);
         return new ResponseEntity<>(sellerResponseDto, HttpStatus.OK);
     }
 

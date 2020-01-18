@@ -40,31 +40,37 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public Seller findById(Long id) {
-        return sellerRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.seller.notExist", new Object[]{})));
+        return sellerRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.seller.notExist", new Object[]{})));
     }
 
     @Override
     public Seller save(Seller seller) {
-        validate(seller.getId() != null, localizedMessageSource.getMessage("error.seller.notHaveId", new Object[]{}));
-        validate(sellerRepository.existsByName(seller.getName()), localizedMessageSource.getMessage("error.seller.name.notUnique", new Object[]{}));
+        validate(seller.getId() != null, localizedMessageSource
+                .getMessage("error.seller.notHaveId", new Object[]{}));
+        validate(sellerRepository.existsByName(seller.getName()), localizedMessageSource
+                .getMessage("error.seller.name.notUnique", new Object[]{}));
         return sellerRepository.saveAndFlush(seller);
     }
 
     @Override
     public Seller update(Seller seller) {
         final Long id = seller.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.seller.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.seller.haveId", new Object[]{}));
         final Seller duplicateSeller = sellerRepository.findByName(seller.getName());
         findById(id);
         final boolean isDuplicateExists = duplicateSeller != null && !Objects.equals(duplicateSeller.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.seller.name.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.seller.name.notUnique", new Object[]{}));
         return sellerRepository.saveAndFlush(seller);
     }
 
     @Override
     public void delete(Seller seller) {
         final Long id = seller.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.seller.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.seller.haveId", new Object[]{}));
         findById(id);
         sellerRepository.delete(seller);
     }

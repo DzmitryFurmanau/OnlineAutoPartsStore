@@ -81,7 +81,8 @@ public class StockController {
     @PostMapping
     public ResponseEntity<StockResponseDto> save(@RequestBody StockRequestDto stockRequestDto) {
         stockRequestDto.setId(null);
-        final StockResponseDto stockResponseDto = mapper.map(stockService.save(getStock(stockRequestDto)), StockResponseDto.class);
+        final StockResponseDto stockResponseDto = mapper.map(stockService
+                .save(getStock(stockRequestDto)), StockResponseDto.class);
         return new ResponseEntity<>(stockResponseDto, HttpStatus.OK);
     }
 
@@ -93,11 +94,13 @@ public class StockController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<StockResponseDto> update(@RequestBody StockRequestDto stockRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, stockRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.stock.unexpectedId", new Object[]{}));
-        }
-        final StockResponseDto stockResponseDto = mapper.map(stockService.update(getStock(stockRequestDto)), StockResponseDto.class);
+    public ResponseEntity<StockResponseDto> update(@RequestBody StockRequestDto stockRequestDto,
+                                                   @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, stockRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.stock.unexpectedId", new Object[]{}));
+        final StockResponseDto stockResponseDto = mapper.map(stockService
+                .update(getStock(stockRequestDto)), StockResponseDto.class);
         return new ResponseEntity<>(stockResponseDto, HttpStatus.OK);
     }
 
@@ -115,10 +118,10 @@ public class StockController {
     private Stock getStock(StockRequestDto stockRequestDto) {
         final Stock stock = mapper.map(stockRequestDto, Stock.class);
         final Provider provider = new Provider();
-        final Heaver heaver = new Heaver();
         provider.setId(stockRequestDto.getProviderId());
-        heaver.setId(stockRequestDto.getHeaverId());
         stock.setProvider(provider);
+        final Heaver heaver = new Heaver();
+        heaver.setId(stockRequestDto.getHeaverId());
         stock.setHeaver(heaver);
         final Set<Detail> detailSet = stockRequestDto.getDetailId().stream().map(detailId -> {
             Detail detail = new Detail();

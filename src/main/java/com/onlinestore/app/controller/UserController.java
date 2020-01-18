@@ -80,7 +80,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponseDto> save(@Valid @RequestBody UserRequestDto userRequestDto) {
         userRequestDto.setId(null);
-        final UserResponseDto userResponseDto = mapper.map(userService.save(getUser(userRequestDto)), UserResponseDto.class);
+        final UserResponseDto userResponseDto = mapper.map(userService
+                .save(getUser(userRequestDto)), UserResponseDto.class);
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
@@ -92,11 +93,13 @@ public class UserController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserResponseDto> update(@Valid @RequestBody UserRequestDto userRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, userRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.user.unexpectedId", new Object[]{}));
-        }
-        final UserResponseDto userResponseDto = mapper.map(userService.update(getUser(userRequestDto)), UserResponseDto.class);
+    public ResponseEntity<UserResponseDto> update(@Valid @RequestBody UserRequestDto userRequestDto,
+                                                  @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, userRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.user.unexpectedId", new Object[]{}));
+        final UserResponseDto userResponseDto = mapper.map(userService
+                .update(getUser(userRequestDto)), UserResponseDto.class);
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 

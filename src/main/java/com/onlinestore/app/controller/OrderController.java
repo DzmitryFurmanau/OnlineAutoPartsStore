@@ -77,7 +77,8 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderResponseDto> save(@RequestBody OrderRequestDto orderRequestDto) {
         orderRequestDto.setId(null);
-        final OrderResponseDto orderResponseDto = mapper.map(orderService.save(getOrder(orderRequestDto)), OrderResponseDto.class);
+        final OrderResponseDto orderResponseDto = mapper.map(orderService
+                .save(getOrder(orderRequestDto)), OrderResponseDto.class);
         return new ResponseEntity<>(orderResponseDto, HttpStatus.OK);
     }
 
@@ -89,11 +90,13 @@ public class OrderController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<OrderResponseDto> update(@RequestBody OrderRequestDto orderRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, orderRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.order.unexpectedId", new Object[]{}));
-        }
-        final OrderResponseDto orderResponseDto = mapper.map(orderService.update(getOrder(orderRequestDto)), OrderResponseDto.class);
+    public ResponseEntity<OrderResponseDto> update(@RequestBody OrderRequestDto orderRequestDto,
+                                                   @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, orderRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.order.unexpectedId", new Object[]{}));
+        final OrderResponseDto orderResponseDto = mapper.map(orderService
+                .update(getOrder(orderRequestDto)), OrderResponseDto.class);
         return new ResponseEntity<>(orderResponseDto, HttpStatus.OK);
     }
 
@@ -111,19 +114,19 @@ public class OrderController {
     private Order getOrder(OrderRequestDto orderRequestDto) {
         final Order order = mapper.map(orderRequestDto, Order.class);
         final Seller seller = new Seller();
-        final Detail detail = new Detail();
-        final Stock stock = new Stock();
-        final Customer customer = new Customer();
-        final Address address = new Address();
         seller.setId(orderRequestDto.getSellerId());
-        detail.setId(orderRequestDto.getDetailId());
-        stock.setId(orderRequestDto.getStockId());
-        customer.setId(orderRequestDto.getCustomerId());
-        address.setId(orderRequestDto.getAddressId());
         order.setSeller(seller);
+        final Detail detail = new Detail();
+        detail.setId(orderRequestDto.getDetailId());
         order.setDetail(detail);
+        final Stock stock = new Stock();
+        stock.setId(orderRequestDto.getStockId());
         order.setStock(stock);
+        final Customer customer = new Customer();
+        customer.setId(orderRequestDto.getCustomerId());
         order.setCustomer(customer);
+        final Address address = new Address();
+        address.setId(orderRequestDto.getAddressId());
         order.setAddress(address);
         return order;
     }

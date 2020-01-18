@@ -40,31 +40,37 @@ public class HeaverServiceImpl implements HeaverService {
 
     @Override
     public Heaver findById(Long id) {
-        return heaverRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.heaver.notExist", new Object[]{})));
+        return heaverRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.heaver.notExist", new Object[]{})));
     }
 
     @Override
     public Heaver save(Heaver heaver) {
-        validate(heaver.getId() != null, localizedMessageSource.getMessage("error.heaver.notHaveId", new Object[]{}));
-        validate(heaverRepository.existsByName(heaver.getName()), localizedMessageSource.getMessage("error.heaver.name.notUnique", new Object[]{}));
+        validate(heaver.getId() != null, localizedMessageSource
+                .getMessage("error.heaver.notHaveId", new Object[]{}));
+        validate(heaverRepository.existsByName(heaver.getName()), localizedMessageSource
+                .getMessage("error.heaver.name.notUnique", new Object[]{}));
         return heaverRepository.saveAndFlush(heaver);
     }
 
     @Override
     public Heaver update(Heaver heaver) {
         final Long id = heaver.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.heaver.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.heaver.haveId", new Object[]{}));
         final Heaver duplicateHeaver = heaverRepository.findByName(heaver.getName());
         findById(id);
         final boolean isDuplicateExists = duplicateHeaver != null && !Objects.equals(duplicateHeaver.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.heaver.name.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.heaver.name.notUnique", new Object[]{}));
         return heaverRepository.saveAndFlush(heaver);
     }
 
     @Override
     public void delete(Heaver heaver) {
         final Long id = heaver.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.heaver.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.heaver.haveId", new Object[]{}));
         findById(id);
         heaverRepository.delete(heaver);
     }

@@ -1,4 +1,4 @@
-package com.onlinestore.app.config;
+package com.onlinestore.app.configuration;
 
 import com.onlinestore.app.converter.LocalDateTimeConverter;
 import com.onlinestore.app.dto.request.OrderRequestDto;
@@ -41,12 +41,10 @@ public class WebConfiguration {
         return new BeanMappingBuilder() {
             @Override
             protected void configure() {
-                mapping(Order.class, OrderResponseDto.class)
-                        .fields("date", "date",
-                                FieldsMappingOptions.customConverter(LocalDateTimeConverter.class));
-                mapping(OrderRequestDto.class, Order.class)
-                        .fields("date", "date",
-                                FieldsMappingOptions.customConverter(LocalDateTimeConverter.class));
+                mapping(Order.class, OrderResponseDto.class).fields("date", "date",
+                        FieldsMappingOptions.customConverter(LocalDateTimeConverter.class));
+                mapping(OrderRequestDto.class, Order.class).fields("date", "date",
+                        FieldsMappingOptions.customConverter(LocalDateTimeConverter.class));
             }
         };
     }

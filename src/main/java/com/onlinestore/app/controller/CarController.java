@@ -77,7 +77,8 @@ public class CarController {
     @PostMapping
     public ResponseEntity<CarResponseDto> save(@RequestBody CarRequestDto carRequestDto) {
         carRequestDto.setId(null);
-        final CarResponseDto carResponseDto = mapper.map(carService.save(mapper.map(carRequestDto, Car.class)), CarResponseDto.class);
+        final CarResponseDto carResponseDto = mapper.map(carService
+                .save(mapper.map(carRequestDto, Car.class)), CarResponseDto.class);
         return new ResponseEntity<>(carResponseDto, HttpStatus.OK);
     }
 
@@ -89,11 +90,13 @@ public class CarController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CarResponseDto> update(@RequestBody CarRequestDto carRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, carRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.car.unexpectedId", new Object[]{}));
-        }
-        final CarResponseDto carResponseDto = mapper.map(carService.update(mapper.map(carRequestDto, Car.class)), CarResponseDto.class);
+    public ResponseEntity<CarResponseDto> update(@RequestBody CarRequestDto carRequestDto,
+                                                 @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, carRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.car.unexpectedId", new Object[]{}));
+        final CarResponseDto carResponseDto = mapper.map(carService
+                .update(mapper.map(carRequestDto, Car.class)), CarResponseDto.class);
         return new ResponseEntity<>(carResponseDto, HttpStatus.OK);
     }
 

@@ -40,23 +40,28 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car findById(Long id) {
-        return carRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.car.notExist", new Object[]{})));
+        return carRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.car.notExist", new Object[]{})));
     }
 
     @Override
     public Car save(Car car) {
-        validate(car.getId() != null, localizedMessageSource.getMessage("error.car.notHaveId", new Object[]{}));
-        validate(carRepository.existsByModel(car.getModel()), localizedMessageSource.getMessage("error.car.model.notUnique", new Object[]{}));
+        validate(car.getId() != null, localizedMessageSource
+                .getMessage("error.car.notHaveId", new Object[]{}));
+        validate(carRepository.existsByModel(car.getModel()), localizedMessageSource
+                .getMessage("error.car.model.notUnique", new Object[]{}));
         return carRepository.saveAndFlush(car);
     }
 
     @Override
     public Car update(Car car) {
         final Long id = car.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.car.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.car.haveId", new Object[]{}));
         final Car duplicateCar = carRepository.findByModel(car.getModel());
         final boolean isDuplicateExists = duplicateCar != null && !Objects.equals(duplicateCar.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.car.model.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.car.model.notUnique", new Object[]{}));
         findById(id);
         return carRepository.saveAndFlush(car);
     }
@@ -65,7 +70,8 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(Car car) {
         final Long id = car.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.car.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.car.haveId", new Object[]{}));
         findById(id);
         carRepository.delete(car);
     }

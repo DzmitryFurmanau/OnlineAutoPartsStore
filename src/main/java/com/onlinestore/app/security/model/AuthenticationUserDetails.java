@@ -28,7 +28,10 @@ public class AuthenticationUserDetails implements UserDetails {
      * @param password    the password
      * @param authorities the authorities
      */
-    public AuthenticationUserDetails(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public AuthenticationUserDetails(Long id,
+                                     String username,
+                                     String password,
+                                     Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;

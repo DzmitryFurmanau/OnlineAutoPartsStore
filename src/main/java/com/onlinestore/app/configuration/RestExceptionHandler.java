@@ -1,4 +1,4 @@
-package com.onlinestore.app.config;
+package com.onlinestore.app.configuration;
 
 import com.onlinestore.app.dto.response.ErrorResponseDto;
 import org.slf4j.Logger;
@@ -30,7 +30,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String EMPTY = "";
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException exception,
+                                                                  final HttpHeaders headers,
+                                                                  final HttpStatus status,
+                                                                  final WebRequest request) {
         String errorMessage = exception.getBindingResult().getAllErrors().stream()
                 .map(objectError -> Objects.requireNonNull(objectError.getDefaultMessage()).concat(SEMICOLON))
                 .reduce(EMPTY, String::concat);
@@ -46,9 +49,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @return the response entity
      */
     @ExceptionHandler(value = EntityNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception, WebRequest request) {
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.NOT_FOUND, exception.getMessage());
-        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
+    protected ResponseEntity<Object> handleEntityNotFoundException(final EntityNotFoundException exception,
+                                                                   final WebRequest request) {
+        ErrorResponseDto errorResponseDto;
+        errorResponseDto = new ErrorResponseDto(HttpStatus.NOT_FOUND, exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto,
+                new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 
     /**
@@ -59,13 +65,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @return the response entity
      */
     @ExceptionHandler(value = {ConstraintViolationException.class})
-    protected ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception, WebRequest request) {
+    protected ResponseEntity<Object> handleConstraintViolationException(final ConstraintViolationException exception,
+                                                                        final WebRequest request) {
         LOGGER.error(exception.getMessage(), exception);
         String errorMessage = exception.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage().concat(SEMICOLON))
                 .reduce(EMPTY, String::concat);
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
-        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
+        ErrorResponseDto errorResponseDto;
+        errorResponseDto = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
+        return handleExceptionInternal(exception, errorResponseDto,
+                new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 
     /**
@@ -76,9 +85,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @return the response entity
      */
     @ExceptionHandler(value = {RuntimeException.class})
-    protected ResponseEntity<Object> handleRuntimeException(RuntimeException exception, WebRequest request) {
+    protected ResponseEntity<Object> handleRuntimeException(final RuntimeException exception,
+                                                            final WebRequest request) {
         LOGGER.error(exception.getMessage(), exception);
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
+        ErrorResponseDto errorResponseDto;
+        errorResponseDto = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto,
+                new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 }

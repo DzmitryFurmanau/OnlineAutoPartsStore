@@ -52,23 +52,28 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public Stock findById(Long id) {
-        return stockRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.stock.notExist", new Object[]{})));
+        return stockRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.stock.notExist", new Object[]{})));
     }
 
     @Override
     public Stock save(Stock stock) {
-        validate(stock.getId() != null, localizedMessageSource.getMessage("error.stock.notHaveId", new Object[]{}));
-        validate(stockRepository.existsByQuantity(stock.getQuantity()), localizedMessageSource.getMessage("error.stock.quantity.notUnique", new Object[]{}));
+        validate(stock.getId() != null, localizedMessageSource
+                .getMessage("error.stock.notHaveId", new Object[]{}));
+        validate(stockRepository.existsByQuantity(stock.getQuantity()), localizedMessageSource
+                .getMessage("error.stock.quantity.notUnique", new Object[]{}));
         return saveAndFlush(stock);
     }
 
     @Override
     public Stock update(Stock stock) {
         final Long id = stock.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.stock.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.stock.haveId", new Object[]{}));
         final Stock duplicateStock = stockRepository.findByQuantity(stock.getQuantity());
         final boolean isDuplicateExists = duplicateStock != null && !Objects.equals(duplicateStock.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.stock.quantity.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.stock.quantity.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(stock);
     }
@@ -77,7 +82,8 @@ public class StockServiceImpl implements StockService {
     @Override
     public void delete(Stock stock) {
         final Long id = stock.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.stock.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.stock.haveId", new Object[]{}));
         findById(id);
         stockRepository.delete(stock);
     }
@@ -89,8 +95,10 @@ public class StockServiceImpl implements StockService {
     }
 
     private Stock saveAndFlush(Stock stock) {
-        validate(stock.getProvider() == null || stock.getProvider().getId() == null, localizedMessageSource.getMessage("error.stock.provider.isNull", new Object[]{}));
-        validate(stock.getHeaver() == null || stock.getHeaver().getId() == null, localizedMessageSource.getMessage("error.stock.heaver.isNull", new Object[]{}));
+        validate(stock.getProvider() == null || stock.getProvider().getId() == null, localizedMessageSource
+                .getMessage("error.stock.provider.isNull", new Object[]{}));
+        validate(stock.getHeaver() == null || stock.getHeaver().getId() == null, localizedMessageSource
+                .getMessage("error.stock.heaver.isNull", new Object[]{}));
         stock.setProvider(providerService.findById(stock.getProvider().getId()));
         stock.setHeaver(heaverService.findById(stock.getHeaver().getId()));
         return stockRepository.saveAndFlush(stock);

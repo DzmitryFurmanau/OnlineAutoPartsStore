@@ -66,7 +66,8 @@ public class AddressController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<AddressResponseDto> getOne(@PathVariable Long id) {
-        final AddressResponseDto addressResponseDto = mapper.map(addressService.findById(id), AddressResponseDto.class);
+        final AddressResponseDto addressResponseDto;
+        addressResponseDto = mapper.map(addressService.findById(id), AddressResponseDto.class);
         return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 
@@ -79,7 +80,8 @@ public class AddressController {
     @PostMapping
     public ResponseEntity<AddressResponseDto> save(@RequestBody AddressRequestDto addressRequestDto) {
         addressRequestDto.setId(null);
-        final AddressResponseDto addressResponseDto = mapper.map(addressService.save(getAddress(addressRequestDto)), AddressResponseDto.class);
+        final AddressResponseDto addressResponseDto = mapper.map(addressService
+                .save(getAddress(addressRequestDto)), AddressResponseDto.class);
         return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 
@@ -91,11 +93,13 @@ public class AddressController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AddressResponseDto> update(@RequestBody AddressRequestDto addressRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, addressRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.address.unexpectedId", new Object[]{}));
-        }
-        final AddressResponseDto addressResponseDto = mapper.map(addressService.update(getAddress(addressRequestDto)), AddressResponseDto.class);
+    public ResponseEntity<AddressResponseDto> update(@RequestBody AddressRequestDto addressRequestDto,
+                                                     @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, addressRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.address.unexpectedId", new Object[]{}));
+        final AddressResponseDto addressResponseDto = mapper.map(addressService
+                .update(getAddress(addressRequestDto)), AddressResponseDto.class);
         return new ResponseEntity<>(addressResponseDto, HttpStatus.OK);
     }
 

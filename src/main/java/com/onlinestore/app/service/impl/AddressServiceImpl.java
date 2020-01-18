@@ -40,31 +40,37 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address findById(Long id) {
-        return addressRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.address.notExist", new Object[]{})));
+        return addressRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.address.notExist", new Object[]{})));
     }
 
     @Override
     public Address save(Address address) {
-        validate(address.getId() != null, localizedMessageSource.getMessage("error.address.notHaveId", new Object[]{}));
-        validate(addressRepository.existsByPhoneNumber(address.getPhoneNumber()), localizedMessageSource.getMessage("error.address.phoneNumber.notUnique", new Object[]{}));
+        validate(address.getId() != null, localizedMessageSource
+                .getMessage("error.address.notHaveId", new Object[]{}));
+        validate(addressRepository.existsByPhoneNumber(address.getPhoneNumber()), localizedMessageSource
+                .getMessage("error.address.phoneNumber.notUnique", new Object[]{}));
         return addressRepository.saveAndFlush(address);
     }
 
     @Override
     public Address update(Address address) {
         final Long id = address.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.address.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.address.haveId", new Object[]{}));
         final Address duplicateAddress = addressRepository.findByPhoneNumber(address.getPhoneNumber());
         findById(id);
         final boolean isDuplicateExists = duplicateAddress != null && !Objects.equals(duplicateAddress.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.address.phoneNumber.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.address.phoneNumber.notUnique", new Object[]{}));
         return addressRepository.saveAndFlush(address);
     }
 
     @Override
     public void delete(Address address) {
         final Long id = address.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.address.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.address.haveId", new Object[]{}));
         findById(id);
         addressRepository.delete(address);
     }

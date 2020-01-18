@@ -46,23 +46,28 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findById(Long id) {
-        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.customer.notExist", new Object[]{})));
+        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.customer.notExist", new Object[]{})));
     }
 
     @Override
     public Customer save(Customer customer) {
-        validate(customer.getId() != null, localizedMessageSource.getMessage("error.customer.notHaveId", new Object[]{}));
-        validate(customerRepository.existsByName(customer.getName()), localizedMessageSource.getMessage("error.customer.name.notUnique", new Object[]{}));
+        validate(customer.getId() != null, localizedMessageSource
+                .getMessage("error.customer.notHaveId", new Object[]{}));
+        validate(customerRepository.existsByName(customer.getName()), localizedMessageSource
+                .getMessage("error.customer.name.notUnique", new Object[]{}));
         return saveAndFlush(customer);
     }
 
     @Override
     public Customer update(Customer customer) {
         final Long id = customer.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.customer.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.customer.haveId", new Object[]{}));
         final Customer duplicateCustomer = customerRepository.findByName(customer.getName());
         final boolean isDuplicateExists = duplicateCustomer != null && !Objects.equals(duplicateCustomer.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.customer.name.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.customer.name.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(customer);
     }
@@ -71,7 +76,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Customer customer) {
         final Long id = customer.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.customer.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.customer.haveId", new Object[]{}));
         findById(id);
         customerRepository.delete(customer);
     }
@@ -85,7 +91,8 @@ public class CustomerServiceImpl implements CustomerService {
     private Customer saveAndFlush(Customer customer) {
         customer.getAddresses().forEach(address -> {
             validate(address == null || address.getId() == null,
-                    localizedMessageSource.getMessage("error.customer.addresses.isNull", new Object[]{}));
+                    localizedMessageSource
+                            .getMessage("error.customer.addresses.isNull", new Object[]{}));
             address.setPhoneNumber(addressService.findById(address.getId()).getPhoneNumber());
         });
         return customerRepository.saveAndFlush(customer);

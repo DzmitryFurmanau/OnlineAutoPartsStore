@@ -40,23 +40,28 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public Provider findById(Long id) {
-        return providerRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.provider.notExist", new Object[]{})));
+        return providerRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.provider.notExist", new Object[]{})));
     }
 
     @Override
     public Provider save(Provider provider) {
-        validate(provider.getId() != null, localizedMessageSource.getMessage("error.provider.notHaveId", new Object[]{}));
-        validate(providerRepository.existsByName(provider.getName()), localizedMessageSource.getMessage("error.provider.name.notUnique", new Object[]{}));
+        validate(provider.getId() != null, localizedMessageSource
+                .getMessage("error.provider.notHaveId", new Object[]{}));
+        validate(providerRepository.existsByName(provider.getName()), localizedMessageSource
+                .getMessage("error.provider.name.notUnique", new Object[]{}));
         return providerRepository.saveAndFlush(provider);
     }
 
     @Override
     public Provider update(Provider provider) {
         final Long id = provider.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.provider.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.provider.haveId", new Object[]{}));
         final Provider duplicateCustomer = providerRepository.findByName(provider.getName());
         final boolean isDuplicateExists = duplicateCustomer != null && !Objects.equals(duplicateCustomer.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.provider.name.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.provider.name.notUnique", new Object[]{}));
         findById(id);
         return providerRepository.saveAndFlush(provider);
     }
@@ -65,7 +70,8 @@ public class ProviderServiceImpl implements ProviderService {
     @Override
     public void delete(Provider provider) {
         final Long id = provider.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.provider.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.provider.haveId", new Object[]{}));
         findById(id);
         providerRepository.delete(provider);
     }

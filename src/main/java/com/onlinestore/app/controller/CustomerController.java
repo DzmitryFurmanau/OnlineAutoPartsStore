@@ -66,7 +66,8 @@ public class CustomerController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<CustomerResponseDto> getOne(@PathVariable Long id) {
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.findById(id), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto;
+        customerResponseDto = mapper.map(customerService.findById(id), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -79,7 +80,8 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerResponseDto> save(@RequestBody CustomerRequestDto customerRequestDto) {
         customerRequestDto.setId(null);
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.save(getCustomer(customerRequestDto)), CustomerResponseDto.class);
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService
+                .save(getCustomer(customerRequestDto)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 
@@ -91,11 +93,13 @@ public class CustomerController {
      * @return the response entity
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CustomerResponseDto> update(@RequestBody CustomerRequestDto customerRequestDto, @PathVariable Long id) {
-        if (!Objects.equals(id, customerRequestDto.getId())) {
-            throw new RuntimeException(localizedMessageSource.getMessage("controller.customer.unexpectedId", new Object[]{}));
-        }
-        final CustomerResponseDto customerResponseDto = mapper.map(customerService.update(getCustomer(customerRequestDto)), CustomerResponseDto.class);
+    public ResponseEntity<CustomerResponseDto> update(@RequestBody CustomerRequestDto customerRequestDto,
+                                                      @PathVariable Long id) throws RuntimeException {
+        if (!Objects.equals(id, customerRequestDto.getId()))
+            throw new RuntimeException(localizedMessageSource
+                    .getMessage("controller.customer.unexpectedId", new Object[]{}));
+        final CustomerResponseDto customerResponseDto = mapper.map(customerService
+                .update(getCustomer(customerRequestDto)), CustomerResponseDto.class);
         return new ResponseEntity<>(customerResponseDto, HttpStatus.OK);
     }
 

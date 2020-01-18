@@ -1,4 +1,4 @@
-package com.onlinestore.app.config;
+package com.onlinestore.app.configuration;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

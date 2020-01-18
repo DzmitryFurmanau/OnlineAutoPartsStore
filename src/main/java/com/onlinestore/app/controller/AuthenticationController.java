@@ -67,7 +67,8 @@ public class AuthenticationController {
      */
     @PostMapping("/signIn")
     public TokenResponseDto authenticateUser(@RequestBody UserRegistrationRequestDto requestDto) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword());
+        UsernamePasswordAuthenticationToken token;
+        token = new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new TokenResponseDto(tokenService.generate(authentication));

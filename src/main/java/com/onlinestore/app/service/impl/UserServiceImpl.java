@@ -46,7 +46,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.user.notExist", new Object[]{})));
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource
+                .getMessage("error.user.notExist", new Object[]{})));
     }
 
     @Override
@@ -56,18 +57,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        validate(user.getId() != null, localizedMessageSource.getMessage("error.user.notHaveId", new Object[]{}));
-        validate(userRepository.existsByName(user.getName()), localizedMessageSource.getMessage("error.user.name.notUnique", new Object[]{}));
+        validate(user.getId() != null, localizedMessageSource
+                .getMessage("error.user.notHaveId", new Object[]{}));
+        validate(userRepository.existsByName(user.getName()), localizedMessageSource
+                .getMessage("error.user.name.notUnique", new Object[]{}));
         return saveAndFlush(user);
     }
 
     @Override
     public User update(User user) {
         final Long id = user.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.user.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.user.haveId", new Object[]{}));
         final User duplicateUser = userRepository.findByName(user.getName());
         final boolean isDuplicateExists = duplicateUser != null && !Objects.equals(duplicateUser.getId(), id);
-        validate(isDuplicateExists, localizedMessageSource.getMessage("error.user.name.notUnique", new Object[]{}));
+        validate(isDuplicateExists, localizedMessageSource
+                .getMessage("error.user.name.notUnique", new Object[]{}));
         findById(id);
         return saveAndFlush(user);
     }
@@ -75,7 +80,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(User user) {
         final Long id = user.getId();
-        validate(id == null, localizedMessageSource.getMessage("error.user.haveId", new Object[]{}));
+        validate(id == null, localizedMessageSource
+                .getMessage("error.user.haveId", new Object[]{}));
         findById(id);
         userRepository.delete(user);
     }
@@ -89,7 +95,8 @@ public class UserServiceImpl implements UserService {
     private User saveAndFlush(User user) {
         user.getRoles().forEach(role -> {
             validate(role == null || role.getId() == null,
-                    localizedMessageSource.getMessage("error.user.roles.isNull", new Object[]{}));
+                    localizedMessageSource
+                            .getMessage("error.user.roles.isNull", new Object[]{}));
             role.setName(roleService.findById(role.getId()).getName());
         });
         return userRepository.saveAndFlush(user);
