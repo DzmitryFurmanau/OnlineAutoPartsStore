@@ -65,7 +65,8 @@ public class RoleServiceImpl implements RoleService {
                 .getMessage("error.role.haveId", new Object[]{}));
         final Role duplicateRole = roleRepository.findByName(role.getName());
         findById(id);
-        final boolean isDuplicateExists = duplicateRole != null && !Objects.equals(duplicateRole.getId(), id);
+        final boolean isDuplicateExists = duplicateRole != null
+                && !Objects.equals(duplicateRole.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.role.name.notUnique", new Object[]{}));
         return roleRepository.saveAndFlush(role);

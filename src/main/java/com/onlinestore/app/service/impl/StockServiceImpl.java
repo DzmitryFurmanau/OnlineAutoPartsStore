@@ -97,9 +97,9 @@ public class StockServiceImpl implements StockService {
     private Stock saveAndFlush(Stock stock) {
         validate(stock.getProvider() == null || stock.getProvider().getId() == null, localizedMessageSource
                 .getMessage("error.stock.provider.isNull", new Object[]{}));
+        stock.setProvider(providerService.findById(stock.getProvider().getId()));
         validate(stock.getHeaver() == null || stock.getHeaver().getId() == null, localizedMessageSource
                 .getMessage("error.stock.heaver.isNull", new Object[]{}));
-        stock.setProvider(providerService.findById(stock.getProvider().getId()));
         stock.setHeaver(heaverService.findById(stock.getHeaver().getId()));
         return stockRepository.saveAndFlush(stock);
     }

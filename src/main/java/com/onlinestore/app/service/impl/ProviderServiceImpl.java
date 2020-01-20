@@ -59,7 +59,8 @@ public class ProviderServiceImpl implements ProviderService {
         validate(id == null, localizedMessageSource
                 .getMessage("error.provider.haveId", new Object[]{}));
         final Provider duplicateCustomer = providerRepository.findByName(provider.getName());
-        final boolean isDuplicateExists = duplicateCustomer != null && !Objects.equals(duplicateCustomer.getId(), id);
+        final boolean isDuplicateExists = duplicateCustomer != null
+                && !Objects.equals(duplicateCustomer.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.provider.name.notUnique", new Object[]{}));
         findById(id);

@@ -60,7 +60,8 @@ public class HeaverServiceImpl implements HeaverService {
                 .getMessage("error.heaver.haveId", new Object[]{}));
         final Heaver duplicateHeaver = heaverRepository.findByName(heaver.getName());
         findById(id);
-        final boolean isDuplicateExists = duplicateHeaver != null && !Objects.equals(duplicateHeaver.getId(), id);
+        final boolean isDuplicateExists = duplicateHeaver != null
+                && !Objects.equals(duplicateHeaver.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.heaver.name.notUnique", new Object[]{}));
         return heaverRepository.saveAndFlush(heaver);

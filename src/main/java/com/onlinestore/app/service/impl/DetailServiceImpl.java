@@ -72,7 +72,8 @@ public class DetailServiceImpl implements DetailService {
                 .getMessage("error.detail.haveId", new Object[]{}));
         final Detail duplicateDetail = detailRepository.findByName(detail.getName());
         findById(id);
-        final boolean isDuplicateExists = duplicateDetail != null && !Objects.equals(duplicateDetail.getId(), id);
+        final boolean isDuplicateExists = duplicateDetail != null
+                && !Objects.equals(duplicateDetail.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.detail.name.notUnique", new Object[]{}));
         return saveAndFlush(detail);
@@ -98,9 +99,8 @@ public class DetailServiceImpl implements DetailService {
                 .getMessage("error.detail.car.isNull", new Object[]{}));
         detail.setCar(carService.findById(detail.getCar().getId()));
         detail.getStocks().forEach(stock -> {
-            validate(stock == null || stock.getId() == null,
-                    localizedMessageSource
-                            .getMessage("error.detail.stocks.isNull", new Object[]{}));
+            validate(stock == null || stock.getId() == null, localizedMessageSource
+                    .getMessage("error.detail.stocks.isNull", new Object[]{}));
             stock.setQuantity(stockService.findById(stock.getId()).getQuantity());
         });
         return detailRepository.saveAndFlush(detail);

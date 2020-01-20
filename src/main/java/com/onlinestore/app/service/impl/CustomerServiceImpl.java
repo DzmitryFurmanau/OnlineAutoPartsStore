@@ -65,7 +65,8 @@ public class CustomerServiceImpl implements CustomerService {
         validate(id == null, localizedMessageSource
                 .getMessage("error.customer.haveId", new Object[]{}));
         final Customer duplicateCustomer = customerRepository.findByName(customer.getName());
-        final boolean isDuplicateExists = duplicateCustomer != null && !Objects.equals(duplicateCustomer.getId(), id);
+        final boolean isDuplicateExists = duplicateCustomer != null
+                && !Objects.equals(duplicateCustomer.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.customer.name.notUnique", new Object[]{}));
         findById(id);
@@ -90,9 +91,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     private Customer saveAndFlush(Customer customer) {
         customer.getAddresses().forEach(address -> {
-            validate(address == null || address.getId() == null,
-                    localizedMessageSource
-                            .getMessage("error.customer.addresses.isNull", new Object[]{}));
+            validate(address == null || address.getId() == null, localizedMessageSource
+                    .getMessage("error.customer.addresses.isNull", new Object[]{}));
             address.setPhoneNumber(addressService.findById(address.getId()).getPhoneNumber());
         });
         return customerRepository.saveAndFlush(customer);

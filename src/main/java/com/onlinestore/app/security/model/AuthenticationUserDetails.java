@@ -28,10 +28,10 @@ public class AuthenticationUserDetails implements UserDetails {
      * @param password    the password
      * @param authorities the authorities
      */
-    public AuthenticationUserDetails(Long id,
-                                     String username,
-                                     String password,
-                                     Collection<? extends GrantedAuthority> authorities) {
+    public AuthenticationUserDetails(final Long id,
+                                     final String username,
+                                     final String password,
+                                     final Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -83,10 +83,10 @@ public class AuthenticationUserDetails implements UserDetails {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AuthenticationUserDetails)) return false;
-        AuthenticationUserDetails that = (AuthenticationUserDetails) o;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof AuthenticationUserDetails)) return false;
+        AuthenticationUserDetails that = (AuthenticationUserDetails) object;
         return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(getPassword(), that.getPassword());

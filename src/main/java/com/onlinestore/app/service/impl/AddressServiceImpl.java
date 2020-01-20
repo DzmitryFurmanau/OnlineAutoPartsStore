@@ -60,7 +60,8 @@ public class AddressServiceImpl implements AddressService {
                 .getMessage("error.address.haveId", new Object[]{}));
         final Address duplicateAddress = addressRepository.findByPhoneNumber(address.getPhoneNumber());
         findById(id);
-        final boolean isDuplicateExists = duplicateAddress != null && !Objects.equals(duplicateAddress.getId(), id);
+        final boolean isDuplicateExists = duplicateAddress != null
+                && !Objects.equals(duplicateAddress.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.address.phoneNumber.notUnique", new Object[]{}));
         return addressRepository.saveAndFlush(address);

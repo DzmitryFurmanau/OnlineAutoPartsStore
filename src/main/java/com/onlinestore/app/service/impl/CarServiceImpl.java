@@ -59,7 +59,8 @@ public class CarServiceImpl implements CarService {
         validate(id == null, localizedMessageSource
                 .getMessage("error.car.haveId", new Object[]{}));
         final Car duplicateCar = carRepository.findByModel(car.getModel());
-        final boolean isDuplicateExists = duplicateCar != null && !Objects.equals(duplicateCar.getId(), id);
+        final boolean isDuplicateExists = duplicateCar != null
+                && !Objects.equals(duplicateCar.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.car.model.notUnique", new Object[]{}));
         findById(id);

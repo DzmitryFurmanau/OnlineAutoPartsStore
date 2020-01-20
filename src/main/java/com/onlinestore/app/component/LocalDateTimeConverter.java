@@ -1,4 +1,4 @@
-package com.onlinestore.app.converter;
+package com.onlinestore.app.component;
 
 import org.dozer.DozerConverter;
 

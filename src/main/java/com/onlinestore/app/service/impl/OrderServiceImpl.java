@@ -110,18 +110,18 @@ public class OrderServiceImpl implements OrderService {
     private Order saveAndFlush(Order order) {
         validate(order.getSeller() == null || order.getSeller().getId() == null, localizedMessageSource
                 .getMessage("error.order.seller.isNull", new Object[]{}));
+        order.setSeller(sellerService.findById(order.getSeller().getId()));
         validate(order.getDetail() == null || order.getDetail().getId() == null, localizedMessageSource
                 .getMessage("error.order.detail.isNull", new Object[]{}));
+        order.setDetail(detailService.findById(order.getDetail().getId()));
         validate(order.getStock() == null || order.getStock().getId() == null, localizedMessageSource
                 .getMessage("error.order.stock.isNull", new Object[]{}));
+        order.setStock(stockService.findById(order.getStock().getId()));
         validate(order.getCustomer() == null || order.getCustomer().getId() == null, localizedMessageSource
                 .getMessage("error.order.customer.isNull", new Object[]{}));
+        order.setCustomer(customerService.findById(order.getCustomer().getId()));
         validate(order.getAddress() == null || order.getAddress().getId() == null, localizedMessageSource
                 .getMessage("error.order.address.isNull", new Object[]{}));
-        order.setSeller(sellerService.findById(order.getSeller().getId()));
-        order.setDetail(detailService.findById(order.getDetail().getId()));
-        order.setStock(stockService.findById(order.getStock().getId()));
-        order.setCustomer(customerService.findById(order.getCustomer().getId()));
         order.setAddress(addressService.findById(order.getAddress().getId()));
         return orderRepository.saveAndFlush(order);
     }

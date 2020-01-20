@@ -60,7 +60,8 @@ public class SellerServiceImpl implements SellerService {
                 .getMessage("error.seller.haveId", new Object[]{}));
         final Seller duplicateSeller = sellerRepository.findByName(seller.getName());
         findById(id);
-        final boolean isDuplicateExists = duplicateSeller != null && !Objects.equals(duplicateSeller.getId(), id);
+        final boolean isDuplicateExists = duplicateSeller != null
+                && !Objects.equals(duplicateSeller.getId(), id);
         validate(isDuplicateExists, localizedMessageSource
                 .getMessage("error.seller.name.notUnique", new Object[]{}));
         return sellerRepository.saveAndFlush(seller);

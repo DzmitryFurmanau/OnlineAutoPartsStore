@@ -36,15 +36,16 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
      * @param tokenService       the token service
      * @param userDetailsService the user details service
      */
-    public AuthenticationTokenFilter(TokenService tokenService, UserDetailsService userDetailsService) {
+    public AuthenticationTokenFilter(final TokenService tokenService,
+                                     final UserDetailsService userDetailsService) {
         this.tokenService = tokenService;
         this.userDetailsService = userDetailsService;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpRequest,
-                                    HttpServletResponse httpServletResponse,
-                                    FilterChain chain) throws IOException {
+    protected void doFilterInternal(final HttpServletRequest httpRequest,
+                                    final HttpServletResponse httpServletResponse,
+                                    final FilterChain chain) throws IOException {
         try {
             String token = getToken(httpRequest);
             if (token != null && tokenService.validate(token)) {
@@ -65,7 +66,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
         }
     }
 
-    private String getToken(HttpServletRequest request) {
+    private String getToken(final HttpServletRequest request) {
         String authHeader = request.getHeader(AUTHORIZATION);
         return authHeader != null && authHeader.startsWith(BEARER)
                 ? authHeader.replace(BEARER, "") : authHeader;

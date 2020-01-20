@@ -1,6 +1,6 @@
 package com.onlinestore.app.configuration;
 
-import com.onlinestore.app.converter.LocalDateTimeConverter;
+import com.onlinestore.app.component.LocalDateTimeConverter;
 import com.onlinestore.app.dto.request.OrderRequestDto;
 import com.onlinestore.app.dto.response.OrderResponseDto;
 import com.onlinestore.app.model.Order;
