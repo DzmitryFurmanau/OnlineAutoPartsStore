@@ -54,9 +54,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/authentication/**").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/cars/**", "/details/**").permitAll()
-                .mvcMatchers(HttpMethod.PUT, "/addresses/**", "/customers/**").hasRole("USER")
-                .mvcMatchers(HttpMethod.POST, "/addresses/**", "/customers/**").hasRole("USER")
-                .mvcMatchers("/addresses/**", "/customers/**", "/cars/**", "/details/**", "/heavers/**", "/sellers/**", "/stocks/**").hasRole("ADMIN");
+                .mvcMatchers(HttpMethod.PUT, "/addresses/**", "/customers/**").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/addresses/**", "/customers/**").permitAll()
+                .mvcMatchers("/addresses/**", "/customers/**", "/cars/**", "/details/**", "/heavers/**", "/sellers/**", "/stocks/**").permitAll();
         final AuthenticationTokenFilter filter = new AuthenticationTokenFilter(tokenService, userDetailsService);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }
